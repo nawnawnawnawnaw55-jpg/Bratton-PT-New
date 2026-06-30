@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Appointment — Bratton Physical Therapy | Slidell, LA</title>
+<meta name="description" content="Schedule a new appointment at Bratton Physical Therapy in Slidell, LA. Call (985) 641-5825 to book your initial evaluation.">
+<meta property="og:title" content="New Appointment — Bratton Physical Therapy">
+<meta property="og:description" content="Schedule your first visit at Bratton Physical Therapy in Slidell, LA.">
+<meta property="og:url" content="/new-appointment/">
+<meta property="og:site_name" content="Bratton Physical Therapy">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+<div id="site-header"></div>
+<script>
+  fetch('/templates/header.html')
+    .then(function(r){return r.text()})
+    .then(function(h){document.getElementById('site-header').innerHTML=h})
+    .then(function(){
+      var toggle=document.getElementById('menu-toggle');
+      var nav=document.getElementById('main-nav');
+      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
+      var path=window.location.pathname;
+      document.querySelectorAll('.nav__link').forEach(function(link){
+        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
+      });
+      window.initStickyNav&&window.initStickyNav();
+    });
+</script>
+
+<main id="main-content">
+  <section class="section">
+    <div class="container" style="max-width:650px">
+      <h1>Schedule an Appointment</h1>
+      <p style="font-size:1.15rem;line-height:1.7">Ready to get started? Call us directly to schedule your initial evaluation. We'll verify your insurance, answer your questions, and find a time that works for you.</p>
+
+      <div class="cta-card" style="text-align:center;background:var(--light-gray);padding:32px 24px;border-radius:8px;margin:24px 0">
+        <h2 style="margin-top:0">Call to Book</h2>
+        <p style="font-size:1.3rem;font-weight:700"><a href="tel:9856415825" style="color:var(--primary);text-decoration:none">(985) 641-5825</a></p>
+        <p>Monday – Friday, 7:00 AM – 6:00 PM</p>
+        <p><a href="tel:9856415825" class="btn btn--accent btn--lg" style="margin-top:8px">Call Now</a></p>
+      </div>
+
+      <h2>What to Bring</h2>
+      <ul style="line-height:1.8;font-size:1.05rem">
+        <li>Photo ID</li>
+        <li>Insurance card</li>
+        <li>Comfortable clothing (athletic wear recommended)</li>
+        <li>List of current medications</li>
+        <li>Any relevant MRI/X-ray reports (optional)</li>
+      </ul>
+
+      <h2>What to Expect</h2>
+      <p>Your first visit includes a one-on-one evaluation with a licensed physical therapist. We'll discuss your history, assess your movement and strength, and develop a personalized treatment plan — all in a private, unhurried setting.</p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/templates/footer.html')
+    .then(function(r){return r.text()})
+    .then(function(f){document.getElementById('site-footer').innerHTML=f});
+</script>
+<script src="/js/main.js"></script>
+</body>
+</html>
