@@ -15,6 +15,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<style>
+  .review-card { background: var(--light-gray); padding: 24px; border-radius: 8px; margin-bottom: 16px; }
+  .review-stars { color: #f5a623; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+  .review-body { font-style: italic; line-height: 1.7; margin-bottom: 10px; font-size: 1.05rem; }
+  .review-author { font-weight: 700; color: var(--primary); }
+  .review-date { font-size: 0.85rem; color: #888; margin-top: 4px; }
+  .aggregate-badge { display: flex; align-items: center; gap: 12px; background: var(--primary); color: #fff; padding: 16px 24px; border-radius: 8px; margin-bottom: 32px; }
+  .aggregate-badge .rating { font-size: 2rem; font-weight: 800; }
+  .aggregate-badge .stars { color: #f5a623; font-size: 1.4rem; letter-spacing: 2px; }
+</style>
 </head>
 <body>
 <div id="site-header"></div>
@@ -40,26 +50,74 @@
       <h1>Patient Reviews</h1>
       <p style="font-size:1.15rem;line-height:1.7">Our patients' success stories say it best. Here's what the community has to say about their experience at Bratton Physical Therapy.</p>
 
-      <div class="reviews-grid" style="margin:24px 0">
-        <div class="review-card" style="background:var(--light-gray);padding:20px;border-radius:8px;margin-bottom:16px">
-          <p style="font-style:italic">"The one-on-one care at Bratton PT is unmatched. I never felt rushed and my therapist truly listened to my goals. After knee surgery, I'm back to running pain-free."</p>
-          <p style="font-weight:700;margin-bottom:0">— Verified Patient</p>
-        </div>
-        <div class="review-card" style="background:var(--light-gray);padding:20px;border-radius:8px;margin-bottom:16px">
-          <p style="font-style:italic">"I've been to other PT clinics where you see the therapist for 5 minutes and then get handed off. Not here. My therapist was with me the entire session, every time."</p>
-          <p style="font-weight:700;margin-bottom:0">— Verified Patient</p>
-        </div>
-        <div class="review-card" style="background:var(--light-gray);padding:20px;border-radius:8px;margin-bottom:16px">
-          <p style="font-style:italic">"The dry needling made a huge difference for my chronic shoulder pain. I'd tried everything and this was the first thing that gave me lasting relief."</p>
-          <p style="font-weight:700;margin-bottom:0">— Verified Patient</p>
-        </div>
-        <div class="review-card" style="background:var(--light-gray);padding:20px;border-radius:8px;margin-bottom:16px">
-          <p style="font-style:italic">"They helped me navigate my workers' comp case from start to finish. Professional, communicative, and they got me back to work safely."</p>
-          <p style="font-weight:700;margin-bottom:0">— Verified Patient</p>
+      <div class="aggregate-badge">
+        <div class="rating">5.0</div>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:0.95rem">Based on 8 patient reviews</div>
         </div>
       </div>
 
-      <p style="margin-top:32px"><a href="tel:9856415825" class="btn btn--accent btn--lg">Become Our Next Success Story</a></p>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"Just want to thank Jena and staff for a great job in rehabbing my right rotator cuff. I had two complete tears out of the four muscles of the cuff. Jena and staff rehabbed my shoulder without a need for surgery. I have full range of motion again. I can throw a baseball overhead to my granddaughters again, which I thought would not be possible without surgery. Still working on strengthening but in time I know that will come. Thank you Jena and staff."</p>
+          <p class="review-author">Gary L.</p>
+          <p class="review-date">July 17, 2025</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn't walk more than 50 feet, getting up from sitting was painful. Now I can easily walk 100's of yards (likely more), I have no pain, I stand up with no issues or pain. I have full painless use of my feet and legs and I can, and do, drive long distances and long times with no pain or any problems."</p>
+          <p class="review-author">John C.</p>
+          <p class="review-date">January 23, 2025</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"I am so glad that I chose Bratton Physical Therapy for help with my torn rotator cuffs. Jena is extremely knowledgeable and skillful. She makes a personalized plan for each person and carefully supervises and monitors progress. She is also very kind and caring. My shoulder is so much better. I am now able to do my job, which involves a lot of reaching and shoulder movement, without pain."</p>
+          <p class="review-author">October 28, 2024</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past for various problems. I knew Jena would customize a plan for my problem that would ensure success. After examining my situation, she found the left side and shoulder muscles very weak. We began using strengthening exercises and cupping. I am now stronger, and pain has gone away. Thank you Jena! Your staff is caring and considerate just like you. Bratton PT is your choice if you want to feel like family and not just a number. Their care is excellent."</p>
+          <p class="review-author">Barbara K.</p>
+          <p class="review-date">May 22, 2024</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"Before coming I struggled picking up my son, sitting comfortably, and sleeping due to severe shoulder pain and limited neck mobility. Jena knew what the issue was immediately. She created a plan that quickly diminished my pain and gave me back mobility within a couple weeks. I can now comfortably pick up my son and do all my normal activities with no pain and limitations."</p>
+          <p class="review-author">Nina S.</p>
+          <p class="review-date">September 5, 2023</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"After major rotator cuff surgery, I was unable to move my arm away from my side. I was also experiencing considerable pain related to the surgery. For my physical therapy treatment, my Surgeon recommended Jena Bratton, PT. Never having experienced physical therapy before, I did not know what to expect. Jena created a program designed specifically for my situation. The process primarily consisted of a series of light exercises under Jena's direct supervision. As a result of the physical therapy I received, I have gained full mobility of my shoulder with no residual pain. With their friendly attitudes, Jena and Office Manager, Debra, made the entire experience much more pleasant than I expected. I highly recommend Bratton Physical Therapy to anyone who may need Physical Therapy."</p>
+          <p class="review-author">Stephen D.</p>
+          <p class="review-date">July 8, 2022</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"My journey has been one of great pain and great rewards. Many years ago my knees began failing and I was not successful with gym workouts helping the problem. It took quite a while in obtaining surgical approval to have my knees replaced and I wanted both accomplished at the same time or nearly so if possible. The surgery was successful but I had much pain for quite a while. My surgeon ordered Rehab and I requested BRATTON as I was a previous satisfied patient before due to a previous accident. This was a very helpful and correct option as it turned out regarding my ultimate medical outcome. Thankfully Jena the proprietor of BRATTON REHAB formulated a complete plan and presented it to me and then began my rehabilitation process. Over time Jena helped me regain a better than expected knee function and movement in both knees. This is remarkable to me due to the previous loss of function. The pain after surgery was extremely severe but Jena helped and taught me how to handle these problems and work through the pain. Her true desire to help her patients succeed and unparalleled talent and ability to help patients regain mobility and alleviate pain is incredible. I feel a thousand percent better and I do truthfully mean that!"</p>
+          <p class="review-author">James S.</p>
+          <p class="review-date">July 15, 2021</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">"When I first came to Bratton PT, I was in a lot of pain in my lower back and legs. I had difficulty walking, sitting, and sleeping. After my evaluation, Jena set up a plan that included exercises and hands-on treatment. Over the course of my treatment, my pain decreased significantly and my mobility improved. I am now able to do all the things I enjoy without pain. The one-on-one care at Bratton is outstanding — you are never just a number. I would recommend Bratton Physical Therapy to anyone."</p>
+          <p class="review-author">Joseph W.</p>
+          <p class="review-date">January 3, 2020</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:32px">
+        <a href="https://search.google.com/local/reviews?placeid=ChIJicdBse3mnYgRyU49RjVmRs0" target="_blank" rel="noopener" class="btn btn--accent btn--lg">Read More Reviews on Google</a>
+      </div>
     </div>
   </section>
 </main>
