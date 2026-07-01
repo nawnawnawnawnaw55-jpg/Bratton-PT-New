@@ -19,8 +19,10 @@
   .reviews-page-grid{display:grid;gap:20px;grid-template-columns:1fr}
   @media(min-width:768px){.reviews-page-grid{grid-template-columns:repeat(2,1fr)}}
   .reviews-page-grid .review-card{display:block;animation:none}
-  .reviews-page-grid .review-card__text{max-height:4.4em;overflow:hidden;position:relative;transition:max-height .3s ease}
-  .reviews-page-grid .review-card__text.expanded{max-height:none!important;overflow:visible!important}
+  .reviews-page-grid .review-card{overflow:visible}
+  .reviews-page-grid .review-card__text{max-height:4.4em;overflow:hidden;position:relative;transition:max-height .4s ease}
+  .reviews-page-grid .review-card__text.expanded{max-height:3000px;overflow:visible}
+  .reviews-page .review-subtitle{text-align:center;font-size:.85rem;color:var(--gray);margin-top:-8px;margin-bottom:20px}
   .reviews-page-grid .review-card__readmore{cursor:pointer;color:var(--primary);font-size:.82rem;font-weight:600;margin-top:6px;display:block}
   .reviews-page-grid .review-card__readmore:hover{color:var(--accent)}
   .reviews-page .overall-stats{text-align:center;margin-bottom:24px}
@@ -96,15 +98,12 @@
     var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
     if (!textEl) return;
     var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
-    if (textEl.classList.contains('expanded')){
+    var isExpanded = textEl.classList.contains('expanded');
+    if (isExpanded){
       textEl.classList.remove('expanded');
-      textEl.style.maxHeight = '4.4em';
-      textEl.style.overflow = 'hidden';
       if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
     } else {
       textEl.classList.add('expanded');
-      textEl.style.maxHeight = 'none';
-      textEl.style.overflow = 'visible';
       if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
     }
   };
@@ -112,10 +111,11 @@
   function renderReviews(reviews, overallRating, totalReviews){
     window._pageReviews = reviews;
 
-    // Overall stats
+    // Overall stats — show global Google rating & total count
     statsEl.innerHTML = '<div class="overall-rating">' + overallRating.toFixed(1) + '</div>' +
       '<div class="overall-stars">' + starStr(overallRating) + '</div>' +
-      '<div class="overall-count">Based on ' + totalReviews + ' Google reviews</div>';
+      '<div class="overall-count">Based on ' + totalReviews + ' Google reviews</div>' +
+      '<p class="review-subtitle">Showing ' + reviews.length + ' most recent reviews</p>';
 
     // Review cards
     grid.innerHTML = reviews.map(function(r, i){
