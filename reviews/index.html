@@ -138,12 +138,11 @@
     }).join('');
   }
 
-  fetch('/api/reviews')
+  fetch('/api/reviews?newest=20')
     .then(function(r){ return r.json(); })
     .then(function(data){
       var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
-      // Take the 8 most recent reviews regardless of rating
-      var reviews = allReviews.slice(0, 8);
+      var reviews = allReviews;
       if (reviews.length) {
         renderReviews(reviews, data.overall_rating || 5.0, data.total_reviews || reviews.length);
       } else {

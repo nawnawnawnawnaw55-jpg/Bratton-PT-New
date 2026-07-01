@@ -8,10 +8,14 @@
  * Each run completely replaces the previous cache file.
  */
 
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import https from 'https';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PLACE_ID = 'ChIJicdBse3mnYgRyU49RjVmRs0';
 const OUTPUT_FILE = path.join(__dirname, 'reviews-cache.json');
