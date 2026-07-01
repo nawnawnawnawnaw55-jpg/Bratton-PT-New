@@ -101,10 +101,14 @@
     var isExpanded = textEl.classList.contains('expanded');
     if (isExpanded){
       textEl.classList.remove('expanded');
+      textEl.style.maxHeight = '';
+      textEl.style.overflow = '';
       textEl.textContent = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
       if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
     } else {
       textEl.classList.add('expanded');
+      textEl.style.maxHeight = 'none';
+      textEl.style.overflow = 'visible';
       textEl.textContent = review.text;
       if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
     }
