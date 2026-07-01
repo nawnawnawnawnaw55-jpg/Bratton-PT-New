@@ -86,7 +86,7 @@ function readCache() {
     // Check cache freshness (5 days max)
     if (data.cached_at) {
       const age = Date.now() - new Date(data.cached_at).getTime();
-      const maxAge = 0; // Force Google live refresh on next request
+      const maxAge = 5 * 24 * 60 * 60 * 1000; // 5 days
       if (age > maxAge) {
         console.warn('Cache is over 5 days old — will try live API');
         return null; // Force refresh from live API
