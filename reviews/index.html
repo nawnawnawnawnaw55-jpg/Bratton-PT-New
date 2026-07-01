@@ -86,36 +86,86 @@
   var ratingEl = document.getElementById('overall-rating');
   var starsEl = document.getElementById('overall-stars');
   var totalText = document.getElementById('total-reviews-text');
+  var allReviews = [];
+  var showingAll = false;
 
   function starStr(rating){
     var full = Math.round(rating);
     return '★'.repeat(full) + '☆'.repeat(5 - full);
   }
 
-  fetch('/api/reviews?all=1')
+  function escapeHTML(str){
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function renderCards(reviews, showAll){
+    var display = showAll ? reviews : reviews.slice(0, 8);
+    var hasMore = reviews.length > 8;
+    grid.innerHTML = display.map(function(r){
+      var isLong = r.text.length > 150;
+      var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
+      var readMoreHTML = isLong ? '<span class="review-readmore" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600;text-align:left">Read more ▼</span>' : '';
+      return '<div class="review-card">' +
+        '<div class="review-stars">' + starStr(r.rating) + '</div>' +
+        '<p class="review-body" data-full="' + escapeHTML(r.text) + '" data-short="' + displayText + '">' + displayText + '</p>' +
+        readMoreHTML +
+        '<p class="review-author">' + escapeHTML(r.name) + '</p>' +
+        '<p class="review-date">' + escapeHTML(r.time) + '</p>' +
+        '</div>';
+    }).join('');
+
+    // Add "Show More" button if needed
+    if (!showAll && hasMore){
+      grid.innerHTML += '<div style="text-align:center;margin-top:16px"><button class="btn btn--outline btn--sm" id="show-more-btn" onclick="window._showAllReviews()">Show All ' + reviews.length + ' Reviews</button></div>';
+    }
+    if (showAll && hasMore){
+      grid.innerHTML += '<div style="text-align:center;margin-top:16px"><button class="btn btn--outline btn--sm" id="show-more-btn" onclick="window._collapseReviews()">Show Less</button></div>';
+    }
+
+    // Attach click handlers to readmore spans
+    grid.querySelectorAll('.review-readmore').forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.stopPropagation();
+        var body = el.previousElementSibling;
+        if (body.classList.contains('expanded')){
+          body.classList.remove('expanded');
+          body.textContent = body.getAttribute('data-short');
+          el.innerHTML = 'Read more ▼';
+        } else {
+          body.classList.add('expanded');
+          body.textContent = body.getAttribute('data-full');
+          el.innerHTML = 'Show less ▲';
+        }
+      });
+    });
+  }
+
+  window._showAllReviews = function(){
+    renderCards(allReviews, true);
+  };
+  window._collapseReviews = function(){
+    renderCards(allReviews, false);
+  };
+
+  fetch('/api/reviews?newest=20')
     .then(function(r){return r.json()})
     .then(function(data){
       var rating = data.overall_rating || 5.0;
       var total = data.total_reviews || 0;
-      var reviews = data.reviews || [];
+      allReviews = data.reviews || [];
 
       ratingEl.textContent = rating.toFixed(1);
       starsEl.textContent = starStr(rating);
       totalText.textContent = 'Based on ' + total + ' patient reviews';
 
-      if (!reviews.length){
+      if (!allReviews.length){
         grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">No reviews found. Check back soon!</p></div>';
         return;
       }
 
-      grid.innerHTML = reviews.map(function(r){
-        return '<div class="review-card">' +
-          '<div class="review-stars">' + starStr(r.rating) + '</div>' +
-          '<p class="review-body">"' + escapeHTML(r.text) + '"</p>' +
-          '<p class="review-author">' + escapeHTML(r.name) + '</p>' +
-          '<p class="review-date">' + escapeHTML(r.time) + '</p>' +
-          '</div>';
-      }).join('');
+      renderCards(allReviews, false);
     })
     .catch(function(){
       ratingEl.textContent = '5.0';
@@ -123,12 +173,6 @@
       totalText.textContent = 'Based on patient reviews';
       grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">Unable to load reviews. Please check back later or visit us on Google.</p></div>';
     });
-
-  function escapeHTML(str){
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
 })();
 </script>
 <script src="/js/main.js"></script>

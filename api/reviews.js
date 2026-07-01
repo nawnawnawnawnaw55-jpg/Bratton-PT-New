@@ -10,9 +10,16 @@ const FALLBACK = [
   { name: "Jeannie R.", text: "You cannot go wrong having your pains disappear at Bratton PT! Individual attention, explanation of each procedure before it is executed! They make it fun!", time: "10 months ago", rating: 5 }
 ];
 
-function serveFallback(showAll, res) {
+function serveFallback(showAll, newest, res) {
   const sorted = [...FALLBACK].sort((a, b) => (b.time||'').localeCompare(a.time||''));
-  const reviews = showAll ? sorted : sorted.slice(0, 5);
+  let reviews;
+  if (newest && newest > 0) {
+    reviews = sorted.slice(0, newest);
+  } else if (showAll) {
+    reviews = sorted;
+  } else {
+    reviews = sorted.slice(0, 5);
+  }
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
   res.json({ reviews, overall_rating: 5.0, total_reviews: 8, _fallback: true });
 }
@@ -21,8 +28,11 @@ export default async function handler(req, res) {
   const PLACE_ID = 'ChIJicdBse3mnYgRyU49RjVmRs0';
   const API_KEY = process.env.GOOGLE_API_KEY;
   
+  const showAll = req.query && req.query.all === '1';
+  const newest = req.query && req.query.newest ? parseInt(req.query.newest, 10) : 0;
+  
   if (!API_KEY) {
-    return serveFallback(req.query && req.query.all === '1', res);
+    return serveFallback(showAll, newest, res);
   }
   
   try {
@@ -31,11 +41,11 @@ export default async function handler(req, res) {
     const data = await response.json();
     
     if (data.error_message) {
-      return serveFallback(req.query && req.query.all === '1', res);
+      return serveFallback(showAll, newest, res);
     }
     
     if (!data.result || !data.result.reviews) {
-      return serveFallback(req.query && req.query.all === '1', res);
+      return serveFallback(showAll, newest, res);
     }
     
     const allReviews = data.result.reviews.map(r => ({
@@ -52,15 +62,18 @@ export default async function handler(req, res) {
     const overallRating = data.result.rating || 5.0;
     const totalReviews = data.result.user_ratings_total || allReviews.length;
     
-    const showAll = req.query && req.query.all === '1';
-    
-    const reviews = showAll
-      ? allReviews.sort((a, b) => (b.time||'').localeCompare(a.time||''))
-      : allReviews.filter(r => r.rating === 5).sort((a, b) => (b.time||'').localeCompare(a.time||'')).slice(0, 5);
+    let reviews;
+    if (newest && newest > 0) {
+      reviews = allReviews.sort((a, b) => (b.time||'').localeCompare(a.time||'')).slice(0, newest);
+    } else if (showAll) {
+      reviews = allReviews.sort((a, b) => (b.time||'').localeCompare(a.time||''));
+    } else {
+      reviews = allReviews.filter(r => r.rating === 5).sort((a, b) => (b.time||'').localeCompare(a.time||'')).slice(0, 5);
+    }
     
     res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
     res.json({ reviews, overall_rating: overallRating, total_reviews: totalReviews });
   } catch (e) {
-    serveFallback(req.query && req.query.all === '1', res);
+    serveFallback(showAll, newest, res);
   }
 }

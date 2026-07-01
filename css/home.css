@@ -87,10 +87,11 @@
 .review-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .review-dot{width:10px;height:10px;border-radius:50%;background:var(--light-gray);border:none;cursor:pointer;transition:all .3s}
 .review-dot--active{background:var(--accent);width:24px;border-radius:5px}
-@media(max-width:767px){
-  .review-card{display:none}
-  .review-card--active{display:block;animation:fadeIn .4s ease}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.review-card{display:none}
+.review-card--active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:768px){
+  .reviews-grid{grid-template-columns:1fr;max-width:650px;margin-left:auto!important;margin-right:auto!important}
 }
 
 /* ===== INSURANCE ===== */

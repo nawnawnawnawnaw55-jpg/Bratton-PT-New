@@ -83,14 +83,19 @@
         function starStr(r){return '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));}
 
         function renderCards(reviews){
+          window._homeReviews = reviews;
           grid.innerHTML = reviews.map(function(r, i){
             var active = i === 0 ? ' review-card--active' : '';
-            return '<div class="review-card' + active + '" data-review="' + i + '">' +
+            var isLong = r.text.length > 150;
+            var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
+            var readMoreHTML = isLong ? '<span class="review-card__readmore" data-idx="' + i + '" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600">Read more ▼</span>' : '';
+            return '<div class="review-card' + active + '" data-review="' + i + '" onclick="window._homeToggleReview(event,' + i + ')">' +
               '<div class="review-card__header">' +
               '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>' +
               '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
               '</div>' +
-              '<p class="review-card__text">' + escapeHTML(r.text) + '</p>' +
+              '<p class="review-card__text" data-idx="' + i + '">' + displayText + '</p>' +
+              readMoreHTML +
               '</div>';
           }).join('');
 
@@ -108,6 +113,24 @@
             showReview(currentReview);
           }, 5000);
         }
+
+        window._homeReviews = [];
+        window._homeToggleReview = function(event, idx){
+          var review = window._homeReviews[idx];
+          if (!review) return;
+          var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
+          if (!textEl) return;
+          var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
+          if (textEl.classList.contains('expanded')){
+            textEl.classList.remove('expanded');
+            textEl.textContent = review.text.length > 150 ? escapeHTML(review.text.substring(0, 150)) + '...' : escapeHTML(review.text);
+            if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
+          } else {
+            textEl.classList.add('expanded');
+            textEl.textContent = escapeHTML(review.text);
+            if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
+          }
+        };
 
         window._homeShowReview = function(n){
           var cards = grid.querySelectorAll('.review-card');
