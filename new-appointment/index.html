@@ -15,6 +15,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<style>
+  .clinic-hours {
+    margin: 0;
+  }
+  .clinic-hours .hours-sep {
+    display: inline;
+  }
+  @media (max-width: 600px) {
+    .clinic-hours .hours-sep {
+      display: none;
+    }
+    .clinic-hours .hours-day {
+      display: block;
+      margin-bottom: 2px;
+    }
+  }
+</style>
 </head>
 <body>
 <div id="site-header"></div>
@@ -41,10 +58,16 @@
       <p style="font-size:1.15rem;line-height:1.7">Ready to get started? Call us directly to schedule your initial evaluation. We'll verify your insurance, answer your questions, and find a time that works for you.</p>
 
       <div class="cta-card" style="text-align:center;background:var(--light-gray);padding:32px 24px;border-radius:8px;margin:24px 0">
-        <h2 style="margin-top:0">Call to Book</h2>
+        <h2 style="margin-top:0">Book Online — Available 24/7</h2>
+        <p>Schedule your appointment anytime — day or night. It takes just a few clicks.</p>
+        <p><a href="/booking/" class="btn btn--accent btn--lg" style="margin-top:8px">
+          <svg style="width:1em;height:1em;vertical-align:middle;fill:currentColor;margin-right:6px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M716.05 464.75C583.14 464.75 475 572.89 475 705.8s108.14 241.05 241.05 241.05S957.1 838.71 957.1 705.8 848.96 464.75 716.05 464.75z m0 416.49c-96.75 0-175.45-78.7-175.45-175.45s78.7-175.45 175.45-175.45S891.5 609.05 891.5 705.8s-78.7 175.44-175.45 175.44z" fill="currentColor"/><path d="M813.75 682.43h-69.31v-77.97c0-15.1-12.24-27.33-27.33-27.33-15.1 0-27.33 12.24-27.33 27.33v105.3c0 15.1 12.24 27.33 27.33 27.33h96.64c15.09 0 27.33-12.24 27.33-27.33s-12.23-27.33-27.33-27.33z" fill="currentColor"/></svg>
+          Book Online
+        </a></p>
+        <hr style="border:none;border-top:1px solid #ddd;margin:24px 0;width:60%">
+        <h2>Prefer to Call?</h2>
         <p style="font-size:1.3rem;font-weight:700"><a href="tel:9856415825" style="color:var(--primary);text-decoration:none">(985) 641-5825</a></p>
-        <p>Monday – Friday, 7:00 AM – 6:00 PM</p>
-        <p><a href="tel:9856415825" class="btn btn--accent btn--lg" style="margin-top:8px">Call Now</a></p>
+        <p class="clinic-hours"><span class="hours-day">Monday – Thursday: 7:00 AM – 5:30 PM</span> <span class="hours-sep">|</span> <span class="hours-day">Friday: 7:00 AM – 2:00 PM</span> <span class="hours-sep">|</span> <span class="hours-day">Saturday: 8:00 AM – 12:00 PM</span></p>
       </div>
 
       <h2>What to Bring</h2>
