@@ -123,12 +123,21 @@
           var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
           if (textEl.classList.contains('expanded')){
             textEl.classList.remove('expanded');
-            textEl.textContent = review.text.length > 150 ? escapeHTML(review.text.substring(0, 150)) + '...' : escapeHTML(review.text);
+            textEl.textContent = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
             if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
+            // Resume auto-rotate when collapsing
+            if (autoTimer) clearInterval(autoTimer);
+            autoTimer = setInterval(function(){
+              currentReview = (currentReview + 1) % window._homeReviews.length;
+              showReview(currentReview);
+            }, 5000);
           } else {
             textEl.classList.add('expanded');
-            textEl.textContent = escapeHTML(review.text);
+            textEl.textContent = review.text;
             if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
+            // Pause auto-rotate while expanded
+            if (autoTimer) clearInterval(autoTimer);
+            autoTimer = null;
           }
         };
 
@@ -150,11 +159,13 @@
           return d.innerHTML;
         }
 
-        // Fetch from same API the popup uses (no ?all=1 -> top 5 five-star)
-        fetch('/api/reviews')
+        // Fetch from static cache (refreshed nightly)
+        fetch('/api/reviews-cache.json')
           .then(function(r){ return r.json(); })
           .then(function(data){
-            var reviews = (data.reviews && data.reviews.length) ? data.reviews : [];
+            var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
+            // Homepage: show top 5-star reviews only, up to 5
+            var reviews = allReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
             if (reviews.length) {
               renderCards(reviews);
             } else {

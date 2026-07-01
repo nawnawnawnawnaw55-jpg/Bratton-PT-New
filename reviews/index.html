@@ -149,12 +149,32 @@
     renderCards(allReviews, false);
   };
 
-  fetch('/api/reviews?newest=20')
+  // Fetch from static cache (refreshed nightly) — show 8 most recent regardless of rating
+  fetch('/api/reviews-cache.json')
     .then(function(r){return r.json()})
     .then(function(data){
       var rating = data.overall_rating || 5.0;
       var total = data.total_reviews || 0;
-      allReviews = data.reviews || [];
+      var rawReviews = data.reviews || [];
+
+      // Sort reviews by time (Google returns relative times like "8 months ago",
+      // "1 year ago", "3 years ago" — parse and sort newest first)
+      allReviews = rawReviews.sort(function(a, b){
+        function parseTime(t){
+          if (!t) return 0;
+          var match = t.match(/(\d+)\s+(month|year|week|day)/i);
+          if (!match) return 0;
+          var num = parseInt(match[1], 10);
+          var unit = match[2].toLowerCase();
+          if (unit === 'day' || unit === 'days') return num;
+          if (unit === 'week' || unit === 'weeks') return num * 7;
+          if (unit === 'month' || unit === 'months') return num * 30;
+          if (unit === 'year' || unit === 'years') return num * 365;
+          return 0;
+        }
+        // Lower daysAgo = newer, so sort ascending
+        return parseTime(a.time) - parseTime(b.time);
+      });
 
       ratingEl.textContent = rating.toFixed(1);
       starsEl.textContent = starStr(rating);
