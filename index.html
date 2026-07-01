@@ -164,8 +164,8 @@
           return d.innerHTML;
         }
 
-        // Fetch from static cache (refreshed nightly)
-        fetch('/api/reviews-cache.json')
+        // Fetch from API (cache-first, falls back to Google API, then hardcoded)
+        fetch('/api/reviews')
           .then(function(r){ return r.json(); })
           .then(function(data){
             var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];

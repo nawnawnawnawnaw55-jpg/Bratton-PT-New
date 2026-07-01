@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reviews — Bratton Physical Therapy | Slidell, LA</title>
-<meta name="description" content="See what patients say about Bratton Physical Therapy in Slidell, LA. Real reviews from real patients.">
-<meta property="og:title" content="Reviews — Bratton Physical Therapy">
-<meta property="og:description" content="Real patient reviews for Bratton Physical Therapy in Slidell, LA.">
+<title>Patient Reviews - Bratton Physical Therapy Slidell LA</title>
+<meta name="description" content="Read what our patients say about Bratton Physical Therapy in Slidell, LA.">
+<meta property="og:title" content="Patient Reviews - Bratton Physical Therapy">
+<meta property="og:description" content="Read what our patients say about Bratton Physical Therapy in Slidell, LA.">
 <meta property="og:url" content="/reviews/">
 <meta property="og:site_name" content="Bratton Physical Therapy">
 <meta property="og:type" content="website">
@@ -16,19 +16,17 @@
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <style>
-  .review-card { background: var(--light-gray); padding: 24px; border-radius: 8px; margin-bottom: 16px; }
-  .review-stars { color: #f5a623; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
-  .review-body { font-style: italic; line-height: 1.7; margin-bottom: 10px; font-size: 1.05rem; }
-  .review-author { font-weight: 700; color: var(--primary); }
-  .review-date { font-size: 0.85rem; color: #888; margin-top: 4px; }
-  .aggregate-badge { display: flex; align-items: center; gap: 12px; background: var(--primary); color: #fff; padding: 16px 24px; border-radius: 8px; margin-bottom: 32px; }
-  .aggregate-badge .rating { font-size: 2rem; font-weight: 800; }
-  .aggregate-badge .stars { color: #f5a623; font-size: 1.4rem; letter-spacing: 2px; }
-  @media (max-width: 480px) {
-    .aggregate-badge { flex-direction: column; text-align: center; gap: 6px; padding: 14px 16px; }
-    .aggregate-badge .rating { font-size: 1.6rem; }
-    .aggregate-badge .stars { font-size: 1.1rem; }
-  }
+  .reviews-page-grid{display:grid;gap:20px;grid-template-columns:1fr}
+  @media(min-width:768px){.reviews-page-grid{grid-template-columns:repeat(2,1fr)}}
+  .reviews-page-grid .review-card{display:block;animation:none}
+  .reviews-page-grid .review-card__text{max-height:4.4em;overflow:hidden;position:relative;transition:max-height .3s ease}
+  .reviews-page-grid .review-card__text.expanded{max-height:none!important;overflow:visible!important}
+  .reviews-page-grid .review-card__readmore{cursor:pointer;color:var(--primary);font-size:.82rem;font-weight:600;margin-top:6px;display:block}
+  .reviews-page-grid .review-card__readmore:hover{color:var(--accent)}
+  .reviews-page .overall-stats{text-align:center;margin-bottom:24px}
+  .reviews-page .overall-rating{font-size:3rem;font-family:var(--font-heading);font-weight:800;color:var(--accent);line-height:1}
+  .reviews-page .overall-stars{font-size:1.4rem;color:var(--accent);margin:4px 0}
+  .reviews-page .overall-count{font-size:.9rem;color:var(--gray)}
 </style>
 </head>
 <body>
@@ -45,34 +43,22 @@
       document.querySelectorAll('.nav__link').forEach(function(link){
         link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
       });
-      window.initStickyNav&&window.initStickyNav();
     });
 </script>
 
 <main id="main-content">
-  <section class="section">
-    <div class="container" style="max-width:800px">
-      <h1>Patient Reviews</h1>
-      <p style="font-size:1.15rem;line-height:1.7">Our patients' success stories say it best. Here's what the community has to say about their experience at Bratton Physical Therapy.</p>
-
-      <div class="aggregate-badge" id="aggregate-badge">
-        <div class="rating" id="overall-rating">⋯</div>
-        <div>
-          <div class="stars" id="overall-stars">★★★★★</div>
-          <div style="font-size:0.95rem" id="total-reviews-text">Loading reviews...</div>
-        </div>
+  <section class="section reviews-page">
+    <div class="container">
+      <div class="section-title">
+        <h1>Patient Reviews</h1>
+        <p>Hear from real patients about their experience at Bratton Physical Therapy</p>
       </div>
-
-      <div class="reviews-grid" id="reviews-grid">
-        <div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">Loading reviews from Google...</p></div>
-      </div>
-
-      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:32px">
-        <a href="https://search.google.com/local/reviews?placeid=ChIJicdBse3mnYgRyU49RjVmRs0" target="_blank" rel="noopener" class="btn btn--accent btn--lg">Read More Reviews on Google</a>
-      </div>
+      <div class="overall-stats" id="overall-stats">Loading...</div>
+      <div class="reviews-page-grid" id="reviews-page-grid">Loading reviews...</div>
     </div>
   </section>
-</main>
+
+  <section class="section section--accent" style="text-align:center"><div class="container"><h2>Ready to Feel Better?</h2><p style="font-size:1.1rem;margin-bottom:20px">Schedule your initial evaluation and let's make things happen!</p><a href="tel:9856415825" class="btn btn--accent btn--lg">&#x260E; Call Today (985) 641-5825</a></div></section>
 
 <div id="site-footer"></div>
 <script>
@@ -80,19 +66,21 @@
     .then(function(r){return r.text()})
     .then(function(f){document.getElementById('site-footer').innerHTML=f});
 </script>
+</main>
+
+<script src="/js/main.js"></script>
+
 <script>
 (function(){
-  var grid = document.getElementById('reviews-grid');
-  var ratingEl = document.getElementById('overall-rating');
-  var starsEl = document.getElementById('overall-stars');
-  var totalText = document.getElementById('total-reviews-text');
-  var allReviews = [];
-  var showingAll = false;
+  var grid = document.getElementById('reviews-page-grid');
+  var statsEl = document.getElementById('overall-stats');
+  var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--secondary)','#e74c3c','#8e44ad','#16a085'];
 
-  function starStr(rating){
-    var full = Math.round(rating);
-    return '★'.repeat(full) + '☆'.repeat(5 - full);
+  function getInitials(name){
+    return (name||'?').split(' ').map(function(w){return w.charAt(0).toUpperCase()}).join('').substring(0,2);
   }
+
+  function starStr(r){return '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));}
 
   function escapeHTML(str){
     var d = document.createElement('div');
@@ -100,101 +88,74 @@
     return d.innerHTML;
   }
 
-  function renderCards(reviews, showAll){
-    var display = showAll ? reviews : reviews.slice(0, 8);
-    var hasMore = reviews.length > 8;
-    grid.innerHTML = display.map(function(r){
+  window._pageReviews = [];
+  window._pageToggleReview = function(event, idx){
+    if (event) { event.stopPropagation(); event.preventDefault(); }
+    var review = window._pageReviews[idx];
+    if (!review) return;
+    var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
+    if (!textEl) return;
+    var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
+    if (textEl.classList.contains('expanded')){
+      textEl.classList.remove('expanded');
+      textEl.style.maxHeight = '4.4em';
+      textEl.style.overflow = 'hidden';
+      if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
+    } else {
+      textEl.classList.add('expanded');
+      textEl.style.maxHeight = 'none';
+      textEl.style.overflow = 'visible';
+      if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
+    }
+  };
+
+  function renderReviews(reviews, overallRating, totalReviews){
+    window._pageReviews = reviews;
+
+    // Overall stats
+    statsEl.innerHTML = '<div class="overall-rating">' + overallRating.toFixed(1) + '</div>' +
+      '<div class="overall-stars">' + starStr(overallRating) + '</div>' +
+      '<div class="overall-count">Based on ' + totalReviews + ' Google reviews</div>';
+
+    // Review cards
+    grid.innerHTML = reviews.map(function(r, i){
       var isLong = r.text.length > 150;
-      var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
-      var readMoreHTML = isLong ? '<span class="review-readmore" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600;text-align:left">Read more ▼</span>' : '';
+      var displayText = escapeHTML(r.text);
+      var readMoreHTML = isLong
+        ? '<span class="review-card__readmore" data-idx="' + i + '" onclick="event.stopPropagation();window._pageToggleReview(event,' + i + ')">Read more ▼</span>'
+        : '';
+      var photoHTML = r.photo
+        ? '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + ';background-image:url(' + escapeHTML(r.photo) + ');background-size:cover;background-position:center"></div>'
+        : '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>';
       return '<div class="review-card">' +
-        '<div class="review-stars">' + starStr(r.rating) + '</div>' +
-        '<p class="review-body" data-full="' + escapeHTML(r.text) + '" data-short="' + displayText + '">' + displayText + '</p>' +
+        '<div class="review-card__header">' +
+        photoHTML +
+        '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
+        '</div>' +
+        '<p class="review-card__text" data-idx="' + i + '" onclick="window._pageToggleReview(event,' + i + ')">' + displayText + '</p>' +
         readMoreHTML +
-        '<p class="review-author">' + escapeHTML(r.name) + '</p>' +
-        '<p class="review-date">' + escapeHTML(r.time) + '</p>' +
         '</div>';
     }).join('');
-
-    // Add "Show More" button if needed
-    if (!showAll && hasMore){
-      grid.innerHTML += '<div style="text-align:center;margin-top:16px"><button class="btn btn--outline btn--sm" id="show-more-btn" onclick="window._showAllReviews()">Show All ' + reviews.length + ' Reviews</button></div>';
-    }
-    if (showAll && hasMore){
-      grid.innerHTML += '<div style="text-align:center;margin-top:16px"><button class="btn btn--outline btn--sm" id="show-more-btn" onclick="window._collapseReviews()">Show Less</button></div>';
-    }
-
-    // Attach click handlers to readmore spans
-    grid.querySelectorAll('.review-readmore').forEach(function(el){
-      el.addEventListener('click', function(e){
-        e.stopPropagation();
-        var body = el.previousElementSibling;
-        if (body.classList.contains('expanded')){
-          body.classList.remove('expanded');
-          body.textContent = body.getAttribute('data-short');
-          el.innerHTML = 'Read more ▼';
-        } else {
-          body.classList.add('expanded');
-          body.textContent = body.getAttribute('data-full');
-          el.innerHTML = 'Show less ▲';
-        }
-      });
-    });
   }
 
-  window._showAllReviews = function(){
-    renderCards(allReviews, true);
-  };
-  window._collapseReviews = function(){
-    renderCards(allReviews, false);
-  };
-
-  // Fetch from static cache (refreshed nightly) — show 8 most recent regardless of rating
-  fetch('/api/reviews-cache.json')
-    .then(function(r){return r.json()})
+  fetch('/api/reviews')
+    .then(function(r){ return r.json(); })
     .then(function(data){
-      var rating = data.overall_rating || 5.0;
-      var total = data.total_reviews || 0;
-      var rawReviews = data.reviews || [];
-
-      // Sort reviews by time (Google returns relative times like "8 months ago",
-      // "1 year ago", "3 years ago" — parse and sort newest first)
-      allReviews = rawReviews.sort(function(a, b){
-        function parseTime(t){
-          if (!t) return 0;
-          var match = t.match(/(\d+)\s+(month|year|week|day)/i);
-          if (!match) return 0;
-          var num = parseInt(match[1], 10);
-          var unit = match[2].toLowerCase();
-          if (unit === 'day' || unit === 'days') return num;
-          if (unit === 'week' || unit === 'weeks') return num * 7;
-          if (unit === 'month' || unit === 'months') return num * 30;
-          if (unit === 'year' || unit === 'years') return num * 365;
-          return 0;
-        }
-        // Lower daysAgo = newer, so sort ascending
-        return parseTime(a.time) - parseTime(b.time);
-      });
-
-      ratingEl.textContent = rating.toFixed(1);
-      starsEl.textContent = starStr(rating);
-      totalText.textContent = 'Based on ' + total + ' patient reviews';
-
-      if (!allReviews.length){
-        grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">No reviews found. Check back soon!</p></div>';
-        return;
+      var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
+      // Take the 8 most recent reviews regardless of rating
+      var reviews = allReviews.slice(0, 8);
+      if (reviews.length) {
+        renderReviews(reviews, data.overall_rating || 5.0, data.total_reviews || reviews.length);
+      } else {
+        grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;color:var(--gray)">No reviews available at this time. Check back soon!</p>';
+        statsEl.innerHTML = '<div class="overall-rating">5.0</div><div class="overall-stars">★★★★★</div><div class="overall-count">Check our Google reviews</div>';
       }
-
-      renderCards(allReviews, false);
     })
     .catch(function(){
-      ratingEl.textContent = '5.0';
-      starsEl.textContent = '★★★★★';
-      totalText.textContent = 'Based on patient reviews';
-      grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">Unable to load reviews. Please check back later or visit us on Google.</p></div>';
+      grid.innerHTML = '<p style="text-align:center;grid-column:1/-1;color:var(--gray)">Unable to load reviews. Please check back later.</p>';
+      statsEl.innerHTML = '<div class="overall-rating">5.0</div><div class="overall-stars">★★★★★</div><div class="overall-count">Check our Google reviews</div>';
     });
 })();
 </script>
-<script src="/js/main.js"></script>
 </body>
 </html>

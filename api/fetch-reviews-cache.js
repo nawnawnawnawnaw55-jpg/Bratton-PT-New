@@ -55,7 +55,7 @@ function fetchGoogleReviews() {
 }
 
 function sanitizeText(t) {
-  return (t || '').replace(/[â-â¿¿]/g, '').replace(/\s+/g, ' ').trim();
+  return (t || '').replace(/[^\x20-\x7E\xA0-\xFF\u2010-\u2122]/g, '').replace(/\s+/g, ' ').trim();
 }
 
 async function main() {
