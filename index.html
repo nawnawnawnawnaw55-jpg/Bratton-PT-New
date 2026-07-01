@@ -164,6 +164,15 @@
           return d.innerHTML;
         }
 
+        // Hardcoded fallback reviews (used when API is unreachable)
+        var fallbackReviewsHome = [
+          {name:'Gary L.',time:'8 months ago',rating:5,text:'Just want to thank Jena and staff for a great job in rehabbing my right rotator cuff. I had two complete tears out of the four muscles of the cuff. Jena and staff rehabbed my shoulder without a need for surgery.'},
+          {name:'John C.',time:'1 year ago',rating:5,text:'The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn\'t walk more than 50 feet, getting up from sitting was painful. Now I can easily walk hundreds of yards, I have no pain.'},
+          {name:'Barbara K.',time:'1 year ago',rating:5,text:'My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past.'},
+          {name:'Nina S.',time:'2 years ago',rating:5,text:'Before coming I struggled picking up my son, sitting comfortably, and sleeping due to severe shoulder pain and limited neck mobility. Jena knew what the issue was immediately. She created a plan that quickly diminished my pain.'},
+          {name:'Stephen D.',time:'3 years ago',rating:5,text:'After major rotator cuff surgery, I was unable to move my arm away from my side. I was also experiencing considerable pain related to the surgery. For my physical therapy treatment, my Surgeon recommended Jena Bratton, PT.'}
+        ];
+
         // Fetch from API (cache-first, falls back to Google API, then hardcoded)
         fetch('/api/reviews')
           .then(function(r){ return r.json(); })
@@ -174,13 +183,11 @@
             if (reviews.length) {
               renderCards(reviews);
             } else {
-              grid.innerHTML = '<div class="review-card review-card--active"><div class="review-card__header"><div class="review-card__avatar" style="background:var(--primary)">BP</div><div><div class="review-card__stars">★★★★★</div><strong>Bratton PT</strong></div></div><p class="review-card__text">Check out our reviews on Google to see what patients are saying!</p></div>';
-              dots.innerHTML = '<button class="review-dot review-dot--active"></button>';
+              renderCards(fallbackReviewsHome);
             }
           })
           .catch(function(){
-            grid.innerHTML = '<div class="review-card review-card--active"><div class="review-card__header"><div class="review-card__avatar" style="background:var(--primary)">BP</div><div><div class="review-card__stars">★★★★★</div><strong>Bratton PT</strong></div></div><p class="review-card__text">Check out our reviews on Google to see what patients are saying!</p></div>';
-            dots.innerHTML = '<button class="review-dot review-dot--active"></button>';
+            renderCards(fallbackReviewsHome);
           });
       })();
       </script></div></section>

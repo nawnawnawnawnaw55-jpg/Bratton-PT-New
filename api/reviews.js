@@ -118,12 +118,20 @@ function selectReviews(allReviews, { newest, showAll }) {
   return sorted.filter(r => r.rating === 5).slice(0, 5);
 }
 
+// ── Safe JSON responder (avoids reliance on Vercel res.json helper) ──
+
+function sendJSON(res, statusCode, data) {
+  res.statusCode = statusCode;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(data));
+}
+
 // ── Serve from hardcoded fallback ────────────────────────────────────
 
 function serveFallback({ newest, showAll }, res) {
   const reviews = selectReviews(FALLBACK, { newest, showAll });
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-  res.json({
+  sendJSON(res, 200, {
     reviews,
     overall_rating: 5.0,
     total_reviews: FALLBACK.length,
@@ -156,7 +164,7 @@ async function fetchGoogleReviews(apiKey, { newest, showAll }, res) {
     const totalReviews = data.result.user_ratings_total || allReviews.length;
 
     res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
-    res.json({ reviews, overall_rating: overallRating, total_reviews: totalReviews, _live: true });
+    sendJSON(res, 200, { reviews, overall_rating: overallRating, total_reviews: totalReviews, _live: true });
   } catch (e) {
     serveFallback({ newest, showAll }, res);
   }
@@ -179,7 +187,7 @@ export default async function handler(req, res) {
     if (cache) {
       const reviews = selectReviews(cache.reviews, { newest, showAll });
       res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
-      res.json({
+      sendJSON(res, 200, {
         reviews,
         overall_rating: cache.overall_rating,
         total_reviews: cache.total_reviews,
