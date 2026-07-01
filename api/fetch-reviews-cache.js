@@ -11,6 +11,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const PLACE_ID = 'ChIJicdBse3mnYgRyU49RjVmRs0';
 const OUTPUT_FILE = path.join(__dirname, 'reviews-cache.json');
@@ -104,6 +105,20 @@ async function main() {
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(cacheData, null, 2), 'utf8');
     log(`SUCCESS: Wrote ${reviews.length} reviews to ${OUTPUT_FILE}`);
     log(`Overall rating: ${cacheData.overall_rating} | Total reviews: ${cacheData.total_reviews}`);
+
+    // Auto-commit and push to trigger Vercel redeploy
+    const projectRoot = path.join(__dirname, '..');
+    const dateStr = new Date().toISOString().split('T')[0];
+    try {
+      log('Committing updated cache to git...');
+      execSync('git add api/reviews-cache.json', { cwd: projectRoot, stdio: 'pipe' });
+      execSync(`git commit -m "Nightly reviews cache refresh - ${dateStr}"`, { cwd: projectRoot, stdio: 'pipe' });
+      execSync('git push', { cwd: projectRoot, stdio: 'pipe' });
+      log('Pushed to git — Vercel will redeploy with fresh cache.');
+    } catch (gitErr) {
+      log('WARNING: git push failed: ' + (gitErr.stderr ? gitErr.stderr.toString().trim() : gitErr.message));
+      log('Cache file was written locally but not pushed. Vercel will keep serving previous cache.');
+    }
     process.exit(0);
   } catch (e) {
     log('ERROR: ' + e.message);
