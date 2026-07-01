@@ -31,7 +31,7 @@
   // Popup
   var popup = document.createElement('div');
   popup.className = 'br-review-popup';
-  popup.innerHTML = '<div class="br-review-header"><h3>★★★★★ Our Reviews</h3><button class="br-review-close">&times;</button></div><div class="br-review-body"><div class="br-review-loading">Loading reviews...</div></div><div class="br-review-footer"><a href="https://search.google.com/local/writereview?placeid=ChIJicdBse3mnYgRyU49RjVmRs0" target="_blank" class="br-review-btn">Leave Us a Review</a></div>';
+  popup.innerHTML = '<div class="br-review-header"><h3>★★★★★ Our Reviews</h3><button class="br-review-close">&times;</button></div><div class="br-review-body"><div class="br-review-loading">Loading reviews...</div></div><div class="br-review-footer"><a href="/reviews/" class="br-review-btn">More Reviews</a></div>';
   document.body.appendChild(popup);
   
   var fallbackReviews = [
