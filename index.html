@@ -88,7 +88,7 @@
             var active = i === 0 ? ' review-card--active' : '';
             var isLong = r.text.length > 150;
             var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
-            var readMoreHTML = isLong ? '<span class="review-card__readmore" data-idx="' + i + '" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600">Read more ▼</span>' : '';
+            var readMoreHTML = isLong ? '<span class="review-card__readmore" data-idx="' + i + '" onclick="event.stopPropagation();window._homeToggleReview(event,' + i + ')" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600">Read more ▼</span>' : '';
             return '<div class="review-card' + active + '" data-review="' + i + '" onclick="window._homeToggleReview(event,' + i + ')">' +
               '<div class="review-card__header">' +
               '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>' +
@@ -116,6 +116,7 @@
 
         window._homeReviews = [];
         window._homeToggleReview = function(event, idx){
+          if (event) { event.stopPropagation(); event.preventDefault(); }
           var review = window._homeReviews[idx];
           if (!review) return;
           var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
@@ -123,6 +124,8 @@
           var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
           if (textEl.classList.contains('expanded')){
             textEl.classList.remove('expanded');
+            textEl.style.maxHeight = '';
+            textEl.style.overflow = '';
             textEl.textContent = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
             if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
             // Resume auto-rotate when collapsing
@@ -133,6 +136,8 @@
             }, 5000);
           } else {
             textEl.classList.add('expanded');
+            textEl.style.maxHeight = 'none';
+            textEl.style.overflow = 'visible';
             textEl.textContent = review.text;
             if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
             // Pause auto-rotate while expanded
