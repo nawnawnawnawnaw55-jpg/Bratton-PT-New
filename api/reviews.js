@@ -50,10 +50,7 @@ export default async function handler(req, res) {
     
     const allReviews = data.result.reviews.map(r => ({
       name: r.author_name,
-      text: (function(t) {
-        t = (t || '').replace(/[â-â¿¿]/g, '').replace(/\s+/g, ' ').trim();
-        return t.length > 180 ? t.substring(0, 180) + '...' : t;
-      })(r.text),
+      text: (r.text || '').replace(/[â-â¿¿]/g, '').replace(/\s+/g, ' ').trim(),
       time: r.relative_time_description,
       rating: r.rating,
       photo: r.profile_photo_url || null
