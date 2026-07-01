@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/home.css">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <style>
    #med-lib-body a circle{transition:fill .2s, opacity .2s; cursor:pointer; fill:var(--accent); opacity:0.85}
    #med-lib-body a:hover circle{fill:var(--primary); opacity:1}
@@ -39,7 +39,7 @@
    /* ========== Medical Library Tabs (preserved from v2 tab interface) ========== */
    .ml-tabs{margin:24px 0}
    .ml-tab-nav{
-    overflow-x:auto;display:flex; gap:0; border-bottom:2px solid var(--accent); margin-bottom:0; flex-wrap:nowrap}
+    overflow-x:auto;display:flex; gap:0; border-bottom:2px solid var(--accent); margin-bottom:0; flex-wrap:nowrap; scrollbar-width:none}
    .ml-tab-btn{flex:1; min-width:100px; padding:10px 14px; background:var(--light-bg, #f5f7fa); border:1px solid #ddd; border-bottom:none; border-radius:6px 6px 0 0; cursor:pointer; font-family:var(--font-heading); font-size:0.9rem; font-weight:600; color:var(--text); text-align:center; transition:background .2s, color .2s, border-color .2s; margin-right:2px; position:relative; bottom:-1px}
    .ml-tab-btn:last-child{margin-right:0}
    .ml-tab-btn:hover{background:var(--accent-light, #e8f0fe); color:var(--primary)}
@@ -60,7 +60,8 @@
    .ml-parent-article-list li{margin:0}
    .ml-parent-article-list a{display:block; padding:8px 16px; text-align:center; color:var(--primary); text-decoration:none; font-weight:500; border-bottom:1px solid #e8e8e8; transition:background .2s, color .2s}
    .ml-parent-article-list a:hover{background:var(--accent); color:#fff}
-   @media(max-width:700px){
+   .ml-tab-nav::-webkit-scrollbar{display:none}
+@media(max-width:700px){
       .ml-diagram-wrapper{position:static; max-width:none}
       .ml-svg-wrap svg{max-width:180px; min-height:200px}
       .ml-other-choices{position:static; width:100%; max-width:300px; margin:20px auto 0}
@@ -112,7 +113,7 @@
   <div class="article-overview"><h4>Groin Strain (Adductor Strain)</h4>
 <img src="https://ptclinic.com/medlibrary/images/v2/a17a.gif" width="300" height="350" alt="Groin (Adductor" Strain" />
 
-<p>This injury usually occurs in sports where cutting, side-stepping, or pivoting are required. Often, there is forceful separation of the legs or twisting of the toe outward. Signs and symptoms include pain and tenderness in the inner thigh region.</p></td>
+<p>This injury usually occurs in sports where cutting, side-stepping, or pivoting are required. Often, there is forceful separation of the legs or twisting of the toe outward. Signs and symptoms include pain and tenderness in the inner thigh region.</p>
 
 </div>
 </div>

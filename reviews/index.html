@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <style>
   .review-card { background: var(--light-gray); padding: 24px; border-radius: 8px; margin-bottom: 16px; }
   .review-stars { color: #f5a623; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
@@ -24,6 +24,11 @@
   .aggregate-badge { display: flex; align-items: center; gap: 12px; background: var(--primary); color: #fff; padding: 16px 24px; border-radius: 8px; margin-bottom: 32px; }
   .aggregate-badge .rating { font-size: 2rem; font-weight: 800; }
   .aggregate-badge .stars { color: #f5a623; font-size: 1.4rem; letter-spacing: 2px; }
+  @media (max-width: 480px) {
+    .aggregate-badge { flex-direction: column; text-align: center; gap: 6px; padding: 14px 16px; }
+    .aggregate-badge .rating { font-size: 1.6rem; }
+    .aggregate-badge .stars { font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body>
@@ -50,69 +55,16 @@
       <h1>Patient Reviews</h1>
       <p style="font-size:1.15rem;line-height:1.7">Our patients' success stories say it best. Here's what the community has to say about their experience at Bratton Physical Therapy.</p>
 
-      <div class="aggregate-badge">
-        <div class="rating">5.0</div>
+      <div class="aggregate-badge" id="aggregate-badge">
+        <div class="rating" id="overall-rating">⋯</div>
         <div>
-          <div class="stars">★★★★★</div>
-          <div style="font-size:0.95rem">Based on 8 patient reviews</div>
+          <div class="stars" id="overall-stars">★★★★★</div>
+          <div style="font-size:0.95rem" id="total-reviews-text">Loading reviews...</div>
         </div>
       </div>
 
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"Just want to thank Jena and staff for a great job in rehabbing my right rotator cuff. I had two complete tears out of the four muscles of the cuff. Jena and staff rehabbed my shoulder without a need for surgery. I have full range of motion again. I can throw a baseball overhead to my granddaughters again, which I thought would not be possible without surgery. Still working on strengthening but in time I know that will come. Thank you Jena and staff."</p>
-          <p class="review-author">Gary L.</p>
-          <p class="review-date">July 17, 2025</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn't walk more than 50 feet, getting up from sitting was painful. Now I can easily walk 100's of yards (likely more), I have no pain, I stand up with no issues or pain. I have full painless use of my feet and legs and I can, and do, drive long distances and long times with no pain or any problems."</p>
-          <p class="review-author">John C.</p>
-          <p class="review-date">January 23, 2025</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"I am so glad that I chose Bratton Physical Therapy for help with my torn rotator cuffs. Jena is extremely knowledgeable and skillful. She makes a personalized plan for each person and carefully supervises and monitors progress. She is also very kind and caring. My shoulder is so much better. I am now able to do my job, which involves a lot of reaching and shoulder movement, without pain."</p>
-          <p class="review-author">October 28, 2024</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past for various problems. I knew Jena would customize a plan for my problem that would ensure success. After examining my situation, she found the left side and shoulder muscles very weak. We began using strengthening exercises and cupping. I am now stronger, and pain has gone away. Thank you Jena! Your staff is caring and considerate just like you. Bratton PT is your choice if you want to feel like family and not just a number. Their care is excellent."</p>
-          <p class="review-author">Barbara K.</p>
-          <p class="review-date">May 22, 2024</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"Before coming I struggled picking up my son, sitting comfortably, and sleeping due to severe shoulder pain and limited neck mobility. Jena knew what the issue was immediately. She created a plan that quickly diminished my pain and gave me back mobility within a couple weeks. I can now comfortably pick up my son and do all my normal activities with no pain and limitations."</p>
-          <p class="review-author">Nina S.</p>
-          <p class="review-date">September 5, 2023</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"After major rotator cuff surgery, I was unable to move my arm away from my side. I was also experiencing considerable pain related to the surgery. For my physical therapy treatment, my Surgeon recommended Jena Bratton, PT. Never having experienced physical therapy before, I did not know what to expect. Jena created a program designed specifically for my situation. The process primarily consisted of a series of light exercises under Jena's direct supervision. As a result of the physical therapy I received, I have gained full mobility of my shoulder with no residual pain. With their friendly attitudes, Jena and Office Manager, Debra, made the entire experience much more pleasant than I expected. I highly recommend Bratton Physical Therapy to anyone who may need Physical Therapy."</p>
-          <p class="review-author">Stephen D.</p>
-          <p class="review-date">July 8, 2022</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"My journey has been one of great pain and great rewards. Many years ago my knees began failing and I was not successful with gym workouts helping the problem. It took quite a while in obtaining surgical approval to have my knees replaced and I wanted both accomplished at the same time or nearly so if possible. The surgery was successful but I had much pain for quite a while. My surgeon ordered Rehab and I requested BRATTON as I was a previous satisfied patient before due to a previous accident. This was a very helpful and correct option as it turned out regarding my ultimate medical outcome. Thankfully Jena the proprietor of BRATTON REHAB formulated a complete plan and presented it to me and then began my rehabilitation process. Over time Jena helped me regain a better than expected knee function and movement in both knees. This is remarkable to me due to the previous loss of function. The pain after surgery was extremely severe but Jena helped and taught me how to handle these problems and work through the pain. Her true desire to help her patients succeed and unparalleled talent and ability to help patients regain mobility and alleviate pain is incredible. I feel a thousand percent better and I do truthfully mean that!"</p>
-          <p class="review-author">James S.</p>
-          <p class="review-date">July 15, 2021</p>
-        </div>
-
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-body">"When I first came to Bratton PT, I was in a lot of pain in my lower back and legs. I had difficulty walking, sitting, and sleeping. After my evaluation, Jena set up a plan that included exercises and hands-on treatment. Over the course of my treatment, my pain decreased significantly and my mobility improved. I am now able to do all the things I enjoy without pain. The one-on-one care at Bratton is outstanding — you are never just a number. I would recommend Bratton Physical Therapy to anyone."</p>
-          <p class="review-author">Joseph W.</p>
-          <p class="review-date">January 3, 2020</p>
-        </div>
+      <div class="reviews-grid" id="reviews-grid">
+        <div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">Loading reviews from Google...</p></div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:32px">
@@ -127,6 +79,57 @@
   fetch('/templates/footer.html')
     .then(function(r){return r.text()})
     .then(function(f){document.getElementById('site-footer').innerHTML=f});
+</script>
+<script>
+(function(){
+  var grid = document.getElementById('reviews-grid');
+  var ratingEl = document.getElementById('overall-rating');
+  var starsEl = document.getElementById('overall-stars');
+  var totalText = document.getElementById('total-reviews-text');
+
+  function starStr(rating){
+    var full = Math.round(rating);
+    return '★'.repeat(full) + '☆'.repeat(5 - full);
+  }
+
+  fetch('/api/reviews?all=1')
+    .then(function(r){return r.json()})
+    .then(function(data){
+      var rating = data.overall_rating || 5.0;
+      var total = data.total_reviews || 0;
+      var reviews = data.reviews || [];
+
+      ratingEl.textContent = rating.toFixed(1);
+      starsEl.textContent = starStr(rating);
+      totalText.textContent = 'Based on ' + total + ' patient reviews';
+
+      if (!reviews.length){
+        grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">No reviews found. Check back soon!</p></div>';
+        return;
+      }
+
+      grid.innerHTML = reviews.map(function(r){
+        return '<div class="review-card">' +
+          '<div class="review-stars">' + starStr(r.rating) + '</div>' +
+          '<p class="review-body">"' + escapeHTML(r.text) + '"</p>' +
+          '<p class="review-author">' + escapeHTML(r.name) + '</p>' +
+          '<p class="review-date">' + escapeHTML(r.time) + '</p>' +
+          '</div>';
+      }).join('');
+    })
+    .catch(function(){
+      ratingEl.textContent = '5.0';
+      starsEl.textContent = '★★★★★';
+      totalText.textContent = 'Based on patient reviews';
+      grid.innerHTML = '<div class="review-card"><p class="review-body" style="text-align:center;color:#999;padding:40px">Unable to load reviews. Please check back later or visit us on Google.</p></div>';
+    });
+
+  function escapeHTML(str){
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+})();
 </script>
 <script src="/js/main.js"></script>
 </body>

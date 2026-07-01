@@ -1,1 +1,11 @@
 <footer style="background:var(--primary);color:var(--white);padding:16px 0;text-align:center;font-size:.82rem"><div class="container">Copyright 2026 Bratton Physical Therapy, All Rights Reserved.<br><a href="/sitemap/" style="color:rgba(255,255,255,0.65);margin:0 6px;text-decoration:none">Sitemap</a> | <a href="/privacy-policy/" style="color:rgba(255,255,255,0.65);margin:0 6px;text-decoration:none">Privacy Policy</a> | <a href="/terms-of-use/" style="color:rgba(255,255,255,0.65);margin:0 6px;text-decoration:none">Terms of Use</a></div></footer>
+
+<script src="/js/br-reviews.js"></script>
+<style>
+@media(min-width:769px){
+  .br-trigger-btn{position:fixed;bottom:20px;right:20px;z-index:99999;background:#2257A6;color:#fff;border:none;border-radius:50px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);font-family:Montserrat,sans-serif}
+  .br-trigger-btn.br-hidden{display:none!important}.br-trigger-btn:hover{transform:scale(1.05);background:#1a447d}
+}
+@media(max-width:768px){.br-trigger-btn{display:none}}
+</style>
+<button class="br-trigger-btn" onclick="var t=this;var p=document.querySelector('.br-review-popup');if(!p){t.classList.add('br-hidden');var s=document.createElement('script');s.src='/js/br-reviews.js';s.onload=function(){var pp=document.querySelector('.br-review-popup');if(pp)pp.classList.add('show')};document.body.appendChild(s)}else if(p.classList.contains('show')){p.classList.remove('show');t.classList.remove('br-hidden')}else{p.classList.add('show');t.classList.add('br-hidden')}">★★★★★ Reviews</button>
