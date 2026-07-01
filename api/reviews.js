@@ -71,22 +71,37 @@ function sortReviewsNewest(reviews) {
 
 function readCache() {
   try {
-    if (fs.existsSync(CACHE_PATH)) {
-      const raw = fs.readFileSync(CACHE_PATH, 'utf8');
-      const data = JSON.parse(raw);
-      if (data.reviews && Array.isArray(data.reviews) && data.reviews.length > 0) {
-        return {
-          reviews: data.reviews,
-          overall_rating: data.overall_rating || 5.0,
-          total_reviews: data.total_reviews || data.reviews.length,
-          cached_at: data.cached_at || null
-        };
+    if (!fs.existsSync(CACHE_PATH)) return null;
+    const raw = fs.readFileSync(CACHE_PATH, 'utf8');
+    const data = JSON.parse(raw);
+    // Validate structure
+    if (!data || typeof data !== 'object') return null;
+    if (!data.reviews || !Array.isArray(data.reviews) || data.reviews.length === 0) return null;
+    // Validate each review has required fields
+    const valid = data.reviews.every(r => r && typeof r === 'object' && typeof r.text === 'string' && r.text.length > 0);
+    if (!valid) {
+      console.warn('Cache contains malformed reviews — skipping');
+      return null;
+    }
+    // Check cache freshness (5 days max)
+    if (data.cached_at) {
+      const age = Date.now() - new Date(data.cached_at).getTime();
+      const maxAge = 5 * 24 * 60 * 60 * 1000; // 5 days
+      if (age > maxAge) {
+        console.warn('Cache is over 5 days old — will try live API');
+        return null; // Force refresh from live API
       }
     }
+    return {
+      reviews: data.reviews,
+      overall_rating: data.overall_rating || 5.0,
+      total_reviews: data.total_reviews || data.reviews.length,
+      cached_at: data.cached_at || null
+    };
   } catch (e) {
-    // Cache file missing or corrupt — will try Google API next
+    console.warn('Cache read error — will try live API:', e.message);
+    return null;
   }
-  return null;
 }
 
 // ── Select subset from full review list ──────────────────────────────
@@ -150,29 +165,38 @@ async function fetchGoogleReviews(apiKey, { newest, showAll }, res) {
 // ── Main handler ─────────────────────────────────────────────────────
 
 export default async function handler(req, res) {
+  // Always set CORS headers first
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const API_KEY = process.env.GOOGLE_API_KEY;
   const showAll = req.query && req.query.all === '1';
   const newest = req.query && req.query.newest ? parseInt(req.query.newest, 10) : 0;
 
-  // 1. Try static cache first
-  const cache = readCache();
-  if (cache) {
-    const reviews = selectReviews(cache.reviews, { newest, showAll });
-    res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
-    res.json({
-      reviews,
-      overall_rating: cache.overall_rating,
-      total_reviews: cache.total_reviews,
-      _from_cache: true
-    });
-    return;
-  }
+  try {
+    // 1. Try static cache first
+    const cache = readCache();
+    if (cache) {
+      const reviews = selectReviews(cache.reviews, { newest, showAll });
+      res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate');
+      res.json({
+        reviews,
+        overall_rating: cache.overall_rating,
+        total_reviews: cache.total_reviews,
+        _from_cache: true
+      });
+      return;
+    }
 
-  // 2. Cache empty — try Google API live
-  if (API_KEY) {
-    return fetchGoogleReviews(API_KEY, { newest, showAll }, res);
-  }
+    // 2. Cache empty — try Google API live
+    if (API_KEY) {
+      return fetchGoogleReviews(API_KEY, { newest, showAll }, res);
+    }
 
-  // 3. No API key — use fallback
-  serveFallback({ newest, showAll }, res);
+    // 3. No API key — use fallback
+    serveFallback({ newest, showAll }, res);
+  } catch (e) {
+    console.error('reviews API error:', e);
+    serveFallback({ newest, showAll }, res);
+  }
 }

@@ -83,7 +83,7 @@
 .review-card__avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:var(--white);flex-shrink:0}
 .review-card__stars{color:var(--accent);font-size:.85rem}
 .review-card__text{font-size:.88rem;color:var(--dark);line-height:1.5}
-.review-card__text.expanded{max-height:none!important;overflow:visible!important;white-space:normal;word-break:break-word}
+.reviews-carousel .review-card__text.expanded{max-height:none;overflow:visible;white-space:normal;word-break:break-word}
 .review-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .review-dot{width:10px;height:10px;border-radius:50%;background:var(--light-gray);border:none;cursor:pointer;transition:all .3s}
 .review-dot--active{background:var(--accent);width:24px;border-radius:5px}
