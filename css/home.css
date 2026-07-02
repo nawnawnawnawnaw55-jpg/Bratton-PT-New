@@ -1,7 +1,14 @@
 /* ===== HERO ===== */
-.hero{position:relative;min-height:55vh;display:flex;align-items:center;overflow:hidden;background:var(--dark)}
-.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero{position:relative;min-height:55vh;display:flex;align-items:center;background:var(--dark);overflow:hidden;z-index:1}
+@media(max-width:768px){.hero{min-height:420px}}
+/* Hero bg images — normal absolute cover, no JS parallax */
+.hero__bg{position:absolute;inset:0;background-size:cover;background-position:center;background-attachment:fixed;z-index:0}
+/* Mobile: hide desktop bg, show vertical mobile bg */
+.hero__bg--mobile{display:none}
+@media(max-width:768px){.hero__bg:not(.hero__bg--mobile){display:none}.hero__bg--mobile{display:block;transform:scaleX(-1);background-attachment:scroll}}
 .hero__overlay{position:absolute;inset:0;z-index:1;background:rgba(0,0,0,0.55);display:flex;align-items:center}
+/* Hero with logo overlap needs extra bottom padding for the logo */
+.hero--logo-overlap{padding-bottom:clamp(40px,8vw,80px)}
 .hero__overlay .container{position:relative;z-index:2;max-width:100vw;overflow:hidden}
 .hero__title{color:var(--white);font-size:clamp(1.3rem,4.5vw,2.4rem);line-height:1.15;margin-bottom:10px;max-width:650px;word-wrap:break-word}
 .hero__subtitle{color:rgba(255,255,255,0.9);font-size:clamp(.85rem,2.2vw,1.2rem);margin-bottom:20px;max-width:550px;font-family:var(--font-heading);font-weight:600}
@@ -14,6 +21,10 @@
   .hero__cta{gap:14px}
 }
 @media(min-width:1024px){.hero{min-height:75vh}}
+
+/* ===== HERO OVERLAP — value-props section renders above hero for parallax cover ===== */
+.section--light.hero-next-section{position:relative;z-index:3;background:var(--light-bg);border-radius:var(--radius-lg) var(--radius-lg) 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.25)}
+@media(max-width:768px){.section--light.hero-next-section{border-radius:var(--radius-md) var(--radius-md) 0 0}}
 
 /* ===== VALUE PROPS ===== */
 .value-props{text-align:center}
@@ -92,6 +103,104 @@
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(min-width:768px){
   .reviews-grid{grid-template-columns:1fr;max-width:650px;margin-left:auto!important;margin-right:auto!important}
+}
+
+/* ===== ANGULAR PARALLAX SCROLL CLUSTER ===== */
+.angular-parallax-section {
+  position: relative;
+}
+.angular-parallax-bg-shape {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50px;
+  opacity: 0.07;
+  background: var(--primary);
+  z-index: 0;
+  will-change: transform;
+}
+.angular-parallax-bg-shape--1 {
+  width: clamp(200px, 40vw, 500px);
+  height: clamp(200px, 40vw, 500px);
+  left: -8%;
+  top: 10%;
+  transform: rotate(15deg);
+}
+.angular-parallax-bg-shape--2 {
+  width: clamp(140px, 25vw, 300px);
+  height: clamp(140px, 25vw, 300px);
+  right: -5%;
+  bottom: 5%;
+  background: var(--accent);
+  transform: rotate(-10deg);
+}
+.angular-scroll-cluster {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: clamp(350px, 55vw, 600px);
+  margin: clamp(20px, 4vw, 40px) auto 0;
+  max-width: 800px;
+}
+.angular-scroll-item {
+  position: absolute;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  will-change: transform;
+}
+.angular-scroll-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.angular-scroll-item--1 {
+  width: clamp(200px, 35vw, 380px);
+  aspect-ratio: 4/3;
+  z-index: 3;
+  top: 5%;
+  left: 5%;
+  transform: rotate(-3deg);
+}
+.angular-scroll-item--2 {
+  width: clamp(160px, 28vw, 300px);
+  aspect-ratio: 3/4;
+  z-index: 2;
+  top: 18%;
+  right: 8%;
+  transform: rotate(4deg);
+}
+.angular-scroll-item--3 {
+  width: clamp(180px, 30vw, 320px);
+  aspect-ratio: 4/3;
+  z-index: 1;
+  bottom: -5%;
+  left: 12%;
+  transform: rotate(-5deg);
+}
+@media (max-width: 600px) {
+  .angular-scroll-cluster {
+    min-height: clamp(300px, 80vw, 480px);
+  }
+  .angular-scroll-item--1 {
+    width: 52vw;
+    left: auto;
+    right: 6%;
+    top: 0;
+  }
+  .angular-scroll-item--2 {
+    width: 42vw;
+    left: 4%;
+    right: auto;
+    top: 22%;
+  }
+  .angular-scroll-item--3 {
+    width: 48vw;
+    left: auto;
+    right: 4%;
+    bottom: -8%;
+  }
 }
 
 /* ===== INSURANCE ===== */

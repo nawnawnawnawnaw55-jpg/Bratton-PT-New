@@ -127,14 +127,16 @@
   var HIDE_THRESHOLD = 80;
 
   function onScroll() {
-    var nav = document.getElementById('main-nav');
-    if (!nav) return;
+    var siteHeader = document.getElementById('site-header');
+    var mainNav = document.getElementById('main-nav');
+    if (!siteHeader || !mainNav) return;
     var currentScrollY = window.scrollY;
     var isMobile = window.innerWidth < 768;
 
     if (!isMobile) {
-      if (nav.classList.contains('nav--hidden')) {
-        nav.classList.remove('nav--hidden');
+      if (siteHeader.classList.contains('site-header--hidden')) {
+        siteHeader.classList.remove('site-header--hidden');
+        mainNav.classList.remove('site-header--hidden');
       }
       lastScrollY = currentScrollY;
       return;
@@ -142,12 +144,15 @@
 
     if (currentScrollY > HIDE_THRESHOLD) {
       if (currentScrollY > lastScrollY) {
-        nav.classList.add('nav--hidden');
+        siteHeader.classList.add('site-header--hidden');
+        mainNav.classList.add('site-header--hidden');
       } else if (currentScrollY < lastScrollY) {
-        nav.classList.remove('nav--hidden');
+        siteHeader.classList.remove('site-header--hidden');
+        mainNav.classList.remove('site-header--hidden');
       }
     } else {
-      nav.classList.remove('nav--hidden');
+      siteHeader.classList.remove('site-header--hidden');
+      mainNav.classList.remove('site-header--hidden');
     }
 
     lastScrollY = currentScrollY;
@@ -168,6 +173,61 @@
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(onScroll, 100);
   });
+})();
+
+// ===== Angular Parallax Scroll Driver =====
+// Drives multi-speed scrolling on overlapping cluster items and bg shapes
+(function(){
+  var clusterEl = document.getElementById('angular-scroll-cluster');
+  var sectionEl = clusterEl ? clusterEl.closest('.angular-parallax-section') : null;
+  if (!clusterEl || !sectionEl) return;
+
+  var items = clusterEl.querySelectorAll('.angular-scroll-item[data-parallax-speed]');
+  var bgShapes = sectionEl.querySelectorAll('.angular-parallax-bg-shape[data-parallax-speed]');
+  var ticking = false;
+
+  function updateParallax() {
+    var sectionRect = sectionEl.getBoundingClientRect();
+    var windowH = window.innerHeight;
+
+    // Only drive when section is in viewport
+    if (sectionRect.bottom < -100 || sectionRect.top > windowH + 100) {
+      ticking = false;
+      return;
+    }
+
+    // Calculate scroll progress through the section (0 = top enters, 1 = bottom exits)
+    var scrollOffset = windowH - sectionRect.top;
+    var sectionHeight = sectionRect.height + windowH;
+    var progress = Math.max(0, Math.min(1, scrollOffset / sectionHeight));
+
+    // Map progress for each item using its speed factor
+    var baseTranslate = (progress - 0.5) * 60; // max ±30px base translation
+
+    items.forEach(function(item) {
+      var speed = parseFloat(item.getAttribute('data-parallax-speed')) || 1;
+      var yOff = baseTranslate * speed;
+      item.style.transform = item.style.transform.replace(/translateY\([^)]*\)/, '') + ' translateY(' + yOff.toFixed(1) + 'px)';
+    });
+
+    bgShapes.forEach(function(shape) {
+      var speed = parseFloat(shape.getAttribute('data-parallax-speed')) || 1;
+      var yOff = baseTranslate * speed;
+      shape.style.transform = shape.style.transform.replace(/translateY\([^)]*\)/, '') + ' translateY(' + yOff.toFixed(1) + 'px)';
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial call
+  setTimeout(updateParallax, 300);
 })();
 
 // ===== Medical Library Video Handler =====
