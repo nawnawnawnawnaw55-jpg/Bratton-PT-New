@@ -1,5 +1,18 @@
 /* ===== HEADER ===== */
 
+/* Reserve space before header loads to prevent layout shift / flicker.
+   These are conservative fallbacks — the actual header height is measured
+   after render and cached in sessionStorage for subsequent page loads. */
+#site-header {
+  min-height: 60px;
+}
+
+@media (min-width: 768px) {
+  #site-header {
+    min-height: 130px;
+  }
+}
+
 /* CTA Bar */
 .header__cta-bar{background:var(--primary);padding:6px 0;display:none}
 .header__cta-bar .container{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
@@ -27,12 +40,12 @@
   .header__logo img{width:220px}
   .header__contact{display:flex;align-items:center;gap:32px}
   .header__address{display:flex;align-items:center;gap:8px;font-size:.85rem;line-height:1.5;color:var(--dark)}
-  .header__address svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+  .header__address svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;transform:translateY(1px)}
   .header__phone{text-align:center}
   .header__label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--gray);letter-spacing:.5px;margin-bottom:2px}
   .header__phone a{font-size:1.1rem;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:6px}
   .header__phone a:hover{color:var(--accent)}
-  .header__icon{color:var(--accent);font-size:1.1rem}
+  .header__icon{display:inline-flex;align-items:center;transform:translateY(1px);color:var(--accent);font-size:1.25rem}
   .mobile-menu-btn,.header__mobile-cta{display:none}
 }
 
@@ -63,13 +76,14 @@
 
 /* Mobile: sticky header + nav wrapper hide on scroll down, show on scroll up */
 @media(max-width:767px){
-  #site-header{position:sticky;top:0;z-index:999;transition:transform .3s ease}
+  #site-header{position:sticky;top:0;z-index:999;transition:transform .3s ease;background:var(--white)}
   #site-header.site-header--hidden{transform:translateY(-100%)}
   #main-nav{position:sticky;top:0;z-index:998;transition:transform .3s ease}
   #main-nav.site-header--hidden{transform:translateY(-100%)}
   .nav{position:static;border-bottom:none}
   .nav--mobile{display:none;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;z-index:1000;background:var(--white);padding:60px 20px 20px;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.2)}
   .nav--mobile.nav--open{display:block}
+  #main-nav.nav--mobile.nav--open{position:fixed;z-index:1000}
   .nav--mobile .nav__inner{display:flex;flex-direction:column;gap:2px}
   .nav--mobile .nav__link{display:block;padding:12px 16px;font-family:var(--font-heading);font-weight:600;font-size:.9rem;text-transform:uppercase;color:var(--dark);border-radius:var(--radius-sm)}
   .nav--mobile .nav__link:hover{background:var(--light-gray)}

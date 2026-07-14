@@ -1,3 +1,67 @@
+// ===== Dynamic Header Height — measure actual rendered height and cache =====
+// Prevents layout shift: on first visit measures the real header height,
+// stores it in sessionStorage, and subsequent page loads reserve that exact
+// space before the fetch completes.
+(function(){
+  var CACHE_KEY = 'headerHeight';
+  var BREAKPOINT = 768;
+  var siteHeader = document.getElementById('site-header');
+
+  // 1. Immediately apply cached height (subsequent page loads — no flicker)
+  if (siteHeader && window.sessionStorage) {
+    var cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      siteHeader.style.minHeight = cached + 'px';
+    }
+  }
+
+  // 2. After header renders, measure actual height and cache it
+  var wasMobile = window.innerWidth < BREAKPOINT;
+  var measured = false;
+
+  function measureAndCache() {
+    if (measured) return;
+    if (!siteHeader || !siteHeader.querySelector('.header')) return;
+    // Wait a tick for layout to settle (nav may have been moved out by MutationObserver)
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        var h = siteHeader.querySelector('.header').offsetHeight;
+        if (h > 0 && window.sessionStorage) {
+          sessionStorage.setItem(CACHE_KEY, h);
+          // Also update inline min-height so this page settles exactly
+          siteHeader.style.minHeight = h + 'px';
+          measured = true;
+        }
+      });
+    });
+  }
+
+  // Try immediately
+  measureAndCache();
+  // Also observe site-header for child additions (header injects via fetch)
+  if (siteHeader) {
+    var obs = new MutationObserver(function() {
+      measureAndCache();
+      if (measured) obs.disconnect();
+    });
+    obs.observe(siteHeader, { childList: true, subtree: true });
+    // Safety timeout: stop observing after 5 seconds
+    setTimeout(function() { obs.disconnect(); }, 5000);
+  }
+
+  // 3. On resize crossing the breakpoint, invalidate cache so next page re-measures
+  window.addEventListener('resize', function() {
+    var isMobile = window.innerWidth < BREAKPOINT;
+    if (isMobile !== wasMobile) {
+      wasMobile = isMobile;
+      measured = false;
+      if (window.sessionStorage) {
+        sessionStorage.removeItem(CACHE_KEY);
+      }
+    }
+  });
+})();
+
 // Fix sticky nav: MutationObserver moves nav out of #site-header to <body>
 // This is necessary because position:sticky fails when the nav is nested inside
 // a container (#site-header) that has no scrollable overflow room.
@@ -13,6 +77,7 @@
   var sh = document.getElementById('site-header');
   if (sh) observer.observe(sh, { childList: true, subtree: true });
 })();
+
 
 // Mobile menu — wait for #menu-toggle to appear (header loads via fetch, so
 // there's a race condition). Using MutationObserver ensures we attach after

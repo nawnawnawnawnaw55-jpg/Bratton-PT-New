@@ -1,0 +1,66 @@
+/* ===== HEADER BLUE ACCENTS =====
+   Clean blue coloring on structural elements of the initial view */
+
+/* --- Top accent stripe above the header utility bar --- */
+.site-header::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-dark) 0%,
+    var(--primary) 25%,
+    var(--accent) 50%,
+    var(--primary) 75%,
+    var(--primary-dark) 100%
+  );
+}
+
+/* --- Nav ribbon: white bg with blue bottom border --- */
+.nav {
+  border-bottom-color: var(--primary) !important;
+}
+
+/* Active nav link: faint blue wash, full bar height */
+@media(min-width:768px){
+  .nav__link--active {
+    background: rgba(0, 90, 170, 0.08) !important;
+    color: var(--primary) !important;
+    border-top-color: transparent !important;
+  }
+  .nav__link:hover {
+    color: var(--primary) !important;
+  }
+}
+
+/* Mobile nav drawer: faint blue wash on active link */
+@media(max-width:767px){
+  .nav--mobile .nav__link--active {
+    background: rgba(0, 90, 170, 0.08) !important;
+    color: var(--primary) !important;
+  }
+  .nav--mobile .nav__link:hover {
+    color: var(--primary) !important;
+  }
+}
+
+/* --- Hero CTA button blue accent glow on hover --- */
+.hero__cta .btn--accent {
+  position: relative;
+  overflow: visible;
+}
+.hero__cta .btn--accent::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+.hero__cta .btn--accent:hover::after {
+  opacity: 0.6;
+}
+
