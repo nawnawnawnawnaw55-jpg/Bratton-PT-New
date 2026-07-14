@@ -211,9 +211,15 @@
   }
 
   // ===== Scroll-aware header show/hide (mobile only) =====
+  // Uses an up-scroll accumulator pattern: the header doesn't reappear on
+  // tiny upward flicks — it requires ~150px of deliberate upward scroll
+  // before sliding back into view proportionally with continued scroll.
   var lastScrollY = window.scrollY;
+  var upAccumulator = 0;          // builds on scroll-up, resets to 0 on scroll-down
   var ticking = false;
-  var HIDE_THRESHOLD = 80;
+  var HIDE_THRESHOLD = 80;        // px — don't hide header until scrolled past this
+  var SHOW_THRESHOLD = 150;       // px — cumulative up-scroll required before header starts to appear
+  var REVEAL_RANGE = 100;         // px — additional scroll over which header translates from hidden → shown
 
   function onScroll() {
     var siteHeader = document.getElementById('site-header');
@@ -223,25 +229,58 @@
     var isMobile = window.innerWidth < 768;
 
     if (!isMobile) {
-      if (siteHeader.classList.contains('site-header--hidden')) {
-        siteHeader.classList.remove('site-header--hidden');
-        mainNav.classList.remove('site-header--hidden');
-      }
+      // Reset desktop state
+      siteHeader.style.transform = '';
+      siteHeader.classList.remove('site-header--hidden');
+      mainNav.classList.remove('site-header--hidden');
+      upAccumulator = 0;
       lastScrollY = currentScrollY;
       return;
     }
 
-    if (currentScrollY > HIDE_THRESHOLD) {
-      if (currentScrollY > lastScrollY) {
-        siteHeader.classList.add('site-header--hidden');
-        mainNav.classList.add('site-header--hidden');
-      } else if (currentScrollY < lastScrollY) {
-        siteHeader.classList.remove('site-header--hidden');
-        mainNav.classList.remove('site-header--hidden');
-      }
-    } else {
+    var delta = lastScrollY - currentScrollY; // positive = scrolling up
+
+    if (currentScrollY <= HIDE_THRESHOLD) {
+      // Near top: always show
+      siteHeader.style.transform = '';
       siteHeader.classList.remove('site-header--hidden');
       mainNav.classList.remove('site-header--hidden');
+      upAccumulator = 0;
+    } else if (delta < 0) {
+      // Scrolling down: hide immediately, reset accumulator
+      upAccumulator = 0;
+      siteHeader.style.transform = '';
+      siteHeader.classList.add('site-header--hidden');
+      mainNav.classList.add('site-header--hidden');
+    } else if (delta > 0) {
+      // Scrolling up: accumulate
+      upAccumulator += delta;
+
+      if (upAccumulator >= SHOW_THRESHOLD) {
+        // Header is fully shown — beyond threshold
+        siteHeader.classList.remove('site-header--hidden');
+        mainNav.classList.remove('site-header--hidden');
+        siteHeader.style.transform = '';
+      } else {
+        // Progressive reveal: map accumulator → translateY
+        // At accumulator = 0, translateY = -100% (hidden)
+        // At accumulator = SHOW_THRESHOLD, translateY = 0% (shown)
+        // Clamp to REVEAL_RANGE for smooth proportional slide
+        var progress = Math.min(upAccumulator / SHOW_THRESHOLD, 1);
+        var translatePct = -(100 - progress * 100);
+        // Round to 1 decimal to avoid sub-pixel jitter
+        translatePct = Math.round(translatePct * 10) / 10;
+        siteHeader.style.transform = 'translateY(' + translatePct + '%)';
+        // Remove the binary hidden class during progressive reveal so CSS
+        // transition doesn't fight our inline transform
+        siteHeader.classList.remove('site-header--hidden');
+        mainNav.classList.remove('site-header--hidden');
+
+        // Also slide main-nav in sync
+        if (mainNav) {
+          mainNav.style.transform = 'translateY(' + translatePct + '%)';
+        }
+      }
     }
 
     lastScrollY = currentScrollY;
