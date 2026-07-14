@@ -71,7 +71,7 @@
 .nav__dropdown{position:relative}
 .nav__dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:200px;background:var(--white);border-radius:0 0 var(--radius-md) var(--radius-md);box-shadow:var(--shadow-md);z-index:100;padding:4px 0}
 .nav__dropdown:hover .nav__dropdown-menu{display:block}
-.nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-size:.78rem;text-transform:none;letter-spacing:0}
+.nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-family:var(--font-heading);font-size:.78rem;text-transform:none;letter-spacing:0}
 .nav__dropdown-menu .nav__link:hover{background:var(--light-gray);color:var(--primary)}
 
 /* Mobile: sticky header + nav wrapper hide on scroll down, show on scroll up */
