@@ -22,7 +22,20 @@
 <script>
   fetch('/templates/header.html')
     .then(function(r){return r.text()})
-    .then(function(h){document.getElementById('site-header').innerHTML=h})
+    .then(function(h){
+      // Parse into a temp container so we can separate header from nav
+      var temp=document.createElement('div');
+      temp.innerHTML=h;
+      var nav=temp.querySelector('#main-nav');
+      // Put header content (everything except nav) into #site-header
+      if(nav){nav.remove();}
+      document.getElementById('site-header').innerHTML=temp.innerHTML;
+      // Insert nav after site-header so position:sticky works
+      if(nav){
+        var sh=document.getElementById('site-header');
+        sh.parentNode.insertBefore(nav,sh.nextSibling);
+      }
+    })
     .then(function(){
       var toggle=document.getElementById('menu-toggle');
       var nav=document.getElementById('main-nav');

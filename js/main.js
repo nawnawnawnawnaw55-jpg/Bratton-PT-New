@@ -62,32 +62,9 @@
   });
 })();
 
-// Fix sticky nav: MutationObserver moves nav out of #site-header to <body>
-// This is necessary because position:sticky fails when the nav is nested inside
-// a container (#site-header) that has no scrollable overflow room.
-(function(){
-  function moveNavOutsideHeader() {
-    var nav = document.getElementById('main-nav');
-    var sh = document.getElementById('site-header');
-    if (nav && sh && nav.parentNode === sh) {
-      sh.parentNode.insertBefore(nav, sh.nextSibling);
-      return true;
-    }
-    return false;
-  }
-
-  // Check immediately in case the header already loaded before this script
-  if (!moveNavOutsideHeader()) {
-    // If not yet, use MutationObserver to wait for header injection
-    var observer = new MutationObserver(function(mutations, obs){
-      if (moveNavOutsideHeader()) obs.disconnect();
-    });
-    var sh = document.getElementById('site-header');
-    if (sh) observer.observe(sh, { childList: true, subtree: true });
-    // Safety timeout: stop observing after 5 seconds
-    setTimeout(function() { observer.disconnect(); }, 5000);
-  }
-})();
+// Sticky nav: #main-nav is placed outside #site-header by the inline script
+// in index.html, so position:sticky in header.css works natively.
+// No JS intervention needed — this comment documents the approach.
 
 
 // Mobile menu — wait for #menu-toggle to appear (header loads via fetch, so
