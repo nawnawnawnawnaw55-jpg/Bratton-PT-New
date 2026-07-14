@@ -66,6 +66,42 @@
 // in index.html, so position:sticky in header.css works natively.
 // No JS intervention needed — this comment documents the approach.
 
+// Fix: On sub-pages, #main-nav is incorrectly nested inside #site-header
+// (the inline script dumps the entire template into #site-header.innerHTML).
+// position:sticky requires #main-nav to be a direct child of a scrollable
+// container (the viewport), not constrained by #site-header's height.
+// Extract and re-place it as a sibling — no-op on the home page.
+// Uses MutationObserver because the header template loads async via fetch,
+// so #main-nav doesn't exist yet when main.js first executes.
+(function fixNavPlacement() {
+  var placed = false;
+  var siteHeader = document.getElementById('site-header');
+  if (!siteHeader) return;
+
+  function tryFix() {
+    if (placed) return;
+    var mainNav = document.getElementById('main-nav');
+    if (mainNav && mainNav.parentNode === siteHeader) {
+      siteHeader.parentNode.insertBefore(mainNav, siteHeader.nextSibling);
+      placed = true;
+      obs.disconnect();
+    }
+  }
+
+  // Try immediately (in case header already loaded)
+  tryFix();
+  if (placed) return;
+
+  // Watch for #main-nav appearing inside #site-header
+  var obs = new MutationObserver(function() {
+    tryFix();
+  });
+  obs.observe(siteHeader, { childList: true, subtree: true });
+
+  // Safety timeout: stop observing after 8 seconds
+  setTimeout(function() { obs.disconnect(); }, 8000);
+})();
+
 
 // Mobile menu — wait for #menu-toggle to appear (header loads via fetch, so
 // there's a race condition). Using MutationObserver ensures we attach after
