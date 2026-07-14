@@ -19,6 +19,30 @@
 </head>
 <body>
 <div id="site-header"></div>
+<noscript>
+  <header class="header"><div class="container"><div class="header__top">
+    <a href="/" class="header__logo"><img src="/files/logo/BRATTON-ai.svg" width="200" height="89" alt="Bratton Physical Therapy"></a>
+    <div class="header__contact">
+      <div class="header__phone"><a href="tel:9856415825">(985) 641-5825</a></div>
+    </div>
+  </div></div></header>
+  <nav class="nav"><div class="container"><div class="nav__inner">
+    <a href="/" class="nav__link">Home</a>
+    <a href="/about/" class="nav__link">About Us</a>
+    <a href="/staff/" class="nav__link">Staff</a>
+    <a href="/conditions/" class="nav__link">Conditions</a>
+    <a href="/services/" class="nav__link">Services</a>
+    <a href="/patcenter/" class="nav__link">Patient Center</a>
+    <a href="/contact/" class="nav__link">Contact</a>
+    <a href="/booking/" class="nav__link">Schedule Appointment</a>
+    <a href="/location/" class="nav__link">Location</a>
+    <a href="/reviews/" class="nav__link">Reviews</a>
+    <a href="/faq/" class="nav__link">FAQ</a>
+    <a href="/insurance/" class="nav__link">Insurance</a>
+    <a href="/library/" class="nav__link">Medical Library</a>
+    <a href="/sitemap/" class="nav__link">Sitemap</a>
+  </div></div></nav>
+</noscript>
 <script>
   fetch('/templates/header.html')
     .then(function(r){return r.text()})

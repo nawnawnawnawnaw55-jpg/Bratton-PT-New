@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bratton-pt.vercel.app/sitemap.xml
