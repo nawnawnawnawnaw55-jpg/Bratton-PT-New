@@ -332,7 +332,7 @@ body:has(.section--bleed-into-footer) .site-footer::after {
   background: var(--accent);
   opacity: 0.08;
   border-radius: 40px;
-  transform: rotate(12deg);
+  transform: rotate(-5deg);
   z-index: 0;
   pointer-events: none;
 }
@@ -341,6 +341,9 @@ body:has(.section--bleed-into-footer) .site-footer::after {
   left: -3%;
   top: 15%;
   bottom: auto;
+  width: clamp(130px, 24vw, 280px);
+  height: clamp(130px, 24vw, 280px);
+  transform: rotate(5deg);
 }
 @media (max-width: 767px) {
   .site-footer__accent-shape--2 {
