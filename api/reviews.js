@@ -15,33 +15,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+// Lives in ./fallback-reviews.js so fetch-reviews-cache.js can reuse the exact same list.
+import { FALLBACK } from './fallback-reviews.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CACHE_PATH = path.join(__dirname, 'reviews-cache.json');
 
 const PLACE_ID = 'ChIJicdBse3mnYgRyU49RjVmRs0';
-
-// ── Hardcoded fallback (16 reviews) ──────────────────────────────────
-// Used only when both the static cache AND Google API are unavailable.
-const FALLBACK = [
-  { name: "Gary L.", text: "Just want to thank Jena and staff for a great job in rehabbing my right rotator cuff. I had two complete tears out of the four muscles of the cuff. Jena and staff rehabbed my shoulder without a need for surgery...", time: "8 months ago", rating: 5 },
-  { name: "John C.", text: "The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn't walk more than 50 feet, getting up from sitting was painful. Now I can easily walk 100's of yards (likely more), I have no pain...", time: "1 year ago", rating: 5 },
-  { name: "Barbara K.", text: "My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past...", time: "1 year ago", rating: 5 },
-  { name: "Nina S.", text: "Before coming I struggled picking up my son, sitting comfortably, and sleeping due to severe shoulder pain and limited neck mobility. Jena knew what the issue was immediately. She created a plan that quickly diminished my pain...", time: "2 years ago", rating: 5 },
-  { name: "Stephen D.", text: "After major rotator cuff surgery, I was unable to move my arm away from my side. I was also experiencing considerable pain related to the surgery. For my physical therapy treatment, my Surgeon recommended Jena Bratton, PT...", time: "3 years ago", rating: 5 },
-  { name: "James S.", text: "My journey has been one of great pain and great rewards. Many years ago my knees began failing and I was not successful with gym workouts helping the problem. It took quite a while in obtaining surgical approval to have my knees replaced...", time: "3 years ago", rating: 5 },
-  { name: "Paul R.", text: "Undergoing PT for total hip replacement. The treatment is awesome. I get a custom PT plan focused on my needs and progress. I am so happy I came to Bratton.", time: "9 months ago", rating: 5 },
-  { name: "Jeannie R.", text: "You cannot go wrong having your pains disappear at Bratton PT! Individual attention, explanation of each procedure before it is executed! They make it fun!", time: "10 months ago", rating: 5 },
-  { name: "Nathan W.", text: "I came to seek relief from my Achilles tendon pain and very quickly they worked with me to make a targeted plan to reduce pain long term. Excellent experience.", time: "7 months ago", rating: 5 },
-  { name: "Susan B.", text: "I had trouble with my right knee. It felt stiff, sore and achy. I tried Bratton Therapy Centre and it was the best decision ever. They came up with a special exercise program just for me.", time: "6 months ago", rating: 5 },
-  { name: "Don N.", text: "When I came to Bratton for a very weak right shoulder, I was becoming one arm person. After 6 weeks of physical therapy I now have full extension and much less pain. My sleep at night has improved as well.", time: "6 months ago", rating: 5 },
-  { name: "Alfred J.", text: "The staff is very professional. All guide your routine with caution and care. I began recovery after my first visit. I know my recovery is in good hands. Give them a call!", time: "5 months ago", rating: 5 },
-  { name: "Duran H.", text: "Extremely friendly staff. They know what they are doing here. I would recommend this place to anyone. Already feeling results after a couple of weeks.", time: "4 months ago", rating: 5 },
-  { name: "Nicholas B.", text: "My back pain was making day-to-day life absolutely miserable, but coming to see Ms. Jena and her amazing staff has been a total game-changer. I have significantly less pain and more flexibility.", time: "3 months ago", rating: 5 },
-  { name: "Paul Rieder", text: "Undergoing PT for total hip replacement. The treatment is awesome. I get a custom PT plan focused on my needs and progress. I am so happy that I came to Bratton.", time: "2 months ago", rating: 5 },
-  { name: "Jeannie Rivers", text: "You cannot go wrong by having your pains disappear when going to Bratton Physical Therapy! Individual attention, explanation of each procedure before it is executed! They make it fun!", time: "1 month ago", rating: 5 }
-];
 
 // ── Helpers ──────────────────────────────────────────────────────────
 
@@ -50,7 +31,10 @@ function sanitizeText(t) {
 }
 
 function parseTimeDays(t) {
-  // Convert relative time strings to approximate days for sorting
+  // Convert relative time strings to approximate days for sorting.
+  // Only used as a fallback for reviews that don't carry an exact timestamp
+  // (i.e. the curated FALLBACK list, or cache entries written before this
+  // field existed).
   if (!t) return 0;
   const match = t.match(/(\d+)\s+(year|month|week|day)s?/i);
   if (!match) return 0;
@@ -64,7 +48,21 @@ function parseTimeDays(t) {
 }
 
 function sortReviewsNewest(reviews) {
-  return [...reviews].sort((a, b) => parseTimeDays(a.time) - parseTimeDays(b.time));
+  return [...reviews].sort((a, b) => {
+    const aNum = typeof a.time === 'number';
+    const bNum = typeof b.time === 'number';
+    // Exact Unix timestamps (real Google reviews) sort correctly by definition.
+    if (aNum && bNum) return b.time - a.time;
+    if (aNum && !bNum) return -1; // a real timestamp beats a guessed one
+    if (!aNum && bNum) return 1;
+    // Neither has an exact timestamp — fall back to the old relative-string guess.
+    // Covers both cache filler entries (relative_time set, time: null) and the
+    // raw FALLBACK array served directly when cache+live API both fail (time
+    // itself holds the relative string, e.g. "8 months ago").
+    const aStr = a.relative_time || (typeof a.time === 'string' ? a.time : '');
+    const bStr = b.relative_time || (typeof b.time === 'string' ? b.time : '');
+    return parseTimeDays(aStr) - parseTimeDays(bStr);
+  });
 }
 
 // ── Read cache from filesystem ───────────────────────────────────────
@@ -154,7 +152,8 @@ async function fetchGoogleReviews(apiKey, { newest, showAll }, res) {
     const allReviews = data.result.reviews.map(r => ({
       name: r.author_name,
       text: sanitizeText(r.text),
-      time: r.relative_time_description,
+      time: r.time,                              // exact Unix timestamp
+      relative_time: r.relative_time_description, // human-readable, for display
       rating: r.rating,
       photo: r.profile_photo_url || null
     }));

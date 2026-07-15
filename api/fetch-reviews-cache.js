@@ -4,8 +4,25 @@
  *   node api/fetch-reviews-cache.js
  *
  * Reads GOOGLE_API_KEY from a .env file in the project root (or environment variable).
- * Fetches ALL reviews from Google Places API and writes to api/reviews-cache.json.
- * Each run completely replaces the previous cache file.
+ *
+ * Google's Place Details API hard-caps at 5 reviews per call, no matter what —
+ * that's a permanent limit on Google's end. But which 5 you get depends on
+ * reviews_sort, and each review carries an exact Unix timestamp (r.time), so
+ * this script:
+ *
+ *   1. Calls Google TWICE per run — once reviews_sort=newest, once
+ *      reviews_sort=most_relevant — since the two sorts often return a
+ *      slightly different set of 5, netting more than 5 unique reviews.
+ *   2. Merges any new-to-us reviews into a PERSISTENT archive
+ *      (api/reviews-archive.json) that never gets wiped — it only grows,
+ *      as genuinely new reviews get posted and captured by "newest" over
+ *      time, or a previously-uncaptured one surfaces via "most_relevant".
+ *   3. Builds the display cache from the archive (sorted by the real
+ *      timestamp, not a fuzzy "3 months ago" string), filling any
+ *      remaining slots up to 20 with the curated fallback list.
+ *
+ * As the archive naturally grows past 20 real reviews, the fallback filler
+ * disappears entirely on its own — no code change needed later.
  */
 
 import https from 'https';
@@ -13,12 +30,15 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { FALLBACK, nameKey } from './fallback-reviews.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PLACE_ID = 'ChIJicdBse3mnYgRyU49RjVmRs0';
 const OUTPUT_FILE = path.join(__dirname, 'reviews-cache.json');
+const ARCHIVE_FILE = path.join(__dirname, 'reviews-archive.json');
+const DISPLAY_TARGET = 20;
 
 // Load GOOGLE_API_KEY from .env file if present
 let API_KEY = process.env.GOOGLE_API_KEY;
@@ -40,9 +60,9 @@ function log(msg) {
   console.log(`[${ts}] ${msg}`);
 }
 
-function fetchGoogleReviews() {
+function fetchGoogleReviews(sort) {
   return new Promise((resolve, reject) => {
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews,rating,user_ratings_total&key=${API_KEY}&language=en`;
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews,rating,user_ratings_total&key=${API_KEY}&language=en&reviews_sort=${sort}`;
     https.get(url, (res) => {
       let body = '';
       res.on('data', (chunk) => { body += chunk; });
@@ -50,17 +70,36 @@ function fetchGoogleReviews() {
         try {
           resolve(JSON.parse(body));
         } catch (e) {
-          reject(new Error('Failed to parse Google API response: ' + e.message));
+          reject(new Error(`Failed to parse Google API response (sort=${sort}): ` + e.message));
         }
       });
     }).on('error', (e) => {
-      reject(new Error('HTTP request failed: ' + e.message));
+      reject(new Error(`HTTP request failed (sort=${sort}): ` + e.message));
     });
   });
 }
 
 function sanitizeText(t) {
   return (t || '').replace(/[^\x20-\x7E\xA0-\xFF\u2010-\u2122]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+// Exact dedup key for real Google reviews: author + exact submission
+// timestamp. Far more reliable than name-matching since it can't collide
+// unless it's genuinely the same review.
+function reviewKey(r) {
+  return (r.name || '').trim().toLowerCase() + '|' + r.time;
+}
+
+function readArchive() {
+  try {
+    if (!fs.existsSync(ARCHIVE_FILE)) return [];
+    const raw = fs.readFileSync(ARCHIVE_FILE, 'utf8');
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    log('WARNING: could not read existing archive, starting fresh: ' + e.message);
+    return [];
+  }
 }
 
 async function main() {
@@ -72,50 +111,81 @@ async function main() {
   }
 
   try {
-    log('Fetching reviews from Google Places API...');
-    const data = await fetchGoogleReviews();
+    log('Fetching reviews from Google Places API (newest + most_relevant)...');
+    const [newestData, relevantData] = await Promise.all([
+      fetchGoogleReviews('newest'),
+      fetchGoogleReviews('most_relevant')
+    ]);
 
-    if (data.error_message) {
-      log('Google API error: ' + data.error_message);
+    const primary = newestData.result ? newestData : relevantData;
+    if (primary.error_message) {
+      log('Google API error: ' + primary.error_message);
+      process.exit(1);
+    }
+    if (!primary.result) {
+      log('No result in API response.');
       process.exit(1);
     }
 
-    if (!data.result || !data.result.reviews) {
-      log('No reviews found in API response.');
-      process.exit(1);
-    }
+    const rawFromBoth = [
+      ...((newestData.result && newestData.result.reviews) || []),
+      ...((relevantData.result && relevantData.result.reviews) || [])
+    ];
 
-    const rawReviews = data.result.reviews;
-
-    // Process reviews (same sanitization as api/reviews.js)
-    const reviews = rawReviews.map(r => ({
+    const freshLive = rawFromBoth.map(r => ({
       name: r.author_name,
       text: sanitizeText(r.text),
-      time: r.relative_time_description,
+      time: r.time,                              // exact Unix timestamp
+      relative_time: r.relative_time_description, // human-readable, for display
       rating: r.rating,
       photo: r.profile_photo_url || null
     }));
 
-    // Sort by time (newest first) — relative times require manual ordering since
-    // Google returns them in their own order already (they come sorted by relevance
-    // by default, not chronologically). We preserve the order from Google.
+    // Merge into the persistent archive — this is what lets the real-review
+    // count grow across nights instead of resetting every run.
+    const archive = readArchive();
+    const archiveKeys = new Set(archive.map(reviewKey));
+    let newlyAdded = 0;
+    for (const r of freshLive) {
+      const k = reviewKey(r);
+      if (!archiveKeys.has(k)) {
+        archive.push(r);
+        archiveKeys.add(k);
+        newlyAdded++;
+      }
+    }
+    // Genuine chronological sort — exact epoch, no string-guessing.
+    archive.sort((a, b) => (b.time || 0) - (a.time || 0));
+    fs.writeFileSync(ARCHIVE_FILE, JSON.stringify(archive, null, 2), 'utf8');
+
+    // Fill remaining display slots (up to 20) with curated fallback reviews
+    // that don't already match someone in the archive.
+    const archivedNameKeys = new Set(archive.map(r => nameKey(r.name)));
+    const fillerReviews = FALLBACK
+      .filter(r => !archivedNameKeys.has(nameKey(r.name)))
+      .map(r => ({ ...r, time: null, relative_time: r.time })); // FALLBACK's own "time" field is the relative string
+
+    const displayReviews = [...archive, ...fillerReviews].slice(0, DISPLAY_TARGET);
+
     const cacheData = {
-      reviews: reviews,
-      overall_rating: data.result.rating || 5.0,
-      total_reviews: data.result.user_ratings_total || reviews.length,
+      reviews: displayReviews,
+      overall_rating: primary.result.rating || 5.0,
+      total_reviews: primary.result.user_ratings_total || displayReviews.length,
+      archive_size: archive.length,
       cached_at: new Date().toISOString()
     };
 
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(cacheData, null, 2), 'utf8');
-    log(`SUCCESS: Wrote ${reviews.length} reviews to ${OUTPUT_FILE}`);
-    log(`Overall rating: ${cacheData.overall_rating} | Total reviews: ${cacheData.total_reviews}`);
+    log(`Archive: ${archive.length} real reviews total (${newlyAdded} new this run).`);
+    log(`SUCCESS: Wrote ${displayReviews.length} reviews to cache (${Math.min(archive.length, DISPLAY_TARGET)} real, ${displayReviews.length - Math.min(archive.length, DISPLAY_TARGET)} curated filler).`);
+    log(`Overall rating: ${cacheData.overall_rating} | Total reviews on Google: ${cacheData.total_reviews}`);
 
     // Auto-commit and push to trigger Vercel redeploy
     const projectRoot = path.join(__dirname, '..');
     const dateStr = new Date().toISOString().split('T')[0];
     try {
-      log('Committing updated cache to git...');
-      execSync('git add api/reviews-cache.json', { cwd: projectRoot, stdio: 'pipe' });
+      log('Committing updated cache + archive to git...');
+      execSync('git add api/reviews-cache.json api/reviews-archive.json', { cwd: projectRoot, stdio: 'pipe' });
       execSync(`git commit -m "Nightly reviews cache refresh - ${dateStr}"`, { cwd: projectRoot, stdio: 'pipe' });
       execSync('git push', { cwd: projectRoot, stdio: 'pipe' });
       log('Pushed to git — Vercel will redeploy with fresh cache.');

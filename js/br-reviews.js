@@ -93,7 +93,7 @@
         '<div class="br-review-name">' + r.name + '</div>' +
         '<div class="br-review-text" data-idx="' + i + '">' + displayText + '</div>' +
         '<div class="br-read-more" data-idx="' + i + '">Read more ▼</div>' +
-        '<div class="br-review-time">' + r.time + '</div>' +
+        '<div class="br-review-time">' + (r.relative_time || r.time) + '</div>' +
         '</div>';
     }).join('');
     
