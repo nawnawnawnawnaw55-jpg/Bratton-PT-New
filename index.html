@@ -262,8 +262,10 @@
             var reviews = allReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
             if (reviews.length) {
               renderCards(reviews);
+              window.__sharedReviews = reviews;
             } else {
               renderCards(fallbackReviewsHome);
+              window.__sharedReviews = fallbackReviewsHome;
             }
           })
           .catch(function(){

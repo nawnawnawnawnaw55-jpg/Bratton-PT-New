@@ -173,6 +173,7 @@
       var reviews = (data.reviews && data.reviews.length) ? data.reviews : [];
       if (reviews.length) {
         renderReviews(reviews, data.overall_rating || 5.0, data.total_reviews || reviews.length);
+        window.__sharedReviews = reviews;
       } else {
         grid.innerHTML = '<p style="text-align:center;color:#fff;padding:40px">No reviews available right now. Please check back soon!</p>';
         statsEl.innerHTML = '';
