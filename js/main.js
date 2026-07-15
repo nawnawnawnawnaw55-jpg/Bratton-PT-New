@@ -45,8 +45,11 @@
   // Also observe site-header for child additions (header injects via fetch)
   if (siteHeader) {
     var obs = new MutationObserver(function() {
-      measureAndCache();
-      if (measured) obs.disconnect();
+      // Defer layout read/write to a rAF to avoid forced reflow
+      requestAnimationFrame(function(){
+        measureAndCache();
+        if (measured) obs.disconnect();
+      });
     });
     obs.observe(siteHeader, { childList: true, subtree: true });
     // Safety timeout: stop observing after 5 seconds

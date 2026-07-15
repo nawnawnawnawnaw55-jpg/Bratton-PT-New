@@ -67,7 +67,7 @@
 .service-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
 .service-card__img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .service-card__body{padding:14px;text-align:center}
-.service-card__body h4{font-size:.9rem;margin-bottom:4px;color:var(--primary)}
+.service-card__body h3{font-size:.9rem;margin-bottom:4px;color:var(--primary)}
 
 /* ===== RECOVERY ===== */
 .recovery{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white)}
