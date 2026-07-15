@@ -147,6 +147,10 @@
     closePopup();
   });
   
+  // Pre-populate the popup body immediately so reviews are ready whether
+  // the popup opens via click or the auto-open timer — zero delay.
+  loadReviews();
+
   // Auto-open after 5 seconds
   setTimeout(function(){
     openPopup();
