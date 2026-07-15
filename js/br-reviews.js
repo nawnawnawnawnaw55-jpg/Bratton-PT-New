@@ -120,26 +120,17 @@
     }
   }
   
-   async function loadReviews(){
+   function loadReviews(){
      if(loaded) return;
      loaded = true;
 
-     // If the page already fetched reviews and stored them on the shared
-     // global (e.g. homepage or /reviews page), use that data instantly —
-     // zero network latency.
+     // Use reviews already fetched by the page (homepage/reviews page) —
+     // no API call from the popup itself.
      if (window.__sharedReviews && window.__sharedReviews.length) {
        renderReviews(window.__sharedReviews);
        return;
      }
 
-     try {
-       var resp = await fetch('/api/reviews');
-       var data = await resp.json();
-       if(data.reviews && data.reviews.length){
-         renderReviews(data.reviews);
-         return;
-       }
-     } catch(e){}
      renderReviews(fallbackReviews);
    }
   
