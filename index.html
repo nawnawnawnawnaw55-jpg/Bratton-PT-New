@@ -15,8 +15,31 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalClinic","name":"Bratton Physical Therapy","address":{"@type":"PostalAddress","streetAddress":"1346 Lindberg Drive Suite 3","addressLocality":"Slidell","addressRegion":"LA","postalCode":"70458"},"telephone":"9856415825","url":"https://www.brattonphysicaltherapy.com/"}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/files/photos/hero-desktop.jpeg" media="(min-width: 769px)">
+<link rel="preload" as="image" href="/files/photos/hero-mobile.jpeg" media="(max-width: 768px)">
+<style>
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/files/fonts/montserrat-600-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/files/fonts/montserrat-700-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/files/fonts/montserrat-800-latin.woff2') format('woff2');
+}
+</style>
 <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/header.css"><link rel="stylesheet" href="/css/home.css"><link rel="stylesheet" href="/css/angular.css">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="canonical" href="https://bratton-pt.vercel.app/" />
@@ -80,8 +103,8 @@
 
    <!-- ===== HERO with logo overlap ===== -->
    <section class="hero hero--logo-overlap">
-     <div class="hero__bg" style="background-image:url('https://images.pexels.com/photos/6111586/pexels-photo-6111586.jpeg?auto=compress&cs=tinysrgb&w=2000');background-position:50% 60%"></div>
-     <div class="hero__bg hero__bg--mobile" style="background-image:url('https://images.pexels.com/photos/7479771/pexels-photo-7479771.jpeg?auto=compress&cs=tinysrgb&w=1200');background-position:50% 30%"></div>
+      <div class="hero__bg" style="background-image:url('/files/photos/hero-desktop.jpeg');background-position:50% 60%"></div>
+      <div class="hero__bg hero__bg--mobile" style="background-image:url('/files/photos/hero-mobile.jpeg');background-position:50% 30%"></div>
     <div class="hero__overlay"><div class="container"><h1 class="hero__title">Physical Therapy Before & After Surgery in Slidell</h1><p class="hero__subtitle">One-on-One Care Focused on Faster, Safer Recovery</p><div class="hero__cta"><a href="/booking/" class="btn btn--accent btn--lg">Request Appointment</a><a href="/services/workers-compensation/" class="btn btn--outline btn--lg">Injured at Work? Start Here</a></div></div></div>
     <div class="hero__logo-strip">
     </div>
@@ -125,14 +148,14 @@
       <div class="service-carousel-wrap">
         <button class="carousel-arrow carousel-arrow--left" onclick="scrollServices(-1)" aria-label="Previous">&#x2039;</button>
         <div class="service-grid" id="service-grid">
-          <a href="/services/therapeutic-exercise/" class="service-card"><img src="/files/services/therapeutic-exercise.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Therapeutic Exercise</h4></div></a>
-          <a href="/services/dry-needling-certified/" class="service-card"><img src="/files/services/dry-needling-certified.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Dry Needling</h4></div></a>
-          <a href="/services/cupping/" class="service-card"><img src="/files/services/cupping.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Cupping</h4></div></a>
-          <a href="/services/mckenzie-method/" class="service-card"><img src="/files/services/mckenzie-method.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>McKenzie Method</h4></div></a>
-          <a href="/services/gait-balance-training/" class="service-card"><img src="/files/services/gait-balance-training.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Gait & Balance</h4></div></a>
-          <a href="/services/blood-flow-restriction-therapy/" class="service-card"><img src="/files/services/blood-flow-restriction-therapy.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Blood Flow Restriction</h4></div></a>
-          <a href="/services/strength-conditioning/" class="service-card"><img src="/files/services/strength-conditioning.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Strength & Conditioning</h4></div></a>
-          <a href="/services/workers-compensation/" class="service-card"><img src="/files/services/workers-compensation.jpg" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Workers Comp</h4></div></a>
+          <a href="/services/therapeutic-exercise/" class="service-card"><img src="/files/services/therapeutic-exercise.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Therapeutic Exercise</h4></div></a>
+          <a href="/services/dry-needling-certified/" class="service-card"><img src="/files/services/dry-needling-certified.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Dry Needling</h4></div></a>
+          <a href="/services/cupping/" class="service-card"><img src="/files/services/cupping.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Cupping</h4></div></a>
+          <a href="/services/mckenzie-method/" class="service-card"><img src="/files/services/mckenzie-method.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>McKenzie Method</h4></div></a>
+          <a href="/services/gait-balance-training/" class="service-card"><img src="/files/services/gait-balance-training.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Gait & Balance</h4></div></a>
+          <a href="/services/blood-flow-restriction-therapy/" class="service-card"><img src="/files/services/blood-flow-restriction-therapy.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Blood Flow Restriction</h4></div></a>
+          <a href="/services/strength-conditioning/" class="service-card"><img src="/files/services/strength-conditioning.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Strength & Conditioning</h4></div></a>
+          <a href="/services/workers-compensation/" class="service-card"><img src="/files/services/workers-compensation.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h4>Workers Comp</h4></div></a>
         </div>
         <button class="carousel-arrow carousel-arrow--right show" onclick="scrollServices(1)" aria-label="Next">&#x203A;</button>
       </div>
@@ -181,7 +204,7 @@
           // Build dots
           dots.innerHTML = reviews.map(function(_, i){
             var active = i === 0 ? ' review-dot--active' : '';
-            return '<button class="review-dot' + active + '" onclick="window._homeShowReview(' + i + ')"></button>';
+            return '<button class="review-dot' + active + '" aria-label="Review ' + (i + 1) + '" onclick="window._homeShowReview(' + i + ')"></button>';
           }).join('');
 
           // Restart auto-rotate
@@ -253,23 +276,31 @@
         ];
 
         // Fetch from API (cache-first, falls back to Google API, then hardcoded)
-        fetch('/api/reviews')
-          .then(function(r){ return r.json(); })
-          .then(function(data){
-            var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
-            // Homepage: show top 5-star reviews only, up to 5
-            var reviews = allReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
-            if (reviews.length) {
-              renderCards(reviews);
-              window.__sharedReviews = reviews;
-            } else {
+        // Wrap in requestIdleCallback to defer non-critical fetch
+        var doReviewsFetch = function(){
+          fetch('/api/reviews')
+            .then(function(r){ return r.json(); })
+            .then(function(data){
+              var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
+              // Homepage: show top 5-star reviews only, up to 5
+              var reviews = allReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
+              if (reviews.length) {
+                renderCards(reviews);
+                window.__sharedReviews = reviews;
+              } else {
+                renderCards(fallbackReviewsHome);
+                window.__sharedReviews = fallbackReviewsHome;
+              }
+            })
+            .catch(function(){
               renderCards(fallbackReviewsHome);
-              window.__sharedReviews = fallbackReviewsHome;
-            }
-          })
-          .catch(function(){
-            renderCards(fallbackReviewsHome);
-          });
+            });
+        };
+        if (window.requestIdleCallback) {
+          requestIdleCallback(doReviewsFetch, { timeout: 3000 });
+        } else {
+          setTimeout(doReviewsFetch, 200);
+        }
       })();
       </script></div></section>
 
@@ -288,19 +319,19 @@
         <button class="recovery__tab" onclick="switchPhase(4)">5</button>
       </div>
       <div class="recovery__content" id="phase-0">
-        <div class="recovery__phase"><div><h3>Pain Relief</h3><p>Reducing pain, swelling, and inflammation are common goals in this phase of recovery. Injury protection, elevation, appropriate medications, compression, and patient education are important.</p></div><img src="/files/services/pain-relief.jpg" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Pain Relief</h3><p>Reducing pain, swelling, and inflammation are common goals in this phase of recovery. Injury protection, elevation, appropriate medications, compression, and patient education are important.</p></div><img src="/files/services/pain-relief.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-1" hidden>
-        <div class="recovery__phase"><div><h3>Introduce Movement</h3><p>Pain-free passive, manual therapy, active range of motion, and cardiorespiratory exercises are indicated here. Education about pain and a positive attitude may help.</p></div><img src="/files/services/therapeutic-exercise.jpg" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Introduce Movement</h3><p>Pain-free passive, manual therapy, active range of motion, and cardiorespiratory exercises are indicated here. Education about pain and a positive attitude may help.</p></div><img src="/files/services/therapeutic-exercise.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-2" hidden>
-        <div class="recovery__phase"><div><h3>Strengthening</h3><p>Progressive loading of healing soft tissues, the reintroduction of low-stress neuromuscular reeducation, balance training, and basic functional activities are part of this rehabilitation phase.</p></div><img src="/files/services/strength-conditioning.jpg" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Strengthening</h3><p>Progressive loading of healing soft tissues, the reintroduction of low-stress neuromuscular reeducation, balance training, and basic functional activities are part of this rehabilitation phase.</p></div><img src="/files/services/strength-conditioning.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-3" hidden>
-        <div class="recovery__phase"><div><h3>Functional Retraining</h3><p>Progressing strengthening exercises, improving flexibility, and advanced balance exercises are part of phase 4. Resuming functional movement occurs in this phase.</p></div><img src="/files/services/gait-balance-training.jpg" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Functional Retraining</h3><p>Progressing strengthening exercises, improving flexibility, and advanced balance exercises are part of phase 4. Resuming functional movement occurs in this phase.</p></div><img src="/files/services/gait-balance-training.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-4" hidden>
-        <div class="recovery__phase"><div><h3>Recovery & Prevention</h3><p>Functional movements are progressed, a controlled re-introduction to sports or challenging environments is initiated. Continued strengthening, flexibility, and goal-specific training occurs.</p></div><img src="/files/services/recovery-prevention.jpg" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Recovery & Prevention</h3><p>Functional movements are progressed, a controlled re-introduction to sports or challenging environments is initiated. Continued strengthening, flexibility, and goal-specific training occurs.</p></div><img src="/files/services/recovery-prevention.webp" alt="" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -312,16 +343,24 @@
   </script>
 
   <!-- ===== INSURANCE ===== -->
-  <section class="section section--light"><div class="container"><div class="section-title"><h2 style="text-align:center;color:var(--success)">We Accept Many Major Insurance Plans</h2></div><div class="insurance-grid"><img src="/files/insurance/bcbs-logo.svg" alt="BCBS" loading="lazy"><img src="/files/insurance/tricare.svg" alt="Tricare" loading="lazy"><img src="/files/insurance/humana.svg" alt="Humana" loading="lazy"><img src="/files/insurance/medicare-in.svg" alt="Medicare" loading="lazy"><img src="/files/insurance/workers-comp.svg" alt="Workers Comp" loading="lazy"><div style="text-align:center;font-weight:700;font-size:1.1rem">Self-pay</div></div><p style="text-align:center;margin-top:20px;font-size:.9rem">No Referral, No Problem — We Can See Patients Without a Physician's Prescription</p><p style="text-align:center;font-size:.85rem;color:var(--gray)">Don't see your plan? Call us to verify your benefits.</p></div></section>
+  <section class="section section--light"><div class="container"><div class="section-title"><h2 style="text-align:center;color:var(--success)">We Accept Many Major Insurance Plans</h2></div><div class="insurance-grid"><img src="/files/insurance/bcbs-logo.svg" alt="BCBS" width="216" height="45" loading="lazy"><img src="/files/insurance/tricare.svg" alt="Tricare" width="1217" height="610" loading="lazy"><img src="/files/insurance/humana.svg" alt="Humana" width="183" height="38" loading="lazy"><img src="/files/insurance/medicare-in.svg" alt="Medicare" width="1284" height="364" loading="lazy"><img src="/files/insurance/workers-comp.svg" alt="Workers Comp" width="403" height="102" loading="lazy"><div style="text-align:center;font-weight:700;font-size:1.1rem">Self-pay</div></div><p style="text-align:center;margin-top:20px;font-size:.9rem">No Referral, No Problem — We Can See Patients Without a Physician's Prescription</p><p style="text-align:center;font-size:.85rem;color:var(--gray)">Don't see your plan? Call us to verify your benefits.</p></div></section>
 
   <!-- ===== CTA ===== -->
 <section class="section section--accent" style="text-align:center"><div class="container"><h2>Ready to Feel Better?</h2><p style="font-size:1.1rem;margin-bottom:20px">Schedule your initial evaluation and let's make things happen!</p><a href="/booking/" class="btn btn--accent btn--lg">Schedule an Appointment</a></div></section>
 
 <div id="site-footer"></div>
 <script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
+  // Wrap footer fetch in requestIdleCallback to defer non-critical resource
+  var fetchFooter = function(){
+    fetch('/templates/footer.html')
+      .then(function(r){return r.text()})
+      .then(function(f){document.getElementById('site-footer').innerHTML=f});
+  };
+  if (window.requestIdleCallback) {
+    requestIdleCallback(fetchFooter, { timeout: 3000 });
+  } else {
+    setTimeout(fetchFooter, 200);
+  }
 </script>
 </main>
 

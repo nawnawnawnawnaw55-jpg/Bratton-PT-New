@@ -25,10 +25,14 @@
     // Wait a tick for layout to settle (nav may have been moved out by MutationObserver)
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
-        var h = siteHeader.querySelector('.header').offsetHeight;
-        if (h > 0 && window.sessionStorage) {
-          sessionStorage.setItem(CACHE_KEY, h);
-          // Also update inline min-height so this page settles exactly
+        // --- READ phase: batch all layout reads before any writes ---
+        var headerEl = siteHeader.querySelector('.header');
+        var h = headerEl.offsetHeight;
+        // --- WRITE phase: apply all DOM writes after reads complete ---
+        if (h > 0) {
+          if (window.sessionStorage) {
+            sessionStorage.setItem(CACHE_KEY, h);
+          }
           siteHeader.style.minHeight = h + 'px';
           measured = true;
         }

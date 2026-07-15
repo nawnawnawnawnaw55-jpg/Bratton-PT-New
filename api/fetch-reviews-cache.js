@@ -83,6 +83,44 @@ function sanitizeText(t) {
   return (t || '').replace(/[^\x20-\x7E\xA0-\xFF\u2010-\u2122]/g, '').replace(/\s+/g, ' ').trim();
 }
 
+// Catches near-duplicate names within the same fetch run — e.g. "Denice Foll"
+// and "Denise Foll" are obviously the same person but Google returned two
+// slightly different author_name strings. We keep the one with more text.
+function dedupeByNameInRun(reviews) {
+  const seen = [];
+  for (const r of reviews) {
+    const rKey = nameKey(r.name);
+    const duplicate = seen.find(s => {
+      // Exact fuzzy-key match (same firstname|lastinitial) — already a dupe
+      if (nameKey(s.name) === rKey) return true;
+      // Near-match: same last-initial, first names within edit-distance of 2
+      const sParts = (s.name || '').trim().split(/\s+/).filter(Boolean);
+      const rParts = (r.name || '').trim().split(/\s+/).filter(Boolean);
+      if (sParts.length < 2 || rParts.length < 2) return false;
+      const sLast = sParts[sParts.length - 1].toLowerCase();
+      const rLast = rParts[rParts.length - 1].toLowerCase();
+      if (sLast !== rLast) return false;
+      const sFirst = sParts[0].toLowerCase();
+      const rFirst = rParts[0].toLowerCase();
+      if (Math.abs(sFirst.length - rFirst.length) > 2) return false;
+      let diffs = 0;
+      const maxLen = Math.max(sFirst.length, rFirst.length);
+      for (let i = 0; i < maxLen; i++) {
+        if (sFirst[i] !== rFirst[i]) diffs++;
+        if (diffs > 2) return false;
+      }
+      return diffs <= 2;
+    });
+    if (!duplicate) {
+      seen.push(r);
+    } else if (r.text.length > duplicate.text.length) {
+      // Replace with the richer version
+      seen[seen.indexOf(duplicate)] = r;
+    }
+  }
+  return seen;
+}
+
 // Exact dedup key for real Google reviews: author + exact submission
 // timestamp. Far more reliable than name-matching since it can't collide
 // unless it's genuinely the same review.
@@ -95,7 +133,11 @@ function readArchive() {
     if (!fs.existsSync(ARCHIVE_FILE)) return [];
     const raw = fs.readFileSync(ARCHIVE_FILE, 'utf8');
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    // Strip empty-text entries that snuck in from older runs and
+    // deduplicate near-name variants (e.g. "Denice" / "Denise").
+    const withText = parsed.filter(r => r.text && r.text.trim().length > 0);
+    return dedupeByNameInRun(withText);
   } catch (e) {
     log('WARNING: could not read existing archive, starting fresh: ' + e.message);
     return [];
@@ -132,14 +174,18 @@ async function main() {
       ...((relevantData.result && relevantData.result.reviews) || [])
     ];
 
-    const freshLive = rawFromBoth.map(r => ({
-      name: r.author_name,
-      text: sanitizeText(r.text),
-      time: r.time,                              // exact Unix timestamp
-      relative_time: r.relative_time_description, // human-readable, for display
-      rating: r.rating,
-      photo: r.profile_photo_url || null
-    }));
+    const freshLive = dedupeByNameInRun(
+      rawFromBoth
+        .map(r => ({
+          name: r.author_name,
+          text: sanitizeText(r.text),
+          time: r.time,                              // exact Unix timestamp
+          relative_time: r.relative_time_description, // human-readable, for display
+          rating: r.rating,
+          photo: r.profile_photo_url || null
+        }))
+        .filter(r => r.text.length > 0) // Google sometimes returns reviews with no body — skip those
+    );
 
     // Merge into the persistent archive — this is what lets the real-review
     // count grow across nights instead of resetting every run.
