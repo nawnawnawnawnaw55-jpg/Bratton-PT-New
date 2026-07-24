@@ -1,0 +1,35 @@
+name: Nightly Reviews Cache Refresh
+
+on:
+  schedule:
+    # 12:03 AM Central Time = 6:03 AM UTC
+    # Central is UTC-5 (daylight: CDT) — adjust if needed for CST (UTC-6):
+    #   CDT (summer): '3 6 * * *'   = 6:03 UTC  = 1:03 AM CDT = 12:03 AM CST
+    #   CST (winter): '3 7 * * *'   = 7:03 UTC  = 1:03 AM CST
+    # We use CDT by default since it's currently July.
+    - cron: '3 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  refresh-cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run reviews cache refresh
+        run: node api/fetch-reviews-cache.js
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
