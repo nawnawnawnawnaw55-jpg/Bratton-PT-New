@@ -10,6 +10,9 @@ on:
     - cron: '3 6 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   refresh-cache:
     runs-on: ubuntu-latest
