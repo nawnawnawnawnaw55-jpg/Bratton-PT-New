@@ -121,23 +121,30 @@
 
   function formatRelativeTime(timeStr){
     if (!timeStr) return '';
-    if (isNaN(Date.parse(timeStr))) return timeStr;
+    var then;
+    // Handle Unix timestamp — seconds since epoch (numeric or numeric string)
+    if (typeof timeStr === 'number' || /^\d+$/.test(timeStr)){
+      var ts = parseInt(timeStr, 10);
+      then = new Date(ts * 1000);
+    } else {
+      if (isNaN(Date.parse(timeStr))) return timeStr;
+      then = new Date(timeStr);
+    }
     var now = new Date();
-    var then = new Date(timeStr);
     var diffMs = now - then;
     if (diffMs < 0) return timeStr;
     var minutes = Math.floor(diffMs / 60000);
-    var hours = Math.floor(diffMs / 3600000);
-    var days = Math.floor(diffMs / 86400000);
-    var weeks = Math.floor(days / 7);
-    var months = Math.floor(days / 30);
-    var years = Math.floor(days / 365);
-    if (minutes < 1) return 'Just now';
+    var hours   = Math.floor(diffMs / 3600000);
+    var days    = Math.floor(diffMs / 86400000);
+    var weeks   = Math.floor(days / 7);
+    var months  = Math.floor(days / 30);
+    var years   = Math.floor(days / 365);
+    if (minutes < 1)  return 'Just now';
     if (minutes < 60) return minutes + ' ' + (minutes === 1 ? 'minute' : 'minutes') + ' ago';
-    if (hours < 24) return hours + ' ' + (hours === 1 ? 'hour' : 'hours') + ' ago';
-    if (days < 7) return days + ' ' + (days === 1 ? 'day' : 'days') + ' ago';
-    if (weeks < 5) return weeks + ' ' + (weeks === 1 ? 'week' : 'weeks') + ' ago';
-    if (months < 12) return months + ' ' + (months === 1 ? 'month' : 'months') + ' ago';
+    if (hours < 24)   return hours + ' ' + (hours === 1 ? 'hour' : 'hours') + ' ago';
+    if (days < 7)     return days + ' ' + (days === 1 ? 'day' : 'days') + ' ago';
+    if (weeks < 5)    return weeks + ' ' + (weeks === 1 ? 'week' : 'weeks') + ' ago';
+    if (months < 12)  return months + ' ' + (months === 1 ? 'month' : 'months') + ' ago';
     return years + ' ' + (years === 1 ? 'year' : 'years') + ' ago';
   }
 
