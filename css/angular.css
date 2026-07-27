@@ -34,7 +34,7 @@
 /* ---- Thin Angular Slash Divider (narrow diagonal line between sections) ---- */
 .angular-slash-divider {
   position: relative;
-  height: 20px;
+  height: 60px;
   z-index: 2;
   margin: 0;
   background: var(--light-bg);
@@ -45,28 +45,22 @@
   position: absolute;
   left: 8%;
   right: 8%;
-  top: 50%;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--primary) 8%,
-    var(--primary) 40%,
-    var(--accent) 70%,
-    transparent 100%
-  );
-  transform: skewY(-0.5deg) translateY(-50%);
-  border-radius: 2px;
+  top: 80%;
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='transparent'/%3E%3Cstop offset='8%25' stop-color='%232257A6'/%3E%3Cstop offset='40%25' stop-color='%232257A6'/%3E%3Cstop offset='70%25' stop-color='%23E05516'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='6' y='3' fill='url(%23g)' rx='3'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  transform: translateY(-50%);
+  border-radius: 3px;
 }
 @media (max-width: 600px) {
   .angular-slash-divider {
-    height: 60px;
+    height: 80px;
   }
   .angular-slash-divider::after {
-    height: 3px;
+    height: 5px;
     left: 5%;
     right: 5%;
-    top: 35%;
+    top: 70%;
     transform: translateY(-50%);
   }
 }
