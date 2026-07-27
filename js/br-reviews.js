@@ -126,10 +126,11 @@
 
      // Use reviews already fetched by the page (homepage/reviews page) —
      // no API call from the popup itself.
-     if (window.__sharedReviews && window.__sharedReviews.length) {
-       renderReviews(window.__sharedReviews);
-       return;
-     }
+      if (window.__sharedReviews && window.__sharedReviews.length) {
+        var filtered = window.__sharedReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
+        renderReviews(filtered.length ? filtered : window.__sharedReviews.slice(0, 5));
+        return;
+      }
 
      renderReviews(fallbackReviews);
    }

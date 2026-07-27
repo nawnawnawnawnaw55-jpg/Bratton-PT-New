@@ -25,6 +25,7 @@
   .reviews-page-grid .review-card__text.expanded{max-height:3000px;overflow:visible}
   .reviews-page-grid .review-card__readmore{cursor:pointer;color:var(--primary);font-size:.82rem;font-weight:600;margin-top:6px;display:block}
   .reviews-page-grid .review-card__readmore:hover{color:var(--accent)}
+  .reviews-page-grid .review-card__time{font-size:.75rem;color:var(--text-muted, #999);margin-top:8px}
    /* === Glass + Google stats card === */
    .reviews-page .overall-stats{display:flex;align-items:center;gap:20px;background:linear-gradient(135deg, #2257A6 0%, #1B3B6F 60%, #142c54 100%);padding:28px 40px;border-radius:16px;box-shadow:0 12px 40px rgba(34,87,166,0.35), inset 0 1px 0 rgba(255,255,255,0.15);margin:24px auto 32px;width:fit-content;min-width:300px;position:relative;overflow:hidden}
    .reviews-page .overall-stats::before{content:"";position:absolute;top:-50%;right:-20%;width:200px;height:200px;border-radius:50%;background:rgba(248,111,38,0.12);pointer-events:none}
@@ -118,6 +119,28 @@
   var statsEl = document.getElementById('overall-stats');
   var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--secondary)','#e74c3c','#8e44ad','#16a085'];
 
+  function formatRelativeTime(timeStr){
+    if (!timeStr) return '';
+    if (isNaN(Date.parse(timeStr))) return timeStr;
+    var now = new Date();
+    var then = new Date(timeStr);
+    var diffMs = now - then;
+    if (diffMs < 0) return timeStr;
+    var minutes = Math.floor(diffMs / 60000);
+    var hours = Math.floor(diffMs / 3600000);
+    var days = Math.floor(diffMs / 86400000);
+    var weeks = Math.floor(days / 7);
+    var months = Math.floor(days / 30);
+    var years = Math.floor(days / 365);
+    if (minutes < 1) return 'Just now';
+    if (minutes < 60) return minutes + ' ' + (minutes === 1 ? 'minute' : 'minutes') + ' ago';
+    if (hours < 24) return hours + ' ' + (hours === 1 ? 'hour' : 'hours') + ' ago';
+    if (days < 7) return days + ' ' + (days === 1 ? 'day' : 'days') + ' ago';
+    if (weeks < 5) return weeks + ' ' + (weeks === 1 ? 'week' : 'weeks') + ' ago';
+    if (months < 12) return months + ' ' + (months === 1 ? 'month' : 'months') + ' ago';
+    return years + ' ' + (years === 1 ? 'year' : 'years') + ' ago';
+  }
+
   function getInitials(name){
     return (name||'?').split(' ').map(function(w){return w.charAt(0).toUpperCase()}).join('').substring(0,2);
   }
@@ -179,12 +202,14 @@
       var photoHTML = r.photo
         ? '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '"><img src="' + escapeHTML(r.photo) + '" referrerpolicy="no-referrer" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover"></div>'
         : '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>';
+      var timeDisplay = formatRelativeTime(r.time);
       return '<div class="review-card">' +
         '<div class="review-card__header">' +
         photoHTML +
         '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
         '</div>' +
         '<p class="review-card__text" data-idx="' + i + '" onclick="window._pageToggleReview(event,' + i + ')">' + displayText + '</p>' +
+        (timeDisplay ? '<div class="review-card__time">' + timeDisplay + '</div>' : '') +
         readMoreHTML +
         '</div>';
     }).join('');
