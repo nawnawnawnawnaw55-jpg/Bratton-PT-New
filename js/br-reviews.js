@@ -124,15 +124,19 @@
      if(loaded) return;
      loaded = true;
 
-     // Use reviews already fetched by the page (homepage/reviews page) —
-     // no API call from the popup itself.
-      if (window.__sharedReviews && window.__sharedReviews.length) {
-        var filtered = window.__sharedReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
-        renderReviews(filtered.length ? filtered : window.__sharedReviews.slice(0, 5));
-        return;
-      }
-
-     renderReviews(fallbackReviews);
+     fetch('/api/reviews?newest=3')
+       .then(function(r){ return r.json(); })
+       .then(function(data){
+         var reviews = (data.reviews && data.reviews.length) ? data.reviews : [];
+         if (reviews.length) {
+           renderReviews(reviews);
+         } else {
+           renderReviews(fallbackReviews);
+         }
+       })
+       .catch(function(){
+         renderReviews(fallbackReviews);
+       });
    }
   
   // Close on outside click
