@@ -26,6 +26,9 @@
 .section--light.hero-next-section{position:relative;z-index:3;background:var(--light-bg);border-radius:var(--radius-lg) var(--radius-lg) 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.25)}
 @media(max-width:768px){.section--light.hero-next-section{border-radius:var(--radius-md) var(--radius-md) 0 0}}
 
+/* ===== SECTION TITLE ===== */
+.section-title{text-align:center}
+
 /* ===== VALUE PROPS ===== */
 .value-props{text-align:center}
 .value-props__grid{display:grid;gap:clamp(16px,3vw,24px);grid-template-columns:1fr;margin-top:clamp(24px,5vw,40px)}
