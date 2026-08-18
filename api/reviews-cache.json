@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Joseph Henley Jr",
+      "text": "In January, I experienced leg pain and dropped foot on my right side due to stenosis in the lower portion of my back. Jena has helped me regain strength and mobility in my leg and foot. She and her staff are very professional in their work. I highly recommend coming to Jena Bratton for physical therapy.January 29 2026I started PT back with Jena , I had back surgery Dec 10, 2025 for stenosis and scoliosis. Looking forward to further work with Jena and her staff. They are incredible!!",
+      "time": 1786974440,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLm4wSS15ZmA-i0hHLSLs-H1ldIHl_M7Mj2hTaufKgXu8jwlQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Lakisha Washington",
       "text": "Ms. Bratton is the best physical therapist I have ever worked with.",
       "time": 1786747530,
@@ -144,17 +152,10 @@
       "time": null,
       "rating": 5,
       "relative_time": "9 months ago"
-    },
-    {
-      "name": "Jeannie R.",
-      "text": "You cannot go wrong having your pains disappear at Bratton PT! Individual attention, explanation of each procedure before it is executed! They make it fun!",
-      "time": null,
-      "rating": 5,
-      "relative_time": "10 months ago"
     }
   ],
   "overall_rating": 5,
   "total_reviews": 207,
-  "archive_size": 12,
-  "cached_at": "2026-08-17T06:42:28.495Z"
+  "archive_size": 13,
+  "cached_at": "2026-08-18T06:34:08.970Z"
 }
