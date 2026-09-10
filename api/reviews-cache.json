@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Sarah Fabares",
+      "text": "The most personal attention I've ever had from a PT Clinic! I started in a boot and on crutches after 6 broken bones in my foot/ankle and 4 months non-weightbearing. I felt so hopeful from the first visit because they were so encouraging and worked dilligently with me 1 on 1 rather than just sending me to do a circuit of exercises on my own. They also have this amazing \"Altered G\" treadmill that allows you to walk before you can actually walk by lifting you up and taking most of the load off your feet. This helped me to start feeling \"normal\" again so much sooner than I thought and reminded me that there was light at the end of the tunnel even though it had been so long that I felt like I'd never walk again. No scheduling drama, just two people (the PT and her assistant) who answer their own phones, actually care about you, and are super accommodating. Hope I never need them again, but if I ever need PT again, I would definitely go here over the other 2 clinics I've worked with in Slidell.",
+      "time": 1788979765,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKUcGJ7284xLkLZblppTdiPG4FkqHXuJPUiLf6o4IIi5yCC3g=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Roland Rivers",
       "text": "I had back to back knee replacements. Jena took very good care of me and explained what kind of treatment I was going to get. They are very professional and good one on one with their patients. My wife and I are currently going there for different kind of treatment. I strongly recommend them to anyone that needs physical therapy.",
       "time": 1787802129,
@@ -146,17 +154,10 @@
       "time": null,
       "rating": 5,
       "relative_time": "3 years ago"
-    },
-    {
-      "name": "James S.",
-      "text": "My journey has been one of great pain and great rewards. Many years ago my knees began failing and I was not successful with gym workouts helping the problem. It took quite a while in obtaining surgical approval to have my knees replaced...",
-      "time": null,
-      "rating": 5,
-      "relative_time": "3 years ago"
     }
   ],
   "overall_rating": 5,
-  "total_reviews": 206,
-  "archive_size": 14,
-  "cached_at": "2026-09-09T10:38:40.629Z"
+  "total_reviews": 207,
+  "archive_size": 15,
+  "cached_at": "2026-09-10T10:26:10.303Z"
 }
