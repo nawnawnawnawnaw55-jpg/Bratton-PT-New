@@ -3,6 +3,14 @@
     {
       "name": "Roland Rivers",
       "text": "I had back to back knee replacements. Jena took very good care of me and explained what kind of treatment I was going to get. They are very professional and good one on one with their patients. My wife and I are currently going there for different kind of treatment. I strongly recommend them to anyone that needs physical therapy.",
+      "time": 1789305538,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocIntFykJPoQisgxDpnEmupj0q9KYugWfenZuvYzUupVKUSOGQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
+      "name": "Roland Rivers",
+      "text": "I had back to back knee replacements. Jena took very good care of me and explained what kind of treatment I was going to get. They are very professional and good one on one with their patients. My wife and I are currently going there for different kind of treatment. I strongly recommend them to anyone that needs physical therapy.",
       "time": 1789217064,
       "relative_time": "in the last week",
       "rating": 5,
@@ -15,14 +23,6 @@
       "relative_time": "in the last week",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocKUcGJ7284xLkLZblppTdiPG4FkqHXuJPUiLf6o4IIi5yCC3g=s128-c0x00000000-cc-rp-mo"
-    },
-    {
-      "name": "Roland Rivers",
-      "text": "I had back to back knee replacements. Jena took very good care of me and explained what kind of treatment I was going to get. They are very professional and good one on one with their patients. My wife and I are currently going there for different kind of treatment. I strongly recommend them to anyone that needs physical therapy.",
-      "time": 1787802129,
-      "relative_time": "in the last week",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocIntFykJPoQisgxDpnEmupj0q9KYugWfenZuvYzUupVKUSOGQ=s128-c0x00000000-cc-rp-mo"
     },
     {
       "name": "Joseph Henley Jr",
@@ -160,5 +160,5 @@
   "overall_rating": 5,
   "total_reviews": 207,
   "archive_size": 16,
-  "cached_at": "2026-09-13T10:58:25.891Z"
+  "cached_at": "2026-09-14T11:33:21.507Z"
 }
