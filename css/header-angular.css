@@ -1,48 +1,4 @@
-/* ===== HEADER BLUE ACCENTS =====
-   Clean blue coloring on structural elements of the initial view */
-
-/* --- Top accent stripe above the header utility bar --- */
-.site-header::before {
-  content: "";
-  display: block;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--primary-dark) 0%,
-    var(--primary) 25%,
-    var(--accent) 50%,
-    var(--primary) 75%,
-    var(--primary-dark) 100%
-  );
-}
-
-/* --- Nav ribbon: white bg with blue bottom border --- */
-.nav {
-  border-bottom-color: var(--primary) !important;
-}
-
-/* Active nav link: faint blue wash, full bar height */
-@media(min-width:768px){
-  .nav__link--active {
-    background: rgba(0, 90, 170, 0.08) !important;
-    color: var(--primary) !important;
-    border-top-color: transparent !important;
-  }
-  .nav__link:hover {
-    color: var(--primary) !important;
-  }
-}
-
-/* Mobile nav drawer: faint blue wash on active link */
-@media(max-width:767px){
-  .nav--mobile .nav__link--active {
-    background: rgba(0, 90, 170, 0.08) !important;
-    color: var(--primary) !important;
-  }
-  .nav--mobile .nav__link:hover {
-    color: var(--primary) !important;
-  }
-}
+/* ===== HERO CTA BLUE ACCENT GLOW ===== */
 
 /* --- Hero CTA button blue accent glow on hover --- */
 .hero__cta .btn--accent {

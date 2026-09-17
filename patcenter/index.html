@@ -27,6 +27,7 @@
   --primary: #2257A6;
   --primary-dark: #1B3B6F;
   --accent: #E05516;
+  --accent-dark: #e05a15;
   --danger: #BE1E2D;
   --success: #1B8E3D;
   --white: #FFFFFF;
@@ -122,17 +123,6 @@ h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
 .card__body{padding:16px}
 .card__title{font-size:1rem;margin-bottom:8px}
 
-/* Mobile Menu */
-.mobile-menu-btn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:none;border:none;cursor:pointer;font-size:24px;color:var(--white)}
-@media(min-width:1024px){.mobile-menu-btn{display:none}}
-
-/* Desktop Nav — now handled in header.css */
-.nav--open{display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:80vw;background:var(--white);z-index:1000;padding:24px;overflow-y:auto;box-shadow:var(--shadow-lg)}
-.nav__link{display:block;padding:10px 16px;font-family:var(--font-heading);font-weight:600;font-size:.9rem;text-transform:uppercase;color:var(--dark);border-radius:var(--radius-sm);transition:background .2s}
-.nav__link:hover,.nav__link--active{background:var(--light-gray);color:var(--primary)}
-.nav__dropdown{position:relative}
-.nav__dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:200px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-md);padding:8px 0;z-index:100}
-.nav__dropdown:hover .nav__dropdown-menu{display:block}
 
 /* Utilities */
 .hidden{display:none!important}
@@ -277,7 +267,7 @@ h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
   font-weight: 700;
 }
 .site-footer__hours-chart {
-  background: rgba(248,111,38,0.08);
+  background: rgba(224,85,22,0.08);
   border-radius: 20px;
   display: inline-block;
   overflow: hidden;
@@ -291,7 +281,7 @@ h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
   border-bottom: none;
 }
 .site-footer__hours-row:hover {
-  background: rgba(248,111,38,0.06);
+  background: rgba(224,85,22,0.06);
 }
 .site-footer__hours-day {
   flex: 0 0 auto;
@@ -424,13 +414,13 @@ html {
 
 /* Arrow icons via background SVG */
 ::-webkit-scrollbar-button:vertical:decrement {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F86F26' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E05516' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='18 15 12 9 6 15'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 ::-webkit-scrollbar-button:vertical:increment {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F86F26' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E05516' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -449,13 +439,13 @@ html {
 
 /* Horizontal scrollbar buttons (if ever needed) */
 ::-webkit-scrollbar-button:horizontal:decrement {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F86F26' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E05516' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
 }
 
 ::-webkit-scrollbar-button:horizontal:increment {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F86F26' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23E05516' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -467,157 +457,68 @@ html {
 
 /* === LOAD BLUE HEADER ACCENTS (site-wide) === */
 
-/* ===== HEADER ===== */
-
-/* Reserve space before header loads to prevent layout shift / flicker.
-   These are conservative fallbacks — the actual header height is measured
-   after render and cached in sessionStorage for subsequent page loads. */
-#site-header {
-  min-height: 60px;
-}
-
-@media (min-width: 768px) {
-  #site-header {
-    min-height: 130px;
-  }
-}
-
-/* CTA Bar */
-.header__cta-bar{background:var(--primary);padding:6px 0;display:none}
-.header__cta-bar .container{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.header__cta-bar .btn{background:var(--accent);color:var(--white);padding:8px 14px;font-size:.78rem;font-weight:700;border-radius:var(--radius-pill);white-space:nowrap;text-transform:uppercase;transition:all .2s}
-.header__cta-bar .btn:hover{background:var(--white);color:var(--primary)}
-
-/* Top row */
-.header__top{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:6px}
-.header__logo{flex-shrink:0}
-.header__logo img{width:120px;height:auto}
-.header__contact{display:none}
-
-/* Mobile: phone CTA in header */
-.header__mobile-cta{display:flex;align-items:center;gap:4px;padding:4px 8px;background:var(--accent);color:var(--white);border-radius:var(--radius-pill);font-weight:700;font-size:.7rem;text-decoration:none;white-space:nowrap}
-.header__mobile-cta:hover{color:var(--white);background:#e05a15}
-
-/* Hamburger */
-.mobile-menu-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--light-gray);border:none;border-radius:var(--radius-sm);font-size:20px;cursor:pointer;color:var(--dark);flex-shrink:0;transition:background .2s,color .2s}
-.mobile-menu-btn.mobile-menu-btn--open{background:var(--primary);color:var(--white)}
-
-/* Desktop: show contact info */
+/* NEW HEADER (.v39 gradient) */
+.v39{background:linear-gradient(135deg,#0d2240,#1a3a6b 30%,#2257A6 60%,#1a3a6b)}
+.v39 .accent-bar{height:5px;background:linear-gradient(90deg,var(--primary-dark),var(--primary) 25%,var(--accent) 50%,var(--primary) 75%,var(--primary-dark))}
+.v39 .htop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}
+.v39 .hlogo{flex-shrink:0;transition:transform .2s;display:inline-block}
+.v39 .hlogo:hover{transform:scale(1.04)}
+.v39 .hlogo svg{width:132px;height:auto;display:block}.v39 .hlogo svg [class*='v55s']{transition:fill .2s ease}.v39 .hlogo:hover svg [class*='v55s']:not(.v55s7){fill:var(--accent)}
+.v39 .hinfo-gradient{display:none;align-items:center;gap:28px;color:#fff}
+.v39 .hinfo-gradient a{color:#fff;font-size:1.05rem;display:flex;align-items:center;gap:8px;font-weight:600}
+.v39 .hinfo-gradient a:hover{color:var(--accent)}
+.v39 .hinfo-gradient svg{color:var(--accent);flex-shrink:0}
+.booking-btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;background:var(--accent);color:#fff!important;border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:.8rem;text-transform:uppercase;transition:all .2s;white-space:nowrap;border:none;cursor:pointer}
+.booking-btn:hover{background:var(--accent-dark);color:#fff!important;transform:translateY(-1px)}
+.booking-btn svg{flex-shrink:0}
+.v39 .booking-btn--gradient-bar{display:none;background:#fff;color:var(--primary)!important;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.v39 .booking-btn--gradient-bar:hover{background:var(--accent);color:#fff!important}
+.v39 .htop__actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.mobile-cta{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#fff;color:var(--primary);border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:.78rem;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:all .2s}
+.mobile-cta:hover{color:#fff;background:var(--accent);transform:translateY(-1px)}
+.mobile-menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:10px;font-size:22px;line-height:1;cursor:pointer;color:#fff;flex-shrink:0;transition:background .2s}
+.mobile-menu-btn:hover{background:rgba(255,255,255,.28)}
+.mobile-menu-btn--open{background:var(--accent);border-color:var(--accent)}
 @media(min-width:768px){
-  .header__cta-bar{display:block}
-  .header__top{justify-content:center;gap:40px;padding:16px 0}
-  .header__logo img{width:220px}
-  .header__contact{display:flex;align-items:center;gap:32px}
-  .header__address{display:flex;align-items:center;gap:8px;font-size:.85rem;line-height:1.5;color:var(--dark)}
-  .header__address svg{width:20px;height:20px;color:var(--accent);flex-shrink:0;transform:translateY(1px)}
-  .header__phone{text-align:center}
-  .header__label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--gray);letter-spacing:.5px;margin-bottom:2px}
-  .header__phone a{font-size:1.1rem;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:6px}
-  .header__phone a:hover{color:var(--accent)}
-  .header__icon{display:inline-flex;align-items:center;transform:translateY(1px);color:var(--accent);font-size:1.25rem}
-  .mobile-menu-btn,.header__mobile-cta{display:none}
+.v39 .htop{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:12px 0}
+.v39 .hlogo{justify-self:start}
+.v39 .hlogo svg{width:220px}
+.v39 .hinfo-gradient{display:flex;justify-self:center}
+.v39 .booking-btn--gradient-bar{display:inline-flex;justify-self:end}
+.v39 .htop__actions{display:none}
+.mobile-cta{display:none}
 }
-
-/* ===== NAVIGATION RIBBON ===== */
-.nav{display:block;background:var(--white);border-top:1px solid var(--light-gray);border-bottom:2px solid var(--primary);position:sticky;top:0;z-index:998}
-.nav .container{position:relative}
+/* NAV RIBBON */
+.nav{background:#fff;border-top:1px solid #EFEFEF;border-bottom:2px solid var(--primary);position:sticky;top:0;z-index:998}
 .nav__inner{display:none}
-
 @media(min-width:768px){
-  .nav__inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
-  .nav__link{display:block;padding:14px 10px;font-family:var(--font-heading);font-weight:600;font-size:.75rem;text-transform:uppercase;color:var(--dark);border-top:2px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.3px}
-  .nav__link:hover,.nav__link--active{color:var(--primary);border-top-color:var(--accent)}
-  .nav__link--active{background:var(--light-gray)}
+.nav__inner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap}
+.nav__link{display:block;padding:12px 14px;font-family:var(--font-heading);font-weight:600;font-size:.78rem;text-transform:uppercase;color:var(--dark);border-top:2px solid transparent;transition:all .2s;white-space:nowrap;letter-spacing:.3px}
+.nav__link:hover,.nav__link--active{color:var(--primary);border-top-color:var(--accent)}
+.nav__link--active{background:var(--light-gray)}
 }
-@media(min-width:1024px){
-  .nav__link{padding:14px 14px;font-size:.8rem}
-}
-@media(min-width:1200px){
-  .nav__link{padding:14px 18px;font-size:.82rem}
-}
-
-/* Dropdown */
 .nav__dropdown{position:relative}
-.nav__dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:200px;background:var(--white);border-radius:0 0 var(--radius-md) var(--radius-md);box-shadow:var(--shadow-md);z-index:100;padding:4px 0}
+.nav__dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:210px;background:#fff;border-radius:0 0 8px 8px;box-shadow:0 6px 18px rgba(0,0,0,.14);z-index:100;padding:4px 0}
 .nav__dropdown:hover .nav__dropdown-menu{display:block}
-.nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-family:var(--font-heading);font-size:.78rem;text-transform:none;letter-spacing:0}
+.nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-size:.78rem;text-transform:none;letter-spacing:0}
 .nav__dropdown-menu .nav__link:hover{background:var(--light-gray);color:var(--primary)}
-
-/* Mobile: sticky header + nav wrapper hide on scroll down, show on scroll up */
 @media(max-width:767px){
-  #site-header{position:sticky;top:0;z-index:999;transition:transform .3s ease;background:var(--white)}
-  #site-header.site-header--hidden{transform:translateY(-100%)}
-  #main-nav{position:sticky;top:0;z-index:998;transition:transform .3s ease}
-  #main-nav.site-header--hidden{transform:translateY(-100%)}
-  .nav{position:static;border-bottom:none}
-  .nav--mobile{display:none;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;z-index:1000;background:var(--white);padding:60px 20px 20px;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,0.2)}
-  .nav--mobile.nav--open{display:block}
-  #main-nav.nav--mobile.nav--open{position:fixed;z-index:1000}
-  .nav--mobile .nav__inner{display:flex;flex-direction:column;gap:2px}
-  .nav--mobile .nav__link{display:block;padding:12px 16px;font-family:var(--font-heading);font-weight:600;font-size:.9rem;text-transform:uppercase;color:var(--dark);border-radius:var(--radius-sm)}
-  .nav--mobile .nav__link:hover{background:var(--light-gray)}
-  .nav--mobile .nav__dropdown-menu{position:static;display:none;box-shadow:none;padding-left:16px;min-width:auto}
-  .nav--mobile .nav__dropdown.open .nav__dropdown-menu{display:block}
-  .nav--open .nav__close-btn{display:flex}
-  .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;display:none}
-  .menu-overlay--visible{display:block}
+.nav--mobile{display:none;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;z-index:1000;background:#fff;padding:64px 20px 24px;overflow-y:auto;box-shadow:-6px 0 24px rgba(0,0,0,.22)}
+.nav--mobile.nav--open{display:block}
+.nav--mobile .nav__inner{display:flex;flex-direction:column;gap:2px}
+.nav--mobile .nav__link{display:block;padding:12px 16px;font-family:var(--font-heading);font-weight:600;font-size:.9rem;text-transform:uppercase;color:var(--dark);border-radius:6px}
+.nav--mobile .nav__link:hover{background:var(--light-gray)}
+.nav--mobile .nav__dropdown-menu{position:static;display:none;box-shadow:none;padding-left:16px;min-width:auto;border-radius:0}
+.nav--mobile .nav__dropdown.open .nav__dropdown-menu{display:block}
 }
-
-.nav__close-btn{display:none;position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:none;font-size:28px;line-height:1;color:var(--dark);cursor:pointer;z-index:1001;align-items:center;justify-content:center;border-radius:var(--radius-sm)}
+.nav__close-btn{display:none;position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:none;font-size:28px;line-height:1;color:var(--dark);cursor:pointer;z-index:1001;align-items:center;justify-content:center;border-radius:6px}
+.nav--open .nav__close-btn{display:flex}
 .nav__close-btn:hover{background:var(--light-gray);color:var(--primary)}
-@media(min-width:768px){
-  .nav__close-btn{display:none!important}
-}
+@media(min-width:768px){.nav__close-btn{display:none!important}}
+.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;display:none}
+.menu-overlay--visible{display:block}
 
-/* Sticky nav — pure CSS, no JS needed */
-@media(min-width:768px){
-  .nav{position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
-}
-/* ===== HEADER BLUE ACCENTS =====
-   Clean blue coloring on structural elements of the initial view */
-
-/* --- Top accent stripe above the header utility bar --- */
-.site-header::before {
-  content: "";
-  display: block;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--primary-dark) 0%,
-    var(--primary) 25%,
-    var(--accent) 50%,
-    var(--primary) 75%,
-    var(--primary-dark) 100%
-  );
-}
-
-/* --- Nav ribbon: white bg with blue bottom border --- */
-.nav {
-  border-bottom-color: var(--primary) !important;
-}
-
-/* Active nav link: faint blue wash, full bar height */
-@media(min-width:768px){
-  .nav__link--active {
-    background: rgba(0, 90, 170, 0.08) !important;
-    color: var(--primary) !important;
-    border-top-color: transparent !important;
-  }
-  .nav__link:hover {
-    color: var(--primary) !important;
-  }
-}
-
-/* Mobile nav drawer: faint blue wash on active link */
-@media(max-width:767px){
-  .nav--mobile .nav__link--active {
-    background: rgba(0, 90, 170, 0.08) !important;
-    color: var(--primary) !important;
-  }
-  .nav--mobile .nav__link:hover {
-    color: var(--primary) !important;
-  }
-}
+/* ===== HERO CTA BLUE ACCENT GLOW ===== */
 
 /* --- Hero CTA button blue accent glow on hover --- */
 .hero__cta .btn--accent {
@@ -721,7 +622,7 @@ html {
 .recovery__tabs{display:flex;justify-content:center;gap:clamp(10px,2vw,18px);margin:clamp(20px,4vw,32px) 0;flex-wrap:wrap}
 .recovery__tab{width:clamp(40px,8vw,52px);height:clamp(40px,8vw,52px);border-radius:50%;border:2px solid rgba(255,255,255,0.4);background:transparent;color:rgba(255,255,255,0.8);font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading)}
 .recovery__tab:hover{border-color:var(--white);background:rgba(255,255,255,0.15);color:var(--white)}
-.recovery__tab--active{background:var(--accent);border-color:var(--accent);color:var(--white);transform:scale(1.1);box-shadow:0 4px 12px rgba(248,111,38,0.4)}
+.recovery__tab--active{background:var(--accent);border-color:var(--accent);color:var(--white);transform:scale(1.1);box-shadow:0 4px 12px rgba(224,85,22,0.4)}
 .recovery__content{background:var(--white);border-radius:var(--radius-lg);padding:clamp(20px,4vw,36px);color:var(--dark);box-shadow:var(--shadow-lg)}
 .recovery__content[hidden]{display:none}
 .recovery__phase{display:grid;gap:clamp(16px,3vw,28px);align-items:center}
@@ -1170,18 +1071,229 @@ html {
 <div id="site-header">
 <a href="#main-content" class="sr-only" style="position:absolute;top:0;left:0;z-index:9999;padding:8px;background:var(--primary);color:#ffffff">Skip to main content</a>
 
-<header class="header">
-  <div class="container"><div class="header__top">
-    <a href="/" class="header__logo"><img src="/files/logo/BRATTON-ai.svg" width="200" height="89" alt="Bratton Physical Therapy"></a>
-    <div class="header__contact">
-      <div class="header__address"><a href="/location/" style="color:inherit;text-decoration:none"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-miterlimit="10"><defs><mask id="pinHoleMask" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16"><rect x="0" y="0" width="16" height="16" fill="white"/><circle cx="8" cy="5.15" r="1.9" fill="black"/></mask></defs><path d="M4.2,7.1l0.1,0.2l0.2,0.3l2.9,4.7c0.2,0.4,0.8,0.6,1.2,0.3c0.1-0.1,0.2-0.2,0.3-0.3L11.8,7c0.2-0.4,0.4-1.2,0.4-1.6c-0.1-2.3-2-4.1-4.3-4.1C5.7,1.2,3.8,3,3.7,5.3C3.7,5.9,3.9,6.6,4.2,7.1z" fill="currentColor" mask="url(#pinHoleMask)"/><circle cx="8" cy="5.15" r="1.9" fill="none" stroke="currentColor"/><path d="M9.8,11c1.6,0.3,2.7,1,2.7,1.8c0,1.1-2,2-4.5,2s-4.5-0.9-4.5-2c0-0.8,1.2-1.6,2.8-1.8"/></svg>1346 Lindberg Drive Suite 3, Slidell, LA 70458</a></div>
-      <div class="header__phone"><span class="header__label">Call Now:</span><a href="tel:9856415825"><span class="header__icon"><svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5562 12.9062L16.1007 13.359C16.1007 13.359 15.0181 14.4355 12.0631 11.4972C9.10812 8.55901 10.1907 7.48257 10.1907 7.48257L10.4775 7.19738C11.1841 6.49484 11.2507 5.36691 10.6342 4.54348L9.37326 2.85908C8.61028 1.83992 7.13596 1.70529 6.26145 2.57483L4.69185 4.13552C4.25823 4.56668 3.96765 5.12559 4.00289 5.74561C4.09304 7.33182 4.81071 10.7447 8.81536 14.7266C13.0621 18.9492 17.0468 19.117 18.6763 18.9651C19.1917 18.9171 19.6399 18.6546 20.0011 18.2954L21.4217 16.883C22.3806 15.9295 22.1102 14.2949 20.8833 13.628L18.9728 12.5894C18.1672 12.1515 17.1858 12.2801 16.5562 12.9062Z" fill="currentColor"/></svg></span> (985) 641-5825</a></div>
+<div class='v39'>
+  <div class='accent-bar'></div>
+  <header class='header'>
+    <div class='container'>
+      <div class='htop'>
+        <a href="/" class="hlogo"><svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 842 343" width="200" height="89">
+	<title>BRATTON-ai-white</title>
+	<defs>
+		<linearGradient id="v55w1" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-214.939,193.828,0,-1.075,244.673)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w2" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-91.597,105.078,0,232.395,244.526)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w3" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-91.597,121.301,0,352.85,244.526)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w4" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-91.597,87.974,0,421.955,244.526)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w5" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-91.597,87.975,0,515.085,244.526)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w6" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-94.75,109.821,0,624.2,245.928)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w7" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-91.597,95.568,0,729.026,244.526)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w8" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.712,31.934,0,-2.219,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w9" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,42.056,0,61.285,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w10" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,45.889,0,124.411,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w11" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-51.871,29.936,0,154.044,312.788)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w12" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,7.25,0,54.376,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w13" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-51.871,45.601,0,242.495,312.788)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w14" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.929,49.552,0,304.555,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w15" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,30.05,0,339.819,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w16" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.712,42.302,0,444.083,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w17" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,42.954,0,503.456,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w18" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.566,29.397,0,540.923,312.136)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w19" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.64,39.901,0,602.739,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w20" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.929,49.551,0,667.276,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w21" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.712,31.935,0,707.086,312.209)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="v55w22" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-50.639,44.839,0,767.872,312.208)">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.v55s0 { fill: #ffffff } 
+		.v55s1 { fill: #ffffff } 
+		.v55s2 { fill: #ffffff } 
+		.v55s3 { fill: #ffffff } 
+		.v55s4 { fill: #ffffff } 
+		.v55s5 { fill: #ffffff } 
+		.v55s6 { fill: #ffffff } 
+		.v55s7 { fill: #1975bb } 
+		.v55s8 { fill: #ffffff } 
+		.v55s9 { fill: #ffffff } 
+		.v55s10 { fill: #ffffff } 
+		.v55s11 { fill: #ffffff } 
+		.v55s12 { fill: #ffffff } 
+		.v55s13 { fill: #ffffff } 
+		.v55s14 { fill: #ffffff } 
+		.v55s15 { fill: #ffffff } 
+		.v55s16 { fill: #ffffff } 
+		.v55s17 { fill: #ffffff } 
+		.v55s18 { fill: #ffffff } 
+		.v55s19 { fill: #ffffff } 
+		.v55s20 { fill: #ffffff } 
+		.v55s21 { fill: #ffffff } 
+		.v55s22 { fill: #ffffff } 
+	</style>
+	<g id="v55Layer1">
+		<g id="v55Group">
+			<g id="v55Group2">
+				<g id="v55Group3">
+					<path id="v55CompoundPath" class="v55s0" d="m29.4 244.7q-3.3 0-5.7-2.5-2.5-2.5-2.5-5.8v-198.4q0-3.3 2.5-5.8 2.4-2.5 5.7-2.5h110.8q14.2 0 25.9 3.7 11.6 3.7 20.9 10.9 9.6 7.6 14.7 17.1 5.1 9.5 5.1 21.8 0 15.1-6.6 26.6-6.6 11.5-20.6 18.6 14.3 5.8 21.7 14.3 13.7 15.9 13.7 40.8 0 27.7-21.1 45-20 16.2-52.1 16.2z"/>
+				</g>
+				<g id="v55Group4">
+					<path id="v55CompoundPath2" fill-rule="evenodd" class="v55s1" d="m252.8 212.2v28.8q0 1.4-1 2.5-1.1 1-2.6 1h-25.9q-1.4 0-2.5-1-1-1.1-1-2.5v-84.6q0-1.4 1-2.4 1.1-1.1 2.5-1.1h58.6q15.1 0 24.2 6.7 9.8 7.2 9.8 19 0 13.4-8 19.3-2 1.5-4.6 2.9-2.7 1.3-5.8 2.4 3.7 2 6.3 4.3 2.7 2.3 4.4 4.7l16 27q1.2 1.9 0.2 3.6-1 1.7-3.2 1.7h-29.7q-0.9 0-1.8-0.6-0.9-0.5-1.3-1.4l-15-27.8 0.1 0.3q-0.4-0.6-1-1.2-0.5-0.6-1.1-0.9-0.9-0.7-7.2-0.7zm-0.7-38.4v17.5h14q8.5 0 13-2 4.4-2 4.4-7.2 0-4.3-3.4-6.3-3.4-2-9.8-2z"/>
+				</g>
+				<g id="v55Group5">
+					<path id="v55CompoundPath3" fill-rule="evenodd" class="v55s2" d="m417 244.5q-0.8 0-1.8-0.6-1-0.5-1.3-1.4l-6-11.4h-43.8l-6 11.4q-0.4 0.9-1.4 1.4-0.9 0.6-1.8 0.6h-24.2q-2.4 0-3.4-1.6-1.1-1.6 0.1-3.6l48-84.5q0.4-0.7 1.4-1.3 1.1-0.6 1.8-0.6h20.6q0.9 0 1.8 0.6 0.9 0.6 1.4 1.4l45.2 84.5q1 2 0 3.5-0.9 1.6-3.3 1.6zm-41.4-34h21.7l-10.5-20.3z"/>
+				</g>
+				<g id="v55Group6">
+					<path id="v55CompoundPath4" class="v55s3" d="m456.8 244.5q-1.4 0-2.4-1-1.1-1.1-1.1-2.5v-65.1h-24.1q-1.6 0-2.6-1-0.9-1.1-0.9-2.6v-15.9q0-1.4 0.9-2.4 1-1.1 2.6-1.1h80.8q1.5 0 2.6 1.1 1 1 1 2.4v15.9q0 1.5-1 2.6-1.1 1-2.6 1h-24.1v65.1q0 1.4-1 2.5-1 1-2.5 1z"/>
+				</g>
+				<g id="v55Group7">
+					<path id="v55CompoundPath5" class="v55s4" d="m550 244.5q-1.4 0-2.5-1-1-1.1-1-2.5v-65.1h-24.2q-1.5 0-2.5-1-1-1.1-1-2.6v-15.9q0-1.4 1-2.4 1-1.1 2.5-1.1h80.8q1.6 0 2.6 1.1 1.1 1 1.1 2.4v15.9q0 1.5-1.1 2.6-1 1-2.6 1h-24v65.1q0 1.4-1 2.5-1 1-2.5 1z"/>
+				</g>
+				<g id="v55Group8">
+					<path id="v55CompoundPath6" fill-rule="evenodd" class="v55s5" d="m706.1 234.2q-13.9 11.7-41 11.7-27.1 0-41-11.7-13.9-11.6-13.9-35.6 0-23.9 13.9-35.7 13.9-11.7 41-11.7 27.1 0 41 11.7 13.9 11.8 13.9 35.7 0 24-13.9 35.6zm-24.3-50.7q-5.7-5.1-16.7-5.1-11 0-16.7 5.1-5.8 5.1-5.8 15.1 0 10.1 5.8 15.1 5.7 5.1 16.7 5.1 11 0 16.7-5.1 5.8-5 5.8-15.1 0-10-5.8-15.1z"/>
+				</g>
+				<g id="v55Group9">
+					<path id="v55CompoundPath7" class="v55s6" d="m784 190.3q3.3 4.5 6.7 9.1v-43q0-1.4 1-2.4 1.1-1.1 2.6-1.1h22.8q1.5 0 2.6 1.1 1 1 1 2.4v84.6q0 1.4-1 2.5-1.1 1-2.6 1h-26.2q-0.6 0-1.5-0.4-0.9-0.4-1.4-1l-33-44.4v42.3q0 1.4-1 2.5-1.1 1-2.6 1h-22.8q-1.4 0-2.4-1-1.1-1.1-1.1-2.5v-84.6q0-1.4 1.1-2.4 1-1.1 2.4-1.1h26q0.7 0 1.7 0.5 1 0.5 1.2 1 5.1 7.1 10 13.7 4.8 6.6 9.9 13.2 3.3 4.5 6.6 9z"/>
+				</g>
+			</g>
+			<path id="v55Path" class="v55s7" d="m109.2 67.9c-0.6-7.8 0-14.3 5.6-15.7 5.7-1.5 12.1-0.3 16 7.4 0.9 1.8 0.7 4 0.8 6.3 0.1 1.3-0.6 2.8 0.3 3.6 2.1 2 1.1 2.1-0.5 3.6-1 1.1-1 2-1.5 3.7-0.7 2.7-2.1 4.2-3.7 4.2-4.7 0-7 1.3-3.7 5.1 2.1 2.4 3.3 4.6 4.4 7.1 0.7 1.6 1.7 2.9 3.3 4.2 2.9 2.5 5 5.6 6.1 8.8 4.2-1.6 7.3-6.7 10.1-11.8 1.4-2.4 0.5-4.2-0.6-6.1-1.3-2.4-1.8-4.6-2.7-6.7-1-2.3 1.2-3.4 2.3-0.8 0.3 0.9 0.8 1.7 1.3 2.6 1.8 3.5 2.7-2.4 3.2-4.9 0.4-2 0.6-2.9 0.8-4.3 0.3-2.6 2-3.1 1.9-0.3 2-3.6 3-3.7 2.6 0-0.7 7.1 0.9 7.9 1.9 2.7 0.7-3.5 3.5-4.2 1.7 1.3-1.6 4.8-1.5 5.3 0.8 2.1 2.6-3.3 3.2-2.2 0.1 3.2-2 3.6-3.8 7.6-5.2 11.5-3.1 8.6-7.7 16.6-13.6 24.3-1.9 2.5-4.6 3.5-8 1.1-2.5-1.7-4.5-4-6.7-6-1.2 5.8-2 11.6-2 17.7 0 3.3 0.3 5 3.4 5.8 12.1 3 22.3 9.1 31.2 15.8 3.9 2.9 4.3 6 1.6 9.5-7.1 9-14.4 18-21.7 26.8-2.2 3.3-2.1 5.6-1.2 7.7 1.2 2.8 0.3 5.7 1.4 7.9 1.1 2.2 3.6 3.4 5.8 4.9 5.8 3.8 3.8 5.9-5.6 4.1-5.8-1.1-10.5-6.1-16-8.3-7.2-2.8-4.2-7.2-2.2-8.3 1.5-0.8 2.8-2.3 3.8-3.2 3.1-2.8 3.9-6.7 4.9-10.1 2.6-9.5 7-16.5 11.6-22.8-10.9 0.1-19.8-2-28.5-1.3-5.5 10.3-13 19.3-22 30.6-1.9 2.5-4.9 3.6-7.9 5.4-5.8 3.6-10.5 8.9-16.4 12.5-8.3 5-13.8 10.5-17.5 17.3 1.2 0.2 2.4 0.3 3.6 0.5 0.9 0.2 0.6 0.8-0.4 1.1-1 0.2-2-0.1-3.1-0.4-0.6 2.5-2 3.6-3 5.4-1.2 2.4-0.8 5.2 0.9 6.7 2.8 2.4 2.8 4-3 3.8-4.5-0.3-5.8-3.4-7-6.8-1.6-5-1-10.1-2-15-1.2-5.6 0.4-5.7 3.9-6.2 6-0.8 11.2-3.9 13.6-8.7 4.4-8.6 10.2-15.5 18.3-18.2 5.6-2 8.2-6.5 10-11.3 2-5.3 4.5-10.3 7.1-15.3 2.3-4.3 2.6-8.5 2.6-12.9-0.1-6.2 1.9-10.5 5.1-13.4-0.2-4 0.1-6.7 2.8-9-0.1-10.2 0.4-20.6 0.2-30.7-3.6-1.2-5.3 1.4-6.1 5.8-0.9 4.9-2 9.5-1.9 15.1 0.1 3.4 0.5 5.1 3.6 8.6 2.2 2.5 1.4 4.2-1 2.5-4.2-3-2.8 1-3 3.8-0.2 1.5-0.1 4.5-1.4 2.1 0.4 2.9-1.1 4.2-1.7 2.7-1.3 1.4-1.5 0.5-1.3-1.5 0.8-7-1-4.6-1.3-1.2-0.2 3.6-2.6 4-1.5-1.3 1-4.7-1-3.8-1.6-0.8-0.8 3.3-2 1.5-1.3-1.3 1-4.1 2-8.2 3.6-12.1 0.9-2.4 0.3-4.6-0.1-7.3-0.8-5-0.8-10.4-0.6-15.6 0.2-3.6 0.6-5.6 2.9-6.7 6.5-3.3 13.1-6.3 19.6-9.5 3.9-4.1 4.4-3.5 3.8-11.1z"/>
+			<g id="v55Group10">
+				<g id="v55Group11">
+					<path id="v55CompoundPath8" fill-rule="evenodd" class="v55s8" d="m22.1 312.2v-50.7h16q7.3 0 11.6 3.9 4.3 3.9 4.3 10.5 0 4.4-2.2 7.9-2.2 3.4-6.1 4.9-3.8 1.5-11 1.5h-5.3v22zm24.4-36.5q0-7.8-9.6-7.8h-7.5v15.9h7.9q4.4 0 6.8-2.1 2.4-2.1 2.4-6z"/>
+				</g>
+				<g id="v55Group12">
+					<path id="v55CompoundPath9" class="v55s9" d="m105.7 261.6h7.1v50.6h-7.1v-22h-27.9v22h-7.1v-50.6h7.1v21.9h27.9z"/>
+				</g>
+				<g id="v55Group13">
+					<path id="v55CompoundPath10" class="v55s10" d="m166.3 261.6h9l-19.1 23.8v26.8h-7.7v-26.8l-19.1-23.8h9l13.8 17.4z"/>
+				</g>
+				<g id="v55Group14">
+					<path id="v55CompoundPath11" class="v55s11" d="m206.8 299.8q0-4.7-7-8.8l-5.8-3.4q-5.4-3.1-7.7-6.2-2.3-3-2.3-7 0-6 4.4-9.7 4.3-3.8 11.3-3.8 6.6 0 12.2 3.6v8.2q-5.8-5.3-12.4-5.3-3.7 0-6.1 1.7-2.4 1.6-2.4 4.2 0 2.3 1.8 4.3 1.7 1.9 5.6 4.1l5.8 3.3q9.8 5.5 9.8 14.1 0 6.1-4.3 9.9-4.3 3.8-11.1 3.8-7.9 0-14.4-4.6v-9.2q6.2 7.4 14.3 7.4 3.6 0 5.9-1.9 2.4-1.9 2.4-4.7z"/>
+				</g>
+				<g id="v55Group15">
+					<path id="v55CompoundPath12" class="v55s12" d="m227.6 261.6h7.3v50.6h-7.3z"/>
+				</g>
+				<g id="v55Group16">
+					<path id="v55CompoundPath13" class="v55s13" d="m276.8 306.1q9.2 0 18-5.6v7.9q-8 4.4-18.4 4.4-8.5 0-14.4-3.4-5.9-3.4-9.4-9.4-3.4-6-3.4-12.9 0-11.1 7.9-18.6 7.9-7.6 19.4-7.6 8 0 17.8 4.2v7.8q-8.9-5.1-17.4-5.1-8.7 0-14.5 5.5-5.7 5.5-5.7 13.8 0 8.3 5.7 13.7 5.6 5.3 14.4 5.3z"/>
+				</g>
+				<g id="v55Group17">
+					<path id="v55CompoundPath14" fill-rule="evenodd" class="v55s14" d="m327.7 261.3h5.1l22.7 50.9h-7.4l-6.8-15h-21.6l-6.3 15h-7.4zm10.6 29.5l-8.2-18.4-7.5 18.4z"/>
+				</g>
+				<g id="v55Group18">
+					<path id="v55CompoundPath15" class="v55s15" d="m367.5 261.6h7.2v44h22.8v6.6h-30z"/>
+				</g>
+				<g id="v55Group19">
+					<path id="v55CompoundPath16" class="v55s16" d="m453.3 261.5h42.3v6.4h-17.6v44.3h-7.3v-44.3h-17.4z"/>
+				</g>
+				<g id="v55Group20">
+					<path id="v55CompoundPath17" class="v55s17" d="m547.5 261.6h7.3v50.6h-7.3v-22h-28.4v22h-7.3v-50.6h7.3v21.9h28.4z"/>
+				</g>
+				<g id="v55Group21">
+					<path id="v55CompoundPath18" class="v55s18" d="m569.7 261.6h28.7v6.4h-21.4v15.5h20.7v6.5h-20.7v15.7h22.1v6.4h-29.4z"/>
+				</g>
+				<g id="v55Group22">
+					<path id="v55CompoundPath19" fill-rule="evenodd" class="v55s19" d="m614.9 312.2v-50.6h13q7.8 0 12.5 3.8 4.6 3.8 4.6 10.3 0 4.4-2.3 7.6-2.3 3.2-6.5 4.8 2.5 1.6 4.9 4.4 2.3 2.7 6.6 9.6 2.8 4.3 4.4 6.5l2.7 3.6h-8.8l-2.3-3.3q-0.1-0.2-0.4-0.6l-1.4-2-2.3-3.7-2.5-4q-2.3-3.1-4.2-5-1.9-1.8-3.5-2.6-1.5-0.8-5.1-0.8h-2v22zm9.7-44.5h-2.3v16h2.9q5.6 0 7.7-0.9 2.1-1 3.2-2.9 1.2-1.9 1.2-4.3 0-2.4-1.3-4.3-1.3-2-3.6-2.8-2.4-0.8-7.8-0.8z"/>
+				</g>
+				<g id="v55Group23">
+					<path id="v55CompoundPath20" fill-rule="evenodd" class="v55s20" d="m690.4 261.3h5.1l22.7 50.9h-7.4l-6.7-15h-21.6l-6.4 15h-7.4zm10.6 29.5l-8.1-18.4-7.6 18.4z"/>
+				</g>
+				<g id="v55Group24">
+					<path id="v55CompoundPath21" fill-rule="evenodd" class="v55s21" d="m731.4 312.2v-50.7h16q7.3 0 11.6 3.9 4.3 3.9 4.3 10.5 0 4.4-2.2 7.9-2.2 3.4-6 4.9-3.9 1.5-11.1 1.5h-5.3v22zm24.4-36.5q0-7.8-9.6-7.8h-7.5v15.9h7.9q4.4 0 6.8-2.1 2.4-2.1 2.4-6z"/>
+				</g>
+				<g id="v55Group25">
+					<path id="v55CompoundPath22" class="v55s22" d="m810.1 261.6h8.8l-18.7 23.8v26.8h-7.5v-26.8l-18.7-23.8h8.8l13.5 17.4z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg></a>
+        <div class='hinfo-gradient'>
+          <a href='/location/'>
+            <svg width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='currentColor' stroke-miterlimit='10'><defs><mask id='p55a' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='16'><rect x='0' y='0' width='16' height='16' fill='white'/><circle cx='8' cy='5.15' r='1.9' fill='black'/></mask></defs><path d='M4.2,7.1l0.1,0.2l0.2,0.3l2.9,4.7c0.2,0.4,0.8,0.6,1.2,0.3c0.1-0.1,0.2-0.2,0.3-0.3L11.8,7c0.2-0.4,0.4-1.2,0.4-1.6c-0.1-2.3-2-4.1-4.3-4.1C5.7,1.2,3.8,3,3.7,5.3C3.7,5.9,3.9,6.6,4.2,7.1z' fill='currentColor' mask='url(#p55a)'/><circle cx='8' cy='5.15' r='1.9' fill='none' stroke='currentColor'/></svg>
+            1346 Lindberg Dr, Slidell
+          </a>
+          <a href='tel:9856415825'>
+            <svg width='16' height='16' viewBox='0 0 24 24' fill='none'><path d='M16.5562 12.9062L16.1007 13.359C16.1007 13.359 15.0181 14.4355 12.0631 11.4972C9.10812 8.55901 10.1907 7.48257 10.1907 7.48257L10.4775 7.19738C11.1841 6.49484 11.2507 5.36691 10.6342 4.54348L9.37326 2.85908C8.61028 1.83992 7.13596 1.70529 6.26145 2.57483L4.69185 4.13552C4.25823 4.56668 3.96765 5.12559 4.00289 5.74561C4.09304 7.33182 4.81071 10.7447 8.81536 14.7266C13.0621 18.9492 17.0468 19.117 18.6763 18.9651C19.1917 18.9171 19.6399 18.6546 20.0011 18.2954L21.4217 16.883C22.3806 15.9295 22.1102 14.2949 20.8833 13.628L18.9728 12.5894C18.1672 12.1515 17.1858 12.2801 16.5562 12.9062Z' fill='currentColor'/></svg>
+            (985) 641-5825
+          </a>
+        </div>
+        <a href='/booking/' class='booking-btn booking-btn--gradient-bar'>
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>
+          Book Appointment
+        </a>
+        <div class='htop__actions'>
+          <a href='/booking/' class='mobile-cta'>
+            <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2'/><line x1='16' y1='2' x2='16' y2='6'/><line x1='8' y1='2' x2='8' y2='6'/><line x1='3' y1='10' x2='21' y2='10'/></svg>
+            Schedule
+          </a>
+          <button class='mobile-menu-btn' id='menu-toggle' aria-label='Menu' aria-expanded='false'>&#x2630;</button>
+        </div>
+      </div>
     </div>
-    <a href="/location/" class="header__mobile-cta" style="background:var(--primary)"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-miterlimit="10"><path d="M4.2,7.1l0.1,0.2l0.2,0.3l2.9,4.7c0.2,0.4,0.8,0.6,1.2,0.3c0.1-0.1,0.2-0.2,0.3-0.3L11.8,7c0.2-0.4,0.4-1.2,0.4-1.6c-0.1-2.3-2-4.1-4.3-4.1C5.7,1.2,3.8,3,3.7,5.3C3.7,5.9,3.9,6.6,4.2,7.1z"/><circle cx="8" cy="5.15" r="1.9"/><path d="M9.8,11c1.6,0.3,2.7,1,2.7,1.8c0,1.1-2,2-4.5,2s-4.5-0.9-4.5-2c0-0.8,1.2-1.6,2.8-1.8"/></svg> Location</a>
-    <a href="/booking/" class="header__mobile-cta"><svg class="svg-icon" style="width:1em;height:1em;vertical-align:middle;fill:currentColor;overflow:hidden" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M440.6 834.15H169.84c-20.48 0-37.14-16.67-37.14-37.15V419.47h717.09v21.29c0 18.12 14.68 32.8 32.8 32.8s32.8-14.68 32.8-32.8V254.11c0-56.65-46.09-102.74-102.75-102.74h-77.23v-41.16c0-18.12-14.69-32.8-32.8-32.8s-32.8 14.69-32.8 32.8v41.16H317.88v-41.16c0-18.12-14.69-32.8-32.8-32.8-18.12 0-32.8 14.69-32.8 32.8v41.16h-82.45c-56.65 0-102.74 46.08-102.74 102.74V797c0 56.65 46.08 102.75 102.74 102.75H440.6c18.12 0 32.8-14.68 32.8-32.8 0-18.12-14.68-32.8-32.8-32.8zM169.84 216.97h82.45v35.49c0 18.12 14.69 32.8 32.8 32.8 18.12 0 32.8-14.69 32.8-32.8v-35.49h351.93v35.49c0 18.12 14.69 32.8 32.8 32.8s32.8-14.69 32.8-32.8v-35.49h77.23c20.48 0 37.15 16.66 37.15 37.14v99.76H132.7v-99.76c0-20.48 16.66-37.14 37.14-37.14z"/><path d="M351.34 526.46H218.83c-18.12 0-32.8 14.69-32.8 32.8s14.69 32.8 32.8 32.8h132.51c18.12 0 32.8-14.69 32.8-32.8s-14.68-32.8-32.8-32.8zM813.75 682.43h-69.31v-77.97c0-15.1-12.24-27.33-27.33-27.33-15.1 0-27.33 12.24-27.33 27.33v105.3c0 15.1 12.24 27.33 27.33 27.33h96.64c15.09 0 27.33-12.24 27.33-27.33s-12.23-27.33-27.33-27.33zM351.34 701.38H218.83c-18.12 0-32.8 14.69-32.8 32.8 0 18.12 14.69 32.8 32.8 32.8h132.51c18.12 0 32.8-14.69 32.8-32.8 0-18.12-14.68-32.8-32.8-32.8z"/><path d="M716.05 464.75C583.14 464.75 475 572.89 475 705.8s108.14 241.05 241.05 241.05S957.1 838.71 957.1 705.8 848.96 464.75 716.05 464.75z m0 416.49c-96.75 0-175.45-78.7-175.45-175.45s78.7-175.45 175.45-175.45S891.5 609.05 891.5 705.8s-78.7 175.44-175.45 175.44z"/></svg> Schedule</a>
-    <button class="mobile-menu-btn" id="menu-toggle" aria-label="Menu">&#x2630;</button>
-  </div></div>
-</header>
+  </header>
+</div>
 </div>
 
 
