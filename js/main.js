@@ -289,3 +289,29 @@
       'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
   });
 })();
+
+// ===== Review Button Visibility =====
+// Hide the floating "★★★★★ Reviews" button on the reviews page itself.
+(function(){
+  var footer = document.getElementById('site-footer');
+
+  function isReviewsPage(){
+    var p = (window.location.pathname || '').replace(/\/+$/, '');
+    return p === '/reviews' || p.indexOf('/reviews/') === 0;
+  }
+
+  function check(){
+    if (!isReviewsPage()) return;
+    var btn = document.querySelector('.br-trigger-btn');
+    if (btn) {
+      btn.classList.add('br-hidden');
+      obs.disconnect();
+    }
+  }
+
+  var obs = new MutationObserver(check);
+  check();
+  obs.observe(footer || document.body, { childList: true, subtree: true });
+  setTimeout(function(){ obs.disconnect(); }, 6000);
+})();
+

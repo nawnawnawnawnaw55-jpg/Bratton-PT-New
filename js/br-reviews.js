@@ -46,6 +46,20 @@
   
   var allReviews = [];
   var loaded = false;
+
+  var DISMISS_KEY = 'brReviewsDismissed';
+  function isDismissed(){
+    try { return !!(window.localStorage && localStorage.getItem(DISMISS_KEY) === '1'); }
+    catch(e){ return false; }
+  }
+  function setDismissed(){
+    try { if (window.localStorage) localStorage.setItem(DISMISS_KEY, '1'); }
+    catch(e){}
+  }
+  function isReviewsPage(){
+    var p = (window.location.pathname || '').replace(/\/+$/, '');
+    return p === '/reviews' || p.indexOf('/reviews/') === 0;
+  }
   
   // Hide/show the inline HTML trigger button
   function hideBtn(){
@@ -66,6 +80,12 @@
   function closePopup(){
     popup.classList.remove('show');
     showBtn();
+  }
+
+  function minimizePopup(){
+    popup.classList.remove('show');
+    showBtn();
+    setDismissed();
   }
   
   function renderReviews(reviews){
@@ -150,15 +170,20 @@
   // Close button
   popup.querySelector('.br-review-close').addEventListener('click', function(e){
     e.stopPropagation();
-    closePopup();
+    minimizePopup();
   });
   
   // Pre-populate the popup body immediately so reviews are ready whether
   // the popup opens via click or the auto-open timer — zero delay.
   loadReviews();
 
-  // Auto-open after 5 seconds
-  setTimeout(function(){
-    openPopup();
-  }, 5000);
+  // Don't auto-open on the reviews page or after the user has minimized the
+  // popup; the button stays visible so it can still be opened manually.
+  if (isReviewsPage()) {
+    hideBtn();
+  } else {
+    setTimeout(function(){
+      if (!isDismissed()) openPopup();
+    }, 5000);
+  }
 })();
