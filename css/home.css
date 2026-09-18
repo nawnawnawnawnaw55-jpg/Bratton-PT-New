@@ -86,7 +86,7 @@
 @media(min-width:768px){.recovery__phase{grid-template-columns:1.5fr 1fr}}
 .recovery__phase img{border-radius:var(--radius-md);width:100%;aspect-ratio:4/3;object-fit:cover;max-height:280px}
 .recovery__phase h3{color:var(--primary);font-size:clamp(1.1rem,2.5vw,1.3rem);margin-bottom:8px;display:flex;align-items:center;gap:10px}.recovery__phase h3::before{content:"";display:block;width:4px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
-.recovery__phase p{font-size:.88rem;color:var(--gray);line-height:1.6}
+.recovery__phase p{font-size:clamp(.9rem,1.5vw,1.2rem);color:var(--gray);line-height:1.6}
 
 /* ===== REVIEWS ===== */
 .reviews-grid{display:grid;gap:20px;grid-template-columns:1fr}

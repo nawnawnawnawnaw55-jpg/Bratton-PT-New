@@ -1,6 +1,6 @@
-# Home Ribbon / Navigation Bar — Complete Reference
+# Home Ribbon / Navigation Bar Ã¢â‚¬â€ Complete Reference
 
-> **Bratton Physical Therapy** — `bratton-pt-v3`  
+> **Bratton Physical Therapy** Ã¢â‚¬â€ `bratton-pt-v3`  
 > Last updated: 2026-07-14
 
 ---
@@ -42,11 +42,11 @@ After the inline fetch script in `index.html` runs, the `<body>` contains these 
 </body>
 ```
 
-**Critical:** `#main-nav` is a direct child of `<body>`, _not_ nested inside `#site-header`. This is required for `position: sticky` to work — a sticky element must be a direct child of a scrollable ancestor. If `#main-nav` were inside `#site-header`, it would be constrained by `#site-header`'s height and could not stick.
+**Critical:** `#main-nav` is a direct child of `<body>`, _not_ nested inside `#site-header`. This is required for `position: sticky` to work Ã¢â‚¬â€ a sticky element must be a direct child of a scrollable ancestor. If `#main-nav` were inside `#site-header`, it would be constrained by `#site-header`'s height and could not stick.
 
 ---
 
-## 3. Template Source — `templates/header.html`
+## 3. Template Source Ã¢â‚¬â€ `templates/header.html`
 
 **Full file (23 lines):**
 
@@ -70,7 +70,7 @@ After the inline fetch script in `index.html` runs, the `<body>` contains these 
     <a href="/" class="nav__link nav__link--active">Home</a>
     <div class="nav__dropdown"><a href="/about/" class="nav__link">About Us</a><div class="nav__dropdown-menu"><a href="/staff/" class="nav__link">Staff</a><a href="/join-our-team/" class="nav__link">Join Our Team</a><a href="/location/" class="nav__link">Location</a></div></div>
     <div class="nav__dropdown"><a href="/conditions/" class="nav__link">Conditions</a><div class="nav__dropdown-menu"><a href="/shoulder-pain/" class="nav__link">Shoulder Pain</a><a href="/knee-pain/" class="nav__link">Knee Pain</a><a href="/back-pain-sciatica/" class="nav__link">Back Pain</a><a href="/sports-injuries/" class="nav__link">Sports Injuries</a><a href="/joint-pain-arthritis/" class="nav__link">Joint Pain & Arthritis</a><a href="/rotator-cuff-tear/" class="nav__link">Rotator Cuff Tear</a><a href="/shoulder-impingement/" class="nav__link">Shoulder Impingement</a><a href="/sprains-strains-tendinitis/" class="nav__link">Sprains, Strains & Tendinitis</a><a href="/walking-balance-problems/" class="nav__link">Walking & Balance Problems</a><a href="/pre-post-surgical-rehabilitation/" class="nav__link">Pre- & Post-Surgical Rehab</a><a href="/work-related-injuries/" class="nav__link">Work-Related Injuries</a><a href="/conditions/" class="nav__link">View All</a></div></div>
-    <div class="nav__dropdown"><a href="/services/" class="nav__link">Services</a><div class="nav__dropdown-menu"><a href="/services/patient-education/" class="nav__link">Patient Education</a><a href="/services/therapeutic-exercise/" class="nav__link">Therapeutic Exercise</a><a href="/services/strength-conditioning/" class="nav__link">Strength & Conditioning</a><a href="/services/dry-needling-certified/" class="nav__link">Dry Needling</a><a href="/services/blood-flow-restriction-therapy/" class="nav__link">Blood Flow Restriction</a><a href="/services/mckenzie-method/" class="nav__link">McKenzie Method</a><a href="/services/mulligan-technique/" class="nav__link">Mulligan Technique</a><a href="/services/cupping/" class="nav__link">Cupping</a><a href="/services/gait-balance-training/" class="nav__link">Gait & Balance</a><a href="/services/vasopneumatic-compression/" class="nav__link">Vasopneumatic Compression</a><a href="/services/moist-heat-ice/" class="nav__link">Moist Heat / Ice</a><a href="/services/electrical-stimulation/" class="nav__link">Electrical Stimulation</a><a href="/services/workers-compensation/" class="nav__link">Workers Comp</a></div></div>
+    <div class="nav__dropdown"><a href="/services/" class="nav__link">Services</a><div class="nav__dropdown-menu"><a href="/services/patient-education/" class="nav__link">Patient Education</a><a href="/services/therapeutic-exercise/" class="nav__link">Therapeutic Exercise</a><a href="/services/strength-conditioning/" class="nav__link">Strength & Conditioning</a><a href="/services/dry-needling-certified/" class="nav__link">Dry Needling</a><a href="/services/blood-flow-restriction-therapy/" class="nav__link">Blood Flow Restriction</a><a href="/services/mckenzie-method/" class="nav__link">McKenzie Method</a><a href="/services/mulligan-technique/" class="nav__link">Mulligan Technique</a><a href="/services/cupping/" class="nav__link">Cupping</a><a href="/services/gait-balance-training/" class="nav__link">Gait & Balance</a><a href="/services/vasopneumatic-compression/" class="nav__link">Vasopneumatic Compression</a><a href="/services/workers-compensation/" class="nav__link">Workers Comp</a></div></div>
     <div class="nav__dropdown"><a href="/patcenter/" class="nav__link">Patient Center</a><div class="nav__dropdown-menu"><a href="/library/" class="nav__link">Medical Library</a><a href="/insurance/" class="nav__link">Insurance</a><a href="/reviews/" class="nav__link">Reviews</a><a href="/faq/" class="nav__link">FAQ</a></div></div>
     <a href="/contact/" class="nav__link">Contact</a>
   </div></div></nav>
@@ -82,12 +82,12 @@ After the inline fetch script in `index.html` runs, the `<body>` contains these 
 |---------|---------|
 | `.sr-only` link | Accessibility skip-to-content, visually hidden but focusable |
 | `header.header` | Logo, address, phone, hamburger button (`#menu-toggle`), mobile CTA buttons |
-| `nav#main-nav.nav--mobile` | The ribbon itself — all site navigation links and dropdown menus |
-| `#main-nav` | Moved to be a sibling of `#site-header` by the injection script (see §4) |
+| `nav#main-nav.nav--mobile` | The ribbon itself Ã¢â‚¬â€ all site navigation links and dropdown menus |
+| `#main-nav` | Moved to be a sibling of `#site-header` by the injection script (see Ã‚Â§4) |
 
 ---
 
-## 4. Injection Script — `index.html` (inline, in `<head>`)
+## 4. Injection Script Ã¢â‚¬â€ `index.html` (inline, in `<head>`)
 
 This script runs immediately after the `<div id="site-header">` placeholder element. It fetches the template, parses it, separates the `#main-nav` from the header content, and places them as siblings in the DOM.
 
@@ -133,13 +133,13 @@ fetch('/templates/header.html')
 
 ---
 
-## 5. CSS — `css/header.css` (full file, 106 lines)
+## 5. CSS Ã¢â‚¬â€ `css/header.css` (full file, 106 lines)
 
 ```css
 /* ===== HEADER ===== */
 
 /* Reserve space before header loads to prevent layout shift / flicker.
-   These are conservative fallbacks — the actual header height is measured
+   These are conservative fallbacks Ã¢â‚¬â€ the actual header height is measured
    after render and cached in sessionStorage for subsequent page loads. */
 #site-header {
   min-height: 60px;
@@ -238,7 +238,7 @@ fetch('/templates/header.html')
   .nav__close-btn{display:none!important}
 }
 
-/* Sticky nav — pure CSS, no JS needed */
+/* Sticky nav Ã¢â‚¬â€ pure CSS, no JS needed */
 @media(min-width:768px){
   .nav{position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
 }
@@ -248,22 +248,22 @@ fetch('/templates/header.html')
 
 | Section | Lines | Purpose |
 |---------|-------|---------|
-| `#site-header` min-height | 6–14 | Prevents layout shift before the header template loads |
-| `.header__cta-bar` | 17–20 | Utility bar above the header (hidden on mobile) |
-| `.header__top` | 23–25 | Logo row — flex layout |
-| `.header__mobile-cta` | 29–31 | Location and Schedule buttons (mobile only) |
-| `.mobile-menu-btn` | 33–34 | Hamburger icon |
-| Desktop media query (768px+) | 37–50 | Shows contact info, hides mobile CTAs, larger logo |
-| **`.nav` base styles** | **53–55** | **The ribbon: `position:sticky;top:0;z-index:998`, white bg, blue bottom border** |
-| Desktop nav links | 57–68 | Flex row of uppercase nav links with increasing padding at wider breakpoints |
-| Dropdown menus | 71–75 | Hover-revealed absolute-positioned dropdowns |
-| Mobile nav drawer | 78–95 | Slide-in panel from right, overlay, close button |
-| Mobile sticky header + nav | 79–82 | Both `#site-header` and `#main-nav` are sticky on mobile, hiding on scroll-down with `transform:translateY(-100%)` |
-| Desktop sticky overrides | 104–106 | `position: sticky; top:0; z-index:999` with box-shadow |
+| `#site-header` min-height | 6Ã¢â‚¬â€œ14 | Prevents layout shift before the header template loads |
+| `.header__cta-bar` | 17Ã¢â‚¬â€œ20 | Utility bar above the header (hidden on mobile) |
+| `.header__top` | 23Ã¢â‚¬â€œ25 | Logo row Ã¢â‚¬â€ flex layout |
+| `.header__mobile-cta` | 29Ã¢â‚¬â€œ31 | Location and Schedule buttons (mobile only) |
+| `.mobile-menu-btn` | 33Ã¢â‚¬â€œ34 | Hamburger icon |
+| Desktop media query (768px+) | 37Ã¢â‚¬â€œ50 | Shows contact info, hides mobile CTAs, larger logo |
+| **`.nav` base styles** | **53Ã¢â‚¬â€œ55** | **The ribbon: `position:sticky;top:0;z-index:998`, white bg, blue bottom border** |
+| Desktop nav links | 57Ã¢â‚¬â€œ68 | Flex row of uppercase nav links with increasing padding at wider breakpoints |
+| Dropdown menus | 71Ã¢â‚¬â€œ75 | Hover-revealed absolute-positioned dropdowns |
+| Mobile nav drawer | 78Ã¢â‚¬â€œ95 | Slide-in panel from right, overlay, close button |
+| Mobile sticky header + nav | 79Ã¢â‚¬â€œ82 | Both `#site-header` and `#main-nav` are sticky on mobile, hiding on scroll-down with `transform:translateY(-100%)` |
+| Desktop sticky overrides | 104Ã¢â‚¬â€œ106 | `position: sticky; top:0; z-index:999` with box-shadow |
 
 ---
 
-## 6. CSS — `css/header-angular.css` (Blue Accents, 66 lines)
+## 6. CSS Ã¢â‚¬â€ `css/header-angular.css` (Blue Accents, 66 lines)
 
 ```css
 /* ===== HEADER BLUE ACCENTS =====
@@ -341,7 +341,7 @@ This file is loaded after `header.css` and provides overrides for:
 
 ---
 
-## 7. CSS — `css/main.css` (Relevant Ribbon Rules)
+## 7. CSS Ã¢â‚¬â€ `css/main.css` (Relevant Ribbon Rules)
 
 ### 7a. Design System Variables
 
@@ -370,12 +370,12 @@ This file is loaded after `header.css` and provides overrides for:
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 ```
 
-**Note:** The `html` element previously had `overflow-y: overlay`, a deprecated non-standard WebKit property that breaks `position: sticky`. This has been **removed** — the `html` element now has no `overflow-y` override, which is critical for sticky behavior.
+**Note:** The `html` element previously had `overflow-y: overlay`, a deprecated non-standard WebKit property that breaks `position: sticky`. This has been **removed** Ã¢â‚¬â€ the `html` element now has no `overflow-y` override, which is critical for sticky behavior.
 
 ### 7c. Desktop Nav / Dropdown Overrides
 
 ```css
-/* Desktop Nav — now handled in header.css */
+/* Desktop Nav Ã¢â‚¬â€ now handled in header.css */
 .nav--open{display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:80vw;background:var(--white);z-index:1000;padding:24px;overflow-y:auto;box-shadow:var(--shadow-lg)}
 .nav__link{display:block;padding:10px 16px;font-family:var(--font-heading);font-weight:600;font-size:.9rem;text-transform:uppercase;color:var(--dark);border-radius:var(--radius-sm);transition:background .2s}
 .nav__link:hover,.nav__link--active{background:var(--light-gray);color:var(--primary)}
@@ -393,28 +393,28 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 
 ---
 
-## 8. JavaScript — `js/main.js` (Ribbon-Related Sections)
+## 8. JavaScript Ã¢â‚¬â€ `js/main.js` (Ribbon-Related Sections)
 
 ### 8a. Sticky Nav Documentation Comment
 
 ```js
 // Sticky nav: #main-nav is placed outside #site-header by the inline script
 // in index.html, so position:sticky in header.css works natively.
-// No JS intervention needed — this comment documents the approach.
+// No JS intervention needed Ã¢â‚¬â€ this comment documents the approach.
 ```
 
-This replaced the old MutationObserver code that was trying to move `#main-nav` after injection. The new approach in `index.html` (see §4) handles the placement correctly from the start.
+This replaced the old MutationObserver code that was trying to move `#main-nav` after injection. The new approach in `index.html` (see Ã‚Â§4) handles the placement correctly from the start.
 
 ### 8b. Dynamic Header Height Measurement
 
 ```js
-// ===== Dynamic Header Height — measure actual rendered height and cache =====
+// ===== Dynamic Header Height Ã¢â‚¬â€ measure actual rendered height and cache =====
 (function(){
   var CACHE_KEY = 'headerHeight';
   var BREAKPOINT = 768;
   var siteHeader = document.getElementById('site-header');
 
-  // 1. Immediately apply cached height (subsequent page loads — no flicker)
+  // 1. Immediately apply cached height (subsequent page loads Ã¢â‚¬â€ no flicker)
   if (siteHeader && window.sessionStorage) {
     var cached = sessionStorage.getItem(CACHE_KEY);
     if (cached) {
@@ -470,7 +470,7 @@ This replaced the old MutationObserver code that was trying to move `#main-nav` 
 ### 8c. Mobile Menu Toggle
 
 ```js
-// Mobile menu — wait for #menu-toggle to appear
+// Mobile menu Ã¢â‚¬â€ wait for #menu-toggle to appear
 (function(){
   var initialized = false;
   var navEl = null;
@@ -586,16 +586,16 @@ This replaced the old MutationObserver code that was trying to move `#main-nav` 
 
     if (currentScrollY > HIDE_THRESHOLD) {
       if (currentScrollY > lastScrollY) {
-        // Scrolling down — hide
+        // Scrolling down Ã¢â‚¬â€ hide
         siteHeader.classList.add('site-header--hidden');
         mainNav.classList.add('site-header--hidden');
       } else if (currentScrollY < lastScrollY) {
-        // Scrolling up — show
+        // Scrolling up Ã¢â‚¬â€ show
         siteHeader.classList.remove('site-header--hidden');
         mainNav.classList.remove('site-header--hidden');
       }
     } else {
-      // Near top — always show
+      // Near top Ã¢â‚¬â€ always show
       siteHeader.classList.remove('site-header--hidden');
       mainNav.classList.remove('site-header--hidden');
     }
@@ -644,7 +644,7 @@ Both the header and nav stick to the top on mobile scroll.
 
 ### Why Nesting Broke It
 
-`position: sticky` requires the element to be a direct child of a **scrollable container** (one that has overflow, or is the viewport itself). When `#main-nav` was nested inside `#site-header`, the sticky positioning was constrained by `#site-header`'s height. Since `#site-header` is only ~130px tall on desktop (just the logo row), there is no scrollable overflow room — the entire `#site-header` scrolls away, taking `#main-nav` with it.
+`position: sticky` requires the element to be a direct child of a **scrollable container** (one that has overflow, or is the viewport itself). When `#main-nav` was nested inside `#site-header`, the sticky positioning was constrained by `#site-header`'s height. Since `#site-header` is only ~130px tall on desktop (just the logo row), there is no scrollable overflow room Ã¢â‚¬â€ the entire `#site-header` scrolls away, taking `#main-nav` with it.
 
 ### The Fix
 
@@ -656,7 +656,7 @@ The `index.html` injection script now:
 
 ### The `overflow-y: overlay` Issue
 
-The `html` element previously had `overflow-y: overlay` in `css/main.css`. This is a deprecated, non-standard WebKit property. Modern browsers treat it as `overflow-y: auto`, which creates a new scrolling context on the `<html>` element itself. This means `position: sticky` elements inside `<html>` no longer stick to the viewport — they stick to the `<html>` element's internal scroll area instead. This property has been removed.
+The `html` element previously had `overflow-y: overlay` in `css/main.css`. This is a deprecated, non-standard WebKit property. Modern browsers treat it as `overflow-y: auto`, which creates a new scrolling context on the `<html>` element itself. This means `position: sticky` elements inside `<html>` no longer stick to the viewport Ã¢â‚¬â€ they stick to the `<html>` element's internal scroll area instead. This property has been removed.
 
 ---
 
@@ -678,16 +678,16 @@ The `html` element previously had `overflow-y: overlay` in `css/main.css`. This 
 
 ```
 index.html
-  ├── <div id="site-header"></div>          ← placeholder
-  ├── <script> fetch /templates/header.html  ← injects header + nav
-  │     └── /templates/header.html           ← template source
-  │           ├── .sr-only (skip link)
-  │           ├── header.header (logo, contact, hamburger)
-  │           └── nav#main-nav (the ribbon)
-  ├── <link> css/main.css                    ← design vars, reset, nav/dropdown base styles
-  ├── <link> css/header.css                  ← header + nav styling, sticky, mobile drawer
-  ├── <link> css/header-angular.css          ← blue accent overrides
-  └── <script src="js/main.js"></script>     ← menu toggle, scroll hide/show, height cache
+  Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ <div id="site-header"></div>          Ã¢â€ Â placeholder
+  Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ <script> fetch /templates/header.html  Ã¢â€ Â injects header + nav
+  Ã¢â€â€š     Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ /templates/header.html           Ã¢â€ Â template source
+  Ã¢â€â€š           Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ .sr-only (skip link)
+  Ã¢â€â€š           Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ header.header (logo, contact, hamburger)
+  Ã¢â€â€š           Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ nav#main-nav (the ribbon)
+  Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ <link> css/main.css                    Ã¢â€ Â design vars, reset, nav/dropdown base styles
+  Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ <link> css/header.css                  Ã¢â€ Â header + nav styling, sticky, mobile drawer
+  Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ <link> css/header-angular.css          Ã¢â€ Â blue accent overrides
+  Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ <script src="js/main.js"></script>     Ã¢â€ Â menu toggle, scroll hide/show, height cache
 ```
 
 ---

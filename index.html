@@ -632,7 +632,7 @@ html {
 .recovery__content{background:var(--white);border-radius:var(--radius-lg);padding:clamp(20px,4vw,36px);color:var(--dark);box-shadow:var(--shadow-lg)}
 .recovery__content[hidden]{display:none}
 .recovery__phase{display:grid;gap:clamp(16px,3vw,28px);align-items:center}
-@media(min-width:768px){.recovery__phase{grid-template-columns:1.5fr 1fr}}
+@media(min-width:768px){.recovery__phase{grid-template-columns:1fr 260px}.recovery__phase img{max-height:200px}}
 .recovery__phase img{border-radius:var(--radius-md);width:100%;aspect-ratio:4/3;object-fit:cover;max-height:280px}
 .recovery__phase h3{color:var(--primary);font-size:clamp(1.1rem,2.5vw,1.3rem);margin-bottom:8px;display:flex;align-items:center;gap:10px}.recovery__phase h3::before{content:"";display:block;width:4px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
 .recovery__phase p{font-size:.88rem;color:var(--gray);line-height:1.6}
@@ -1332,7 +1332,7 @@ html {
    <section class="hero hero--logo-overlap">
       <div class="hero__bg" style="background-image:url('/files/photos/hero-desktop.jpeg');background-position:50% 60%"></div>
       <div class="hero__bg hero__bg--mobile" style="background-image:url('/files/photos/hero-mobile.jpeg');background-position:50% 30%"></div>
-    <div class="hero__overlay"><div class="container"><h1 class="hero__title">Physical Therapy Before & After Surgery in Slidell</h1><p class="hero__subtitle">One-on-One Care Focused on Faster, Safer Recovery</p><div class="hero__cta"><a href="/booking/" class="btn btn--accent btn--lg">Request Appointment</a><a href="/services/workers-compensation/" class="btn btn--outline btn--lg">Injured at Work? Start Here</a></div></div></div>
+    <div class="hero__overlay"><div class="container"><h1 class="hero__title">Physical Therapy Before & After Surgery in Slidell</h1><p class="hero__subtitle">Care That Stays With You Every Step of the Way</p><div class="hero__cta"><a href="/booking/" class="btn btn--accent btn--lg">Request Appointment</a><a href="/services/workers-compensation/" class="btn btn--outline btn--lg">Injured at Work? Start Here</a></div></div></div>
     <div class="hero__logo-strip">
     </div>
   </section>
@@ -1341,7 +1341,7 @@ html {
   <section class="section section--light hero-next-section"><div class="container value-props"><h2 style="text-align:center">One-on-One Care Focused on Faster, Safer Recovery</h2><p style="text-align:center;max-width:700px;margin:8px auto 0">At Bratton Physical Therapy, we believe in personalized treatment plans designed around your specific needs and goals.</p><div class="value-props__grid"><div class="value-prop reveal-on-scroll"><div class="value-prop__icon" style="font-size:28px"><img src="/files/icons/expert-team.svg" alt="" style="width:36px;height:36px"></div><h3><a href="/staff/">Expert Team</a></h3><p>Licensed therapists with years of experience.</p></div><div class="value-prop reveal-on-scroll"><div class="value-prop__icon" style="font-size:28px"><img src="/files/icons/personalized-care.svg" alt="" style="width:36px;height:36px"></div><h3><a href="/about/">Personalized Care</a></h3><p>Custom treatment plans for your needs.</p></div><div class="value-prop reveal-on-scroll"><div class="value-prop__icon" style="font-size:28px"><img src="/files/icons/fast-recovery.svg" alt="" style="width:36px;height:36px"></div><h3>Faster Recovery</h3><p>Get back to activities you love, faster.</p></div></div></div></section>
 
   <!-- ===== CONDITIONS ===== -->
-  <section class="section"><div class="container"><div class="section-title"><h2>Conditions We Treat</h2><p>We specialize in treating a wide range of orthopedic conditions.</p></div><div class="conditions-pills"><a href="/shoulder-pain/" class="condition-pill">Shoulder Pain</a><a href="/knee-pain/" class="condition-pill">Knee Pain</a><a href="/back-pain-sciatica/" class="condition-pill">Back Pain</a><a href="/neck-pain/" class="condition-pill">Neck Pain</a><a href="/acl-injury/" class="condition-pill">ACL Injury</a><a href="/sports-injuries/" class="condition-pill">Sports Injuries</a><a href="/conditions/" class="condition-pill" style="background:var(--accent)">View All &rarr;</a></div></div></section>
+  <section class="section"><div class="container"><div class="section-title"><h2>Conditions We Treat</h2><p>We specialize in treating a wide range of orthopedic conditions.</p></div><div class="conditions-pills"><a href="/shoulder-pain/" class="condition-pill">Shoulder</a><a href="/knee-pain/" class="condition-pill">Knee</a><a href="/back-pain-sciatica/" class="condition-pill">Back</a><a href="/neck-pain/" class="condition-pill">Neck</a><a href="/acl-injury/" class="condition-pill">ACL Injury</a><a href="/sports-injuries/" class="condition-pill">Sports Injuries</a><a href="/conditions/" class="condition-pill" style="background:var(--accent)">View All &rarr;</a></div></div></section>
 
   <!-- ===== ANGULAR PARALLAX CLUSTER ===== -->
   <section class="section section--light angular-parallax-section" style="overflow:hidden; position:relative;">
@@ -1546,19 +1546,19 @@ html {
         <button class="recovery__tab" onclick="switchPhase(4)">5</button>
       </div>
       <div class="recovery__content" id="phase-0">
-        <div class="recovery__phase"><div><h3>Pain Relief</h3><p>Reducing pain, swelling, and inflammation are common goals in this phase of recovery. Injury protection, elevation, appropriate medications, compression, and patient education are important.</p></div><img src="/files/services/pain-relief.webp" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Pain Relief</h3><p>Reducing pain, swelling, and inflammation is the focus of this phase. Elevation, compression, appropriate medication, and education help protect the injured area and manage symptoms safely.</p></div><img src="/files/services/pain-relief.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-1" hidden>
-        <div class="recovery__phase"><div><h3>Introduce Movement</h3><p>Pain-free passive, manual therapy, active range of motion, and cardiorespiratory exercises are indicated here. Education about pain and a positive attitude may help.</p></div><img src="/files/services/therapeutic-exercise.webp" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Introduce Movement</h3><p>Passive and manual therapy, active range-of-motion exercises, and light cardio gently restore movement while keeping the heart and lungs working without stressing the injury.</p></div><img src="/files/services/therapeutic-exercise.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-2" hidden>
-        <div class="recovery__phase"><div><h3>Strengthening</h3><p>Progressive loading of healing soft tissues, the reintroduction of low-stress neuromuscular reeducation, balance training, and basic functional activities are part of this rehabilitation phase.</p></div><img src="/files/services/strength-conditioning.webp" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Strengthening</h3><p>Healing tissues are progressively loaded to rebuild strength. Low-stress neuromuscular re-education and balance training help regain stability and basic function.</p></div><img src="/files/services/strength-conditioning.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-3" hidden>
-        <div class="recovery__phase"><div><h3>Functional Retraining</h3><p>Progressing strengthening exercises, improving flexibility, and advanced balance exercises are part of phase 4. Resuming functional movement occurs in this phase.</p></div><img src="/files/services/gait-balance-training.webp" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Functional Retraining</h3><p>New strength translates into real-world movement by retraining everyday patterns such as walking, lifting, and reaching for a safe return to daily activities.</p></div><img src="/files/services/gait-balance-training.webp" alt="" loading="lazy"></div>
       </div>
       <div class="recovery__content" id="phase-4" hidden>
-        <div class="recovery__phase"><div><h3>Recovery & Prevention</h3><p>Functional movements are progressed, a controlled re-introduction to sports or challenging environments is initiated. Continued strengthening, flexibility, and goal-specific training occurs.</p></div><img src="/files/services/recovery-prevention.webp" alt="" loading="lazy"></div>
+        <div class="recovery__phase"><div><h3>Recovery & Prevention</h3><p>Controlled, goal-specific training prepares you to return to sport, work, or recreation while building habits that help prevent re-injury.</p></div><img src="/files/services/recovery-prevention.webp" alt="" loading="lazy"></div>
       </div>
     </div>
   </section>

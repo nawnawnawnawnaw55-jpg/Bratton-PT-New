@@ -40,8 +40,8 @@
   <url><loc>https://bratton-pt.vercel.app/services/mulligan-technique/</loc><priority>0.6</priority></url>
   <url><loc>https://bratton-pt.vercel.app/services/gait-balance-training/</loc><priority>0.6</priority></url>
   <url><loc>https://bratton-pt.vercel.app/services/vasopneumatic-compression/</loc><priority>0.5</priority></url>
-  <url><loc>https://bratton-pt.vercel.app/services/moist-heat-ice/</loc><priority>0.5</priority></url>
-  <url><loc>https://bratton-pt.vercel.app/services/electrical-stimulation/</loc><priority>0.5</priority></url>
+
+
   <!-- Patient Resources -->
   <url><loc>https://bratton-pt.vercel.app/patcenter/</loc><priority>0.7</priority></url>
   <url><loc>https://bratton-pt.vercel.app/library/</loc><priority>0.6</priority></url>
