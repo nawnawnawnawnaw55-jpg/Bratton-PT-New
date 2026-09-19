@@ -1299,29 +1299,7 @@ html {
 </div>
 
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main id="main-content">
   <section class="section">
@@ -1350,7 +1328,7 @@ html {
       <h2 style="margin-top:48px;text-align:center">Meet Our Team</h2>
       <div class="staff-grid" style="display:grid;gap:32px;grid-template-columns:1fr;margin-top:24px">
         <div class="staff-card">
-           <img src="/files/photos/staff/jena.jpg" alt="Jena Bratton, PT" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy" onerror="this.style.display='none'">
+           <img src="/files/photos/staff/jena.jpg" alt="Jena Bratton, PT" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy">
           <div>
             <h3 style="margin:0 0 4px 0;color:var(--primary)">Jena Bratton, PT</h3>
             <p style="font-weight:600;color:var(--accent);margin:0 0 8px 0">Owner & Physical Therapist</p>
@@ -1358,7 +1336,7 @@ html {
           </div>
         </div>
         <div class="staff-card">
-           <img src="/files/photos/staff/jacob.jpg" alt="Jacob D'Angelo, Patient Care Coordinator" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy" onerror="this.style.display='none'">
+           <img src="/files/photos/staff/jacob.jpg" alt="Jacob D'Angelo, Patient Care Coordinator" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy">
           <div>
             <h3 style="margin:0 0 4px 0;color:var(--primary)">Jacob D'Angelo</h3>
             <p style="font-weight:600;color:var(--accent);margin:0 0 8px 0">Patient Care Coordinator</p>
@@ -1366,7 +1344,7 @@ html {
           </div>
         </div>
         <div class="staff-card">
-           <img src="/files/photos/staff/madyson.jpg" alt="Madyson Boehm, Rehab Technician" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy" onerror="this.style.display='none'">
+           <img src="/files/photos/staff/madyson.jpg" alt="Madyson Boehm, Rehab Technician" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0" loading="lazy">
           <div>
             <h3 style="margin:0 0 4px 0;color:var(--primary)">Madyson Boehm</h3>
             <p style="font-weight:600;color:var(--accent);margin:0 0 8px 0">Rehab Technician</p>
@@ -1387,11 +1365,7 @@ html {
 </main>
 
 <div id="site-footer"></div>
-<script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
-</script>
+<script src="/js/footer.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

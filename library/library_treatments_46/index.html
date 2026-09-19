@@ -1354,36 +1354,14 @@ html {
 </div>
 
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main id="main-content">
   <section class="section">
     <div class="container" style="max-width:800px">
       <div class="library-article">
   <h1>Elbow Resistive Range of Motion</h1>
-  <hr><h2 id='mListLabel' >Possible Treatments</h2><div><div><p><div style='max-width:640px;margin:0 auto;'><div class='g5-mlvideo-wrapper'><a rel='nofollow' href='#' title='67167689'  ><div ><span class=''>Elbow Resistive Range of Motion<br/>Click to view the video<br/></span><i ></i></div></a></div></div><br/><p><h4 >Elbow Resistive Range of Motion</h4>Exercises that gradually increase in resistance (weights) and in repetitions. PRE is usually prescribed for reeducation of muscles and strengthening. Weights, rubber bands, and body weight can be used as resistance.</p></p></div><a href="#" class="ml-back-arrow" onclick="history.go(-1);return false" aria-label="Back to previous page"><span class="ml-back-arrow-icon">←</span> Back to Previous Page</a></div>
+  <hr><h2 id='mListLabel' >Possible Treatments</h2><div><div><p><div style='max-width:640px;margin:0 auto;'><div class='g5-mlvideo-wrapper'><a rel='nofollow' href='#' title='67167689'  ><div ><span class=''>Elbow Resistive Range of Motion<br/>Click to view the video<br/></span><i ></i></div></a></div></div><br/><p><h4 >Elbow Resistive Range of Motion</h4>Exercises that gradually increase in resistance (weights) and in repetitions. PRE is usually prescribed for reeducation of muscles and strengthening. Weights, rubber bands, and body weight can be used as resistance.</p></p></div><a href="#" class="ml-back-arrow" aria-label="Back to previous page"><span class="ml-back-arrow-icon">←</span> Back to Previous Page</a></div>
   <div class="ml-body-links"><a href="/library/library_neck/" class="ml-body-link">Neck</a><a href="/library/library_shoulder/" class="ml-body-link">Shoulder</a><a href="/library/library_back/" class="ml-body-link">Back</a><a href="/library/library_elbow/" class="ml-body-link">Elbow</a><a href="/library/library_wrist/" class="ml-body-link">Wrist & Hand</a><a href="/library/library_hip/" class="ml-body-link">Hip</a><a href="/library/library_knee/" class="ml-body-link">Knee</a><a href="/library/library_leg/" class="ml-body-link">Leg</a><a href="/library/library_ankle/" class="ml-body-link">Ankle & Foot</a></div>
   <h5 style="margin-top:32px; color:var(--primary)">Disclaimer</h5><div style="font-size:0.85rem;color:#666;line-height:1.6;margin-bottom:24px"><p>The information in this medical library is intended for informational and educational purposes only and in no way should be taken to be the provision or practice of physical therapy, medical, or professional healthcare advice or services. The information should not be considered complete or exhaustive and should not be used for diagnostic or treatment purposes without first consulting with your physical therapist, occupational therapist, physician or other healthcare provider. The owners of this website accept no responsibility for the misuse of information contained within this website.</p></div>
   <p style="margin-top:32px;text-align:center"><a href="tel:9856415825" class="btn btn--accent btn--lg">Questions? Call Us</a></p>
@@ -1393,31 +1371,8 @@ html {
 </main>
 
 <div id="site-footer"></div>
-<script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
-</script>
+<script src="/js/footer.js"></script>
 <script src="/js/main.js"></script>
-<script>
-(function(){
-  var tabs = document.querySelectorAll('.ml-tabs');
-  tabs.forEach(function(tab){
-    var btns = tab.querySelectorAll('.ml-tab-btn');
-    var panels = tab.querySelectorAll('.ml-tab-panel');
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = this.getAttribute('data-ml-tab');
-        btns.forEach(function(b){ b.classList.remove('ml-tab-btn--active'); b.setAttribute('aria-selected','false'); });
-        panels.forEach(function(p){ p.classList.remove('ml-tab-panel--active'); p.setAttribute('hidden',''); });
-        this.classList.add('ml-tab-btn--active');
-        this.setAttribute('aria-selected','true');
-        var panel = tab.querySelector('[data-ml-tab-panel="' + id + '"]');
-        if(panel){ panel.classList.add('ml-tab-panel--active'); panel.removeAttribute('hidden'); }
-      });
-    });
-  });
-})();
-</script>
+<script src="/js/ml-tabs.js"></script>
 </body>
 </html>

@@ -315,3 +315,57 @@
   setTimeout(function(){ obs.disconnect(); }, 6000);
 })();
 
+// ===== Delegated inline-handler replacements (CSP-safe) =====
+
+// Floating "★★★★★ Reviews" button (injected by footer.html).
+// Loads the reviews popup script on demand, then toggles the popup.
+document.addEventListener('click', function(e){
+  var btn = e.target.closest('.br-trigger-btn');
+  if (!btn) return;
+  e.preventDefault();
+  var popup = document.querySelector('.br-review-popup');
+  if (!popup) {
+    btn.classList.add('br-hidden');
+    var s = document.createElement('script');
+    s.src = '/js/br-reviews.js';
+    s.onload = function(){
+      var p = document.querySelector('.br-review-popup');
+      if (p) p.classList.add('show');
+    };
+    document.body.appendChild(s);
+  } else if (popup.classList.contains('show')) {
+    popup.classList.remove('show');
+    btn.classList.remove('br-hidden');
+  } else {
+    popup.classList.add('show');
+    btn.classList.add('br-hidden');
+  }
+});
+
+// Medical library "Back to Previous Page" links (replaces inline history.go(-1)).
+document.addEventListener('click', function(e){
+  var back = e.target.closest('.ml-back-arrow');
+  if (!back) return;
+  e.preventDefault();
+  window.history.go(-1);
+});
+
+// FAQ accordion buttons (workers-compensation page).
+document.addEventListener('click', function(e){
+  var q = e.target.closest('.faq-q');
+  if (!q) return;
+  q.parentElement.classList.toggle('open');
+});
+
+// Image load-error fallback: hide broken images and, where present,
+// reveal the decorative fallback sibling (home page movement-medicine images).
+document.addEventListener('error', function(e){
+  var img = e.target;
+  if (!img || img.tagName !== 'IMG') return;
+  img.style.display = 'none';
+  var sib = img.nextElementSibling;
+  if (sib && sib.classList && sib.classList.contains('angular-scroll-item__fallback')) {
+    sib.style.display = 'flex';
+  }
+}, true);
+

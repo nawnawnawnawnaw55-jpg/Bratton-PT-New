@@ -1325,29 +1325,7 @@ html {
 </div>
 
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main id="main-content">
   <section class="section reviews-page">
@@ -1364,146 +1342,12 @@ html {
   <section class="section section--accent" style="text-align:center"><div class="container"><h2>Ready to Feel Better?</h2><p style="font-size:1.1rem;margin-bottom:20px">Schedule your initial evaluation and let's make things happen!</p><a href="/new-appointment/" class="btn btn--accent btn--lg"><svg class="svg-icon" style="width:1em;height:1em;vertical-align:middle;fill:currentColor;overflow:hidden" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M440.6 834.15H169.84c-20.48 0-37.14-16.67-37.14-37.15V419.47h717.09v21.29c0 18.12 14.68 32.8 32.8 32.8s32.8-14.68 32.8-32.8V254.11c0-56.65-46.09-102.74-102.75-102.74h-77.23v-41.16c0-18.12-14.69-32.8-32.8-32.8s-32.8 14.69-32.8 32.8v41.16H317.88v-41.16c0-18.12-14.69-32.8-32.8-32.8-18.12 0-32.8 14.69-32.8 32.8v41.16h-82.45c-56.65 0-102.74 46.08-102.74 102.74V797c0 56.65 46.08 102.75 102.74 102.75H440.6c18.12 0 32.8-14.68 32.8-32.8 0-18.12-14.68-32.8-32.8-32.8zM169.84 216.97h82.45v35.49c0 18.12 14.69 32.8 32.8 32.8 18.12 0 32.8-14.69 32.8-32.8v-35.49h351.93v35.49c0 18.12 14.69 32.8 32.8 32.8s32.8-14.69 32.8-32.8v-35.49h77.23c20.48 0 37.15 16.66 37.15 37.14v99.76H132.7v-99.76c0-20.48 16.66-37.14 37.14-37.14z"/><path d="M351.34 526.46H218.83c-18.12 0-32.8 14.69-32.8 32.8s14.69 32.8 32.8 32.8h132.51c18.12 0 32.8-14.69 32.8-32.8s-14.68-32.8-32.8-32.8zM813.75 682.43h-69.31v-77.97c0-15.1-12.24-27.33-27.33-27.33-15.1 0-27.33 12.24-27.33 27.33v105.3c0 15.1 12.24 27.33 27.33 27.33h96.64c15.09 0 27.33-12.24 27.33-27.33s-12.23-27.33-27.33-27.33zM351.34 701.38H218.83c-18.12 0-32.8 14.69-32.8 32.8 0 18.12 14.69 32.8 32.8 32.8h132.51c18.12 0 32.8-14.69 32.8-32.8 0-18.12-14.68-32.8-32.8-32.8z"/><path d="M716.05 464.75C583.14 464.75 475 572.89 475 705.8s108.14 241.05 241.05 241.05S957.1 838.71 957.1 705.8 848.96 464.75 716.05 464.75z m0 416.49c-96.75 0-175.45-78.7-175.45-175.45s78.7-175.45 175.45-175.45S891.5 609.05 891.5 705.8s-78.7 175.44-175.45 175.44z"/></svg> Request Appointment</a></div></section>
 
 <div id="site-footer"></div>
-<script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
-</script>
+<script src="/js/footer.js"></script>
 </main>
 
 <script src="/js/main.js"></script>
 <script src="/js/br-reviews.js"></script>
 
-<script>
-(function(){
-  var grid = document.getElementById('reviews-page-grid');
-  var statsEl = document.getElementById('overall-stats');
-  var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--secondary)','#e74c3c','#8e44ad','#16a085'];
-
-  function formatRelativeTime(timeStr){
-    if (!timeStr) return '';
-    var then;
-    // Handle Unix timestamp — seconds since epoch (numeric or numeric string)
-    if (typeof timeStr === 'number' || /^\d+$/.test(timeStr)){
-      var ts = parseInt(timeStr, 10);
-      then = new Date(ts * 1000);
-    } else {
-      if (isNaN(Date.parse(timeStr))) return timeStr;
-      then = new Date(timeStr);
-    }
-    var now = new Date();
-    var diffMs = now - then;
-    if (diffMs < 0) return timeStr;
-    var minutes = Math.floor(diffMs / 60000);
-    var hours   = Math.floor(diffMs / 3600000);
-    var days    = Math.floor(diffMs / 86400000);
-    var weeks   = Math.floor(days / 7);
-    var months  = Math.floor(days / 30);
-    var years   = Math.floor(days / 365);
-    if (minutes < 1)  return 'Just now';
-    if (minutes < 60) return minutes + ' ' + (minutes === 1 ? 'minute' : 'minutes') + ' ago';
-    if (hours < 24)   return hours + ' ' + (hours === 1 ? 'hour' : 'hours') + ' ago';
-    if (days < 7)     return days + ' ' + (days === 1 ? 'day' : 'days') + ' ago';
-    if (weeks < 5)    return weeks + ' ' + (weeks === 1 ? 'week' : 'weeks') + ' ago';
-    if (months < 12)  return months + ' ' + (months === 1 ? 'month' : 'months') + ' ago';
-    return years + ' ' + (years === 1 ? 'year' : 'years') + ' ago';
-  }
-
-  function getInitials(name){
-    return (name||'?').split(' ').map(function(w){return w.charAt(0).toUpperCase()}).join('').substring(0,2);
-  }
-
-  function starStr(r){return '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));}
-
-  function escapeHTML(str){
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
-  }
-
-  window._pageReviews = [];
-  window._pageToggleReview = function(event, idx){
-    if (event) { event.stopPropagation(); event.preventDefault(); }
-    var review = window._pageReviews[idx];
-    if (!review) return;
-    var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
-    if (!textEl) return;
-    var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
-    var isExpanded = textEl.classList.contains('expanded');
-    if (isExpanded){
-      textEl.classList.remove('expanded');
-      textEl.style.maxHeight = '';
-      textEl.style.overflow = '';
-      textEl.textContent = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
-      if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
-    } else {
-      textEl.classList.add('expanded');
-      textEl.style.maxHeight = 'none';
-      textEl.style.overflow = 'visible';
-      textEl.textContent = review.text;
-      if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
-    }
-  };
-
-  function renderReviews(reviews, overallRating, totalReviews){
-    window._pageReviews = reviews;
-
-    // Overall stats — Glass + Google branded card
-    statsEl.innerHTML = '<a href="https://search.google.com/local/reviews?placeid=ChIJicdBse3mnYgRyU49RjVmRs0" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;gap:6px;">' +
-        '<div class="stats-google-g">G</div>' +
-        '<span class="stats-google-label">Google</span>' +
-      '</a>' +
-      '<div class="stats-rating-block">' +
-        '<div class="overall-rating">' + overallRating.toFixed(1) + '</div>' +
-        '<div class="overall-stars">' + starStr(overallRating) + '</div>' +
-        '<div class="overall-count">Based on ' + totalReviews + ' Google reviews</div>' +
-        '<span class="review-subtitle">Showing ' + reviews.length + ' most recent</span>' +
-      '</div>';
-
-    // Review cards
-    grid.innerHTML = reviews.map(function(r, i){
-      var isLong = r.text.length > 150;
-      var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
-      var readMoreHTML = isLong
-        ? '<span class="review-card__readmore" data-idx="' + i + '" onclick="event.stopPropagation();window._pageToggleReview(event,' + i + ')">Read more ▼</span>'
-        : '';
-      var photoHTML = r.photo
-        ? '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '"><img src="' + escapeHTML(r.photo) + '" referrerpolicy="no-referrer" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover"></div>'
-        : '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>';
-      var timeDisplay = formatRelativeTime(r.time);
-      return '<div class="review-card">' +
-        '<div class="review-card__header">' +
-        photoHTML +
-        '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
-        '</div>' +
-        '<p class="review-card__text" data-idx="' + i + '" onclick="window._pageToggleReview(event,' + i + ')">' + displayText + '</p>' +
-        (timeDisplay ? '<div class="review-card__time">' + timeDisplay + '</div>' : '') +
-        readMoreHTML +
-        '</div>';
-    }).join('');
-  }
-
-  // The server-side cache (api/reviews-cache.json, refreshed nightly) always
-  // provides 20 reviews (archive real + curated filler). No client-side padding
-  // or fallback duplication needed — api/fallback-reviews.js is the single
-  // source of truth when fallback is necessary.
-  fetch('/api/reviews?newest=20')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var reviews = (data.reviews && data.reviews.length) ? data.reviews : [];
-      if (reviews.length) {
-        renderReviews(reviews, data.overall_rating || 5.0, data.total_reviews || reviews.length);
-        window.__sharedReviews = reviews;
-      } else {
-        grid.innerHTML = '<p style="text-align:center;color:#fff;padding:40px">No reviews available right now. Please check back soon!</p>';
-        statsEl.innerHTML = '';
-      }
-    })
-    .catch(function(){
-      grid.innerHTML = '<p style="text-align:center;color:#fff;padding:40px">Unable to load reviews. Please refresh the page or try again later.</p>';
-      statsEl.innerHTML = '';
-    });
-})();
-</script>
+<script src="/js/reviews-page.js"></script>
 </body>
 </html>

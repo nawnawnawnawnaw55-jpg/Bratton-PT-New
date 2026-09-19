@@ -1302,29 +1302,7 @@ html {
 </div>
 </div>
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main id="main-content">
 
@@ -1351,15 +1329,15 @@ html {
       <div class="section-title"><h2>Movement Is Medicine</h2><p>Physical therapy that moves with you, at your pace, on your terms.</p></div>
       <div class="angular-scroll-cluster" id="angular-scroll-cluster">
         <div class="angular-scroll-item angular-scroll-item--1 reveal-on-scroll" data-parallax-speed="0.7" data-reveal-dir="left">
-<img src="/files/photos/movement-medicine-1.jpg" alt="Physical therapy treatment" width="533" height="400" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<img src="/files/photos/movement-medicine-1.jpg" alt="Physical therapy treatment" width="533" height="400" loading="lazy">
           <div class="angular-scroll-item__fallback" style="display:none; background:var(--primary); width:100%;height:100%;align-items:center;justify-content:center;border-radius:var(--radius-lg)"><span style="color:#fff;font-family:var(--font-heading);font-weight:800;font-size:clamp(2rem,6vw,4rem)">PT</span></div>
         </div>
         <div class="angular-scroll-item angular-scroll-item--2 reveal-on-scroll" data-parallax-speed="1.6" data-reveal-dir="right">
-<img src="/files/photos/movement-medicine-2.jpg" alt="Therapy session" width="600" height="803" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<img src="/files/photos/movement-medicine-2.jpg" alt="Therapy session" width="600" height="803" loading="lazy">
           <div class="angular-scroll-item__fallback" style="display:none; background:var(--accent); width:100%;height:100%;align-items:center;justify-content:center;border-radius:var(--radius-lg)"><span style="color:#fff;font-family:var(--font-heading);font-weight:800;font-size:clamp(2rem,6vw,4rem)">RX</span></div>
         </div>
         <div class="angular-scroll-item angular-scroll-item--3 reveal-on-scroll" data-parallax-speed="0.9" data-reveal-dir="bottom">
-<img src="/files/photos/movement-medicine-3.jpg" alt="Rehabilitation" width="535" height="400" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+<img src="/files/photos/movement-medicine-3.jpg" alt="Rehabilitation" width="535" height="400" loading="lazy">
           <div class="angular-scroll-item__fallback" style="display:none; background:var(--primary-dark); width:100%;height:100%;align-items:center;justify-content:center;border-radius:var(--radius-lg)"><span style="color:#fff;font-family:var(--font-heading);font-weight:800;font-size:clamp(2rem,6vw,4rem)">RE</span></div>
         </div>
       </div>
@@ -1373,7 +1351,7 @@ html {
     <div class="container">
       <div class="section-title"><h2>How We Treat</h2></div>
       <div class="service-carousel-wrap">
-        <button class="carousel-arrow carousel-arrow--left" onclick="scrollServices(-1)" aria-label="Previous">&#x2039;</button>
+        <button class="carousel-arrow carousel-arrow--left" aria-label="Previous">&#x2039;</button>
         <div class="service-grid" id="service-grid">
           <a href="/services/therapeutic-exercise/" class="service-card"><img src="/files/services/therapeutic-exercise.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h3 class="service-card__title">Therapeutic Exercise</h3></div></a>
           <a href="/services/dry-needling-certified/" class="service-card"><img src="/files/services/dry-needling-certified.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h3 class="service-card__title">Dry Needling</h3></div></a>
@@ -1384,7 +1362,7 @@ html {
           <a href="/services/strength-conditioning/" class="service-card"><img src="/files/services/strength-conditioning.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h3 class="service-card__title">Strength & Conditioning</h3></div></a>
           <a href="/services/workers-compensation/" class="service-card"><img src="/files/services/workers-compensation.webp" alt="" class="service-card__img" loading="lazy"><div class="service-card__body"><h3 class="service-card__title">Workers Comp</h3></div></a>
         </div>
-        <button class="carousel-arrow carousel-arrow--right show" onclick="scrollServices(1)" aria-label="Next">&#x203A;</button>
+        <button class="carousel-arrow carousel-arrow--right show" aria-label="Next">&#x203A;</button>
       </div>
       <p style="text-align:center;margin-top:24px"><a href="/services/" class="btn btn--outline">View All Services</a></p>
     </div>
@@ -1397,139 +1375,7 @@ html {
       </div>
       <div class="review-dots" id="home-review-dots"></div>
       <p style="text-align:center;margin-top:16px"><a href="/reviews/" class="btn btn--outline btn--sm">Read All Reviews &rarr;</a></p>
-      <script>
-      (function(){
-        var grid = document.getElementById('home-reviews-grid');
-        var dots = document.getElementById('home-review-dots');
-        var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--secondary)'];
-        var currentReview = 0;
-        var autoTimer = null;
-
-        function getInitials(name){
-          return (name||'?').split(' ').map(function(w){return w.charAt(0).toUpperCase()}).join('').substring(0,2);
-        }
-
-        function starStr(r){return '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));}
-
-        function renderCards(reviews){
-          window._homeReviews = reviews;
-          grid.innerHTML = reviews.map(function(r, i){
-            var active = i === 0 ? ' review-card--active' : '';
-            var isLong = r.text.length > 150;
-            var displayText = isLong ? escapeHTML(r.text.substring(0, 150)) + '...' : escapeHTML(r.text);
-            var readMoreHTML = isLong ? '<span class="review-card__readmore" data-idx="' + i + '" onclick="event.stopPropagation();window._homeToggleReview(event,' + i + ')" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600">Read more ▼</span>' : '';
-            return '<div class="review-card' + active + '" data-review="' + i + '" onclick="window._homeToggleReview(event,' + i + ')">' +
-              '<div class="review-card__header">' +
-              '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>' +
-              '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
-              '</div>' +
-              '<p class="review-card__text" data-idx="' + i + '">' + displayText + '</p>' +
-              readMoreHTML +
-              '</div>';
-          }).join('');
-
-          // Build dots
-          dots.innerHTML = reviews.map(function(_, i){
-            var active = i === 0 ? ' review-dot--active' : '';
-            return '<button class="review-dot' + active + '" aria-label="Review ' + (i + 1) + '" onclick="window._homeShowReview(' + i + ')"></button>';
-          }).join('');
-
-          // Restart auto-rotate
-          currentReview = 0;
-          if (autoTimer) clearInterval(autoTimer);
-          autoTimer = setInterval(function(){
-            currentReview = (currentReview + 1) % reviews.length;
-            showReview(currentReview);
-          }, 5000);
-        }
-
-        window._homeReviews = [];
-        window._homeToggleReview = function(event, idx){
-          if (event) { event.stopPropagation(); event.preventDefault(); }
-          var review = window._homeReviews[idx];
-          if (!review) return;
-          var textEl = grid.querySelector('.review-card__text[data-idx="' + idx + '"]');
-          if (!textEl) return;
-          var readmoreEl = grid.querySelector('.review-card__readmore[data-idx="' + idx + '"]');
-          if (textEl.classList.contains('expanded')){
-            textEl.classList.remove('expanded');
-            textEl.style.maxHeight = '';
-            textEl.style.overflow = '';
-            textEl.textContent = review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text;
-            if (readmoreEl) readmoreEl.innerHTML = 'Read more ▼';
-            // Resume auto-rotate when collapsing
-            if (autoTimer) clearInterval(autoTimer);
-            autoTimer = setInterval(function(){
-              currentReview = (currentReview + 1) % window._homeReviews.length;
-              showReview(currentReview);
-            }, 5000);
-          } else {
-            textEl.classList.add('expanded');
-            textEl.style.maxHeight = 'none';
-            textEl.style.overflow = 'visible';
-            textEl.textContent = review.text;
-            if (readmoreEl) readmoreEl.innerHTML = 'Show less ▲';
-            // Pause auto-rotate while expanded
-            if (autoTimer) clearInterval(autoTimer);
-            autoTimer = null;
-          }
-        };
-
-        window._homeShowReview = function(n){
-          var cards = grid.querySelectorAll('.review-card');
-          var dotEls = dots.querySelectorAll('.review-dot');
-          cards.forEach(function(el, i){ el.classList.toggle('review-card--active', i === n); });
-          dotEls.forEach(function(el, i){ el.classList.toggle('review-dot--active', i === n); });
-          currentReview = n;
-        };
-
-        function showReview(n){
-          window._homeShowReview(n);
-        }
-
-        function escapeHTML(str){
-          var d = document.createElement('div');
-          d.textContent = str;
-          return d.innerHTML;
-        }
-
-        // Hardcoded fallback reviews (used when API is unreachable)
-        var fallbackReviewsHome = [
-          {name:'Gary L.',time:'8 months ago',rating:5,text:'Just want to thank Jena and staff for a great job in rehabbing my right rotator cuff. I had two complete tears out of the four muscles of the cuff. Jena and staff rehabbed my shoulder without a need for surgery.'},
-          {name:'John C.',time:'1 year ago',rating:5,text:'The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn\'t walk more than 50 feet, getting up from sitting was painful. Now I can easily walk hundreds of yards, I have no pain.'},
-          {name:'Barbara K.',time:'1 year ago',rating:5,text:'My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past.'},
-          {name:'Nina S.',time:'2 years ago',rating:5,text:'Before coming I struggled picking up my son, sitting comfortably, and sleeping due to severe shoulder pain and limited neck mobility. Jena knew what the issue was immediately. She created a plan that quickly diminished my pain.'},
-          {name:'Stephen D.',time:'3 years ago',rating:5,text:'After major rotator cuff surgery, I was unable to move my arm away from my side. I was also experiencing considerable pain related to the surgery. For my physical therapy treatment, my Surgeon recommended Jena Bratton, PT.'}
-        ];
-
-        // Fetch from API (cache-first, falls back to Google API, then hardcoded)
-        // Wrap in requestIdleCallback to defer non-critical fetch
-        var doReviewsFetch = function(){
-          fetch('/api/reviews')
-            .then(function(r){ return r.json(); })
-            .then(function(data){
-              var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
-              // Homepage: show top 5-star reviews only, up to 5
-              var reviews = allReviews.filter(function(r){ return r.rating === 5; }).slice(0, 5);
-              if (reviews.length) {
-                renderCards(reviews);
-                window.__sharedReviews = reviews;
-              } else {
-                renderCards(fallbackReviewsHome);
-                window.__sharedReviews = fallbackReviewsHome;
-              }
-            })
-            .catch(function(){
-              renderCards(fallbackReviewsHome);
-            });
-        };
-        if (window.requestIdleCallback) {
-          requestIdleCallback(doReviewsFetch, { timeout: 3000 });
-        } else {
-          setTimeout(doReviewsFetch, 200);
-        }
-      })();
-      </script></div></section>
+      <script src="/js/home-reviews.js"></script></div></section>
 
   <!-- ===== RECOVERY ===== -->
   <section class="section recovery">
@@ -1539,11 +1385,11 @@ html {
         <p>Learn about the 5 phases of recovery</p>
       </div>
       <div class="recovery__tabs">
-        <button class="recovery__tab recovery__tab--active" onclick="switchPhase(0)">1</button>
-        <button class="recovery__tab" onclick="switchPhase(1)">2</button>
-        <button class="recovery__tab" onclick="switchPhase(2)">3</button>
-        <button class="recovery__tab" onclick="switchPhase(3)">4</button>
-        <button class="recovery__tab" onclick="switchPhase(4)">5</button>
+        <button class="recovery__tab recovery__tab--active">1</button>
+        <button class="recovery__tab">2</button>
+        <button class="recovery__tab">3</button>
+        <button class="recovery__tab">4</button>
+        <button class="recovery__tab">5</button>
       </div>
       <div class="recovery__content" id="phase-0">
         <div class="recovery__phase"><div><h3>Pain Relief</h3><p>Reducing pain, swelling, and inflammation is the focus of this phase. Elevation, compression, appropriate medication, and education help protect the injured area and manage symptoms safely.</p></div><img src="/files/services/pain-relief.webp" alt="" loading="lazy"></div>
@@ -1562,12 +1408,7 @@ html {
       </div>
     </div>
   </section>
-  <script>
-  function switchPhase(n){
-    document.querySelectorAll(".recovery__content").forEach(function(el,i){el.hidden=i!==n});
-    document.querySelectorAll(".recovery__tab").forEach(function(el,i){el.classList.toggle("recovery__tab--active",i===n)});
-  }
-  </script>
+  
 
   <!-- ===== INSURANCE ===== -->
   <section class="section section--light"><div class="container"><div class="section-title"><h2 style="text-align:center;color:var(--success)">We Accept Many Major Insurance Plans</h2></div><div class="insurance-grid" style="row-gap:21px"><img src="/files/insurance/bcbs-logo.svg" alt="BCBS" width="216" height="45" loading="lazy"><img src="/files/insurance/tricare.svg" alt="Tricare" width="1217" height="610" loading="lazy"><img src="/files/insurance/humana.svg" alt="Humana" width="183" height="38" loading="lazy"><img src="/files/insurance/medicare-in.svg" alt="Medicare" width="1284" height="364" loading="lazy"><img src="/files/insurance/workers-comp.svg" alt="Workers Comp" width="403" height="102" loading="lazy"><div style="text-align:center;font-weight:800;font-size:1.6rem;color:var(--dark);font-family:var(--font-heading);text-transform:uppercase">Self-pay</div></div><p style="text-align:center;margin-top:20px;font-size:1.05rem;color:var(--dark)">No Referral, No Problem. We can see patients without a physician's prescription.</p><p style="text-align:center;font-size:.9rem;color:var(--gray)">Don't see your plan? <a href="tel:9856415825" style="font-weight:700;color:var(--primary)">Call us</a> to verify your benefits.</p></div></section>
@@ -1576,103 +1417,17 @@ html {
 <section class="section section--accent" style="text-align:center"><div class="container"><h2>Ready to Feel Better?</h2><p style="font-size:1.1rem;margin-bottom:20px">Schedule your initial evaluation and let's make things happen!</p><a href="/booking/" class="btn btn--accent btn--lg">Schedule an Appointment</a></div></section>
 
 <div id="site-footer"></div>
-<script>
-  // Wrap footer fetch in requestIdleCallback to defer non-critical resource
-  var fetchFooter = function(){
-    fetch('/templates/footer.html')
-      .then(function(r){return r.text()})
-      .then(function(f){document.getElementById('site-footer').innerHTML=f});
-  };
-  if (window.requestIdleCallback) {
-    requestIdleCallback(fetchFooter, { timeout: 3000 });
-  } else {
-    setTimeout(fetchFooter, 200);
-  }
-</script>
+<script src="/js/footer.js"></script>
 </main>
 
 <script src="/js/main.js"></script>
 <script src="/js/br-reviews.js"></script>
+<script src="/js/home.js"></script>
 
-<script>
-function updateArrows(){
-  var grid=document.getElementById("service-grid");
-  if(!grid)return;
-  var card=grid.querySelector(".service-card");
-  if(!card)return;
-  var cw=card.offsetWidth+14;
-  var maxScroll=grid.scrollWidth-grid.clientWidth;
-  var pos=grid.scrollLeft;
-  var atStart=pos<10;
-  var atEnd=pos>maxScroll-10;
-  var la=document.querySelector(".carousel-arrow--left");
-  var ra=document.querySelector(".carousel-arrow--right");
-  var wrap=document.querySelector(".service-carousel-wrap");
-  if(la){la.classList.toggle("show",!atStart)}
-  if(ra){ra.classList.toggle("show",!atEnd)}
-  if(wrap){wrap.classList.toggle("at-start",atStart);wrap.classList.toggle("at-end",atEnd)}
-  // Highlight center card (mobile only)
-  if(window.innerWidth<480){
-    var cards=grid.querySelectorAll(".service-card");
-    var centerX=pos+grid.clientWidth/2;
-    var closest=null;var closestDist=Infinity;
-    cards.forEach(function(c){
-      var cx=c.offsetLeft+c.offsetWidth/2;
-      var dist=Math.abs(cx-centerX);
-      if(dist<closestDist){closest=c;closestDist=dist}
-      c.style.opacity="0.6";c.style.transform="scale(0.92)";c.style.pointerEvents="none";
-    });
-    if(closest){closest.style.opacity="1";closest.style.transform="scale(1)";closest.style.pointerEvents="auto"}
-  }
-}
-function scrollServices(dir){
-  var grid=document.getElementById("service-grid");
-  var card=grid.querySelector(".service-card");
-  if(!card)return;
-  var cw=card.offsetWidth+14;
-  var maxScroll=grid.scrollWidth-grid.clientWidth;
-  var newPos=Math.max(0,Math.min(maxScroll,grid.scrollLeft+dir*cw));
-  grid.scrollTo({left:newPos,behavior:"smooth"});
-  setTimeout(updateArrows,450);
-}
-(function(){
-  var grid=document.getElementById("service-grid");
-  if(!grid)return;
-  grid.addEventListener("scroll",updateArrows);
-  updateArrows();
-  setTimeout(updateArrows,300);
-  setTimeout(updateArrows,700);
-})();
-</script>
+
 
 <!-- Scroll Reveal scripting -->
-<script>
-(function(){
-  // ---- Scroll Reveal ----
-  var revealEls = document.querySelectorAll('.reveal-on-scroll');
-  function checkReveals(){
-    var windowH = window.innerHeight;
-    revealEls.forEach(function(el){
-      var rect = el.getBoundingClientRect();
-      if (rect.top < windowH * 0.85) {
-        el.classList.add('revealed');
-      }
-    });
-  }
-  var revealTicking = false;
-  window.addEventListener('scroll', function(){
-    if (!revealTicking) {
-      requestAnimationFrame(function(){
-        checkReveals();
-        revealTicking = false;
-      });
-      revealTicking = true;
-    }
-  }, { passive: true });
-  // Initial check
-  setTimeout(checkReveals, 200);
-})();
-</script>
+
 
 </body>
 </html>

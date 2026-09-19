@@ -1338,29 +1338,7 @@ html {
 </div>
 
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main>
   <!-- Hero -->
@@ -1445,19 +1423,19 @@ html {
     <div class="container" style="max-width:800px">
       <h2 style="text-align:center;margin-bottom:32px">Frequently Asked Questions</h2>
       <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need a referral?</button>
+        <button class="faq-q">Do I need a referral?</button>
         <div class="faq-a">Most workers' comp cases require a physician's referral to initiate treatment. Contact us and we can help guide you.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How quickly can I start?</button>
+        <button class="faq-q">How quickly can I start?</button>
         <div class="faq-a">We aim to schedule evaluations within 24–48 hours of receiving authorization.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you communicate with employers and adjusters?</button>
+        <button class="faq-q">Do you communicate with employers and adjusters?</button>
         <div class="faq-a">Yes, we provide regular progress reports and updates to ensure all parties are aligned on the recovery timeline.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How long does therapy take?</button>
+        <button class="faq-q">How long does therapy take?</button>
         <div class="faq-a">The duration depends on the severity of the injury and the physical demands of your specific job.</div>
       </div>
     </div>
@@ -1474,11 +1452,7 @@ html {
 </main>
 
 <div id="site-footer"></div>
-<script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
-</script>
+<script src="/js/footer.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

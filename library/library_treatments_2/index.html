@@ -1354,29 +1354,7 @@ html {
 </div>
 
 
-<script>
-  fetch('/templates/header.html')
-    .then(function(r){return r.text()})
-    .then(function(h){
-      var temp=document.createElement('div');
-      temp.innerHTML=h;
-      var nav=temp.querySelector('#main-nav');
-      if(nav){
-        var sh=document.getElementById('site-header');
-        sh.parentNode.insertBefore(nav,sh.nextSibling);
-      }
-    })
-    .then(function(){
-      var toggle=document.getElementById('menu-toggle');
-      var nav=document.getElementById('main-nav');
-      if(toggle&&nav){toggle.addEventListener('click',function(){nav.classList.toggle('nav--open')})}
-      var path=window.location.pathname;
-      document.querySelectorAll('.nav__link').forEach(function(link){
-        link.classList.toggle('nav__link--active',link.getAttribute('href')===path);
-      });
-      window.initStickyNav&&window.initStickyNav();
-    });
-</script>
+<script src="/js/header.js"></script>
 
 <main id="main-content">
   <section class="section">
@@ -1384,7 +1362,7 @@ html {
       <div class="library-article">
   <a href="/library/library_treatments/" class="ml-back-arrow" aria-label="Back to Treatments"><span class="ml-back-arrow-icon">←</span> Back to Treatments</a>
   <h1>Disclaimer</h1>
-  <div class="article-overview">id='articleArea' class='hidden treatbottom'><hr><h2 id='mListLabel' class='uk-text-center'>Possible Treatments</h2><div><a href="javascript: history.go(-1)" class="uk-button uk-button-primary uk-container-center uk-width-medium-1-2 uk-display-block"><i class="uk-icon-undo"></i> Back to Previous Screen</a></div></div>
+  <div class="article-overview">id='articleArea' class='hidden treatbottom'><hr><h2 id='mListLabel' class='uk-text-center'>Possible Treatments</h2><div><a href="#" class="uk-button uk-button-primary uk-container-center uk-width-medium-1-2 uk-display-block ml-back-arrow"><i class="uk-icon-undo"></i> Back to Previous Screen</a></div></div>
 
 <div class='ml_body_links_seo uk-margin-large-top'>
 Links:
@@ -1399,9 +1377,7 @@ Links:
 	<a href="/library_ankle/" title="Ankle/Foot">Ankle & Foot</a>
 </div>
 <h5>Disclaimer</h5>
-<div class='uk-text-small' id='disclaimer'><p>The information in this medical library is intended for informational and educational purposes only and in no way should be taken to be the provision or practice of physical therapy, medical, or professional healthcare advice or services. The information should not be considered complete or exhaustive and should not be used for diagnostic or treatment purposes without first consulting with your physical therapist, occupational therapist, physician or other healthcare provider. The owners of this website accept no responsibility for the misuse of information contained within this website.</p></div><script language="Javascript">
-
-</script>
+<div class='uk-text-small' id='disclaimer'><p>The information in this medical library is intended for informational and educational purposes only and in no way should be taken to be the provision or practice of physical therapy, medical, or professional healthcare advice or services. The information should not be considered complete or exhaustive and should not be used for diagnostic or treatment purposes without first consulting with your physical therapist, occupational therapist, physician or other healthcare provider. The owners of this website accept no responsibility for the misuse of information contained within this website.</p></div>
                 </section>
             </div>
                     </div>
@@ -1463,31 +1439,8 @@ Slidell, LA 70458</div></a><br>
 </main>
 
 <div id="site-footer"></div>
-<script>
-  fetch('/templates/footer.html')
-    .then(function(r){return r.text()})
-    .then(function(f){document.getElementById('site-footer').innerHTML=f});
-</script>
+<script src="/js/footer.js"></script>
 <script src="/js/main.js"></script>
-<script>
-(function(){
-  var tabs = document.querySelectorAll('.ml-tabs');
-  tabs.forEach(function(tab){
-    var btns = tab.querySelectorAll('.ml-tab-btn');
-    var panels = tab.querySelectorAll('.ml-tab-panel');
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var id = this.getAttribute('data-ml-tab');
-        btns.forEach(function(b){ b.classList.remove('ml-tab-btn--active'); b.setAttribute('aria-selected','false'); });
-        panels.forEach(function(p){ p.classList.remove('ml-tab-panel--active'); p.setAttribute('hidden',''); });
-        this.classList.add('ml-tab-btn--active');
-        this.setAttribute('aria-selected','true');
-        var panel = tab.querySelector('[data-ml-tab-panel="' + id + '"]');
-        if(panel){ panel.classList.add('ml-tab-panel--active'); panel.removeAttribute('hidden'); }
-      });
-    });
-  });
-})();
-</script>
+<script src="/js/ml-tabs.js"></script>
 </body>
 </html>
