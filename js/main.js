@@ -151,7 +151,7 @@
       overlay.classList.add('menu-overlay--visible');
       toggleEl.classList.add('mobile-menu-btn--open');
       toggleEl.innerHTML = '&times;';
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     }
 
     function close() {
@@ -159,7 +159,29 @@
       overlay.classList.remove('menu-overlay--visible');
       toggleEl.classList.remove('mobile-menu-btn--open');
       toggleEl.innerHTML = '&#x2630;';
+      unlockScroll();
+    }
+
+    // Lock page scroll while the mobile menu is open. Setting overflow:hidden on
+    // <body> alone is not enough on iOS Safari/WebKit — the root <html> is the
+    // scroll container (overflow-x:hidden now lives on html), so we lock both,
+    // and swallow touchmove on the page behind the drawer so it can't scroll.
+    function preventBodyScroll(e) {
+      // Allow scrolling inside the drawer itself (its links scroll via overflow-y:auto)
+      if (navEl && navEl.contains(e.target)) return;
+      e.preventDefault();
+    }
+
+    function lockScroll() {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('touchmove', preventBodyScroll, { passive: false });
+    }
+
+    function unlockScroll() {
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.removeEventListener('touchmove', preventBodyScroll);
     }
 
     toggleEl.addEventListener('click', function(e) {
