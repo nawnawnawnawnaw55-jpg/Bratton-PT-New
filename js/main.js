@@ -219,6 +219,79 @@
 
 })();
 
+// ===== Scroll-aware header show/hide (mobile only) =====
+// Hides the sticky header on scroll-down; reveals it only after ~150px of
+// deliberate upward scroll so it doesn't flash back on tiny flicks.
+(function(){
+  var siteHeader = document.getElementById('site-header');
+  if (!siteHeader) return;
+
+  var lastScrollY = window.scrollY;
+  var upAccumulator = 0;
+  var ticking = false;
+  var HIDE_THRESHOLD = 80;    // don't hide until scrolled past this
+  var SHOW_THRESHOLD = 150;   // cumulative up-scroll required to reveal
+
+  function onScroll() {
+    var currentScrollY = window.scrollY;
+    var isMobile = window.innerWidth < 768;
+
+    if (!isMobile) {
+      // Desktop: header scrolls away naturally — reset any mobile state.
+      siteHeader.style.transform = '';
+      siteHeader.classList.remove('site-header--hidden');
+      upAccumulator = 0;
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    var delta = lastScrollY - currentScrollY; // positive = scrolling up
+
+    if (currentScrollY <= HIDE_THRESHOLD) {
+      // Near top: always show
+      siteHeader.style.transform = '';
+      siteHeader.classList.remove('site-header--hidden');
+      upAccumulator = 0;
+    } else if (delta < 0) {
+      // Scrolling down: hide immediately, reset accumulator
+      upAccumulator = 0;
+      siteHeader.style.transform = '';
+      siteHeader.classList.add('site-header--hidden');
+    } else if (delta > 0) {
+      // Scrolling up: accumulate
+      upAccumulator += delta;
+      if (upAccumulator >= SHOW_THRESHOLD) {
+        siteHeader.classList.remove('site-header--hidden');
+        siteHeader.style.transform = '';
+      } else {
+        // Progressive reveal mapped from accumulator
+        var progress = Math.min(upAccumulator / SHOW_THRESHOLD, 1);
+        var translatePct = Math.round(-(100 - progress * 100) * 10) / 10;
+        siteHeader.style.transform = 'translateY(' + translatePct + '%)';
+        siteHeader.classList.remove('site-header--hidden');
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  var resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(onScroll, 100);
+  });
+})();
+
 // ===== Angular Parallax Scroll Driver =====
 // Drives multi-speed scrolling on overlapping cluster items and bg shapes
 (function(){

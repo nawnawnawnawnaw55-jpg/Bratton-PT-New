@@ -310,8 +310,8 @@
 
 /* Reset */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#1a3a6b}
-body{font-family:var(--font-body);font-size:clamp(1rem, 2vw, 1.125rem);line-height:1.6;color:var(--dark);background:var(--white);overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#1a3a6b;overflow-x:hidden}
+body{font-family:var(--font-body);font-size:clamp(1rem, 2vw, 1.125rem);line-height:1.6;color:var(--dark);background:var(--white)}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--primary);text-decoration:none;transition:color .2s}
 a:hover{color:var(--accent)}
@@ -759,6 +759,8 @@ html {
 .nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-size:.78rem;text-transform:none;letter-spacing:0}
 .nav__dropdown-menu .nav__link:hover{background:var(--light-gray);color:var(--primary)}
 @media(max-width:767px){
+#site-header{position:sticky;top:0;z-index:999;transition:transform .3s ease}
+#site-header.site-header--hidden{transform:translateY(-100%)}
 .nav--mobile{display:none;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;z-index:1000;background:#fff;padding:64px 20px 24px;overflow-y:auto;box-shadow:-6px 0 24px rgba(0,0,0,.22)}
 .nav--mobile.nav--open{display:block}
 .nav--mobile .nav__inner{display:flex;flex-direction:column;gap:2px}
@@ -885,7 +887,7 @@ html {
 @media(min-width:768px){.recovery__phase{grid-template-columns:1.5fr 1fr}}
 .recovery__phase img{border-radius:var(--radius-md);width:100%;aspect-ratio:4/3;object-fit:cover;max-height:280px}
 .recovery__phase h3{color:var(--primary);font-size:clamp(1.1rem,2.5vw,1.3rem);margin-bottom:8px;display:flex;align-items:center;gap:10px}.recovery__phase h3::before{content:"";display:block;width:4px;height:22px;background:var(--accent);border-radius:2px;flex-shrink:0}
-.recovery__phase p{font-size:.88rem;color:var(--gray);line-height:1.6}
+.recovery__phase p{font-size:clamp(.9rem,1.5vw,1.2rem);color:var(--gray);line-height:1.6}
 
 /* ===== REVIEWS ===== */
 .reviews-grid{display:grid;gap:20px;grid-template-columns:1fr}

@@ -44,6 +44,8 @@
 .nav__dropdown-menu .nav__link{display:block;padding:10px 16px;border:none;font-size:.78rem;text-transform:none;letter-spacing:0}
 .nav__dropdown-menu .nav__link:hover{background:var(--light-gray);color:var(--primary)}
 @media(max-width:767px){
+#site-header{position:sticky;top:0;z-index:999;transition:transform .3s ease}
+#site-header.site-header--hidden{transform:translateY(-100%)}
 .nav--mobile{display:none;position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;z-index:1000;background:#fff;padding:64px 20px 24px;overflow-y:auto;box-shadow:-6px 0 24px rgba(0,0,0,.22)}
 .nav--mobile.nav--open{display:block}
 .nav--mobile .nav__inner{display:flex;flex-direction:column;gap:2px}
