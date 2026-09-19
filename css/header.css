@@ -9,17 +9,17 @@
 .v39 .hinfo-gradient a{color:#fff;font-size:1.05rem;display:flex;align-items:center;gap:8px;font-weight:600}
 .v39 .hinfo-gradient a:hover{color:var(--accent)}
 .v39 .hinfo-gradient svg{color:var(--accent);flex-shrink:0}
-.booking-btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;background:var(--accent);color:#fff!important;border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:.8rem;text-transform:uppercase;transition:all .2s;white-space:nowrap;border:none;cursor:pointer}
+.booking-btn{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;background:#CD4A10;color:#fff!important;border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:.8rem;text-transform:uppercase;transition:all .2s;white-space:nowrap;border:none;cursor:pointer}
 .booking-btn:hover{background:var(--accent-dark);color:#fff!important;transform:translateY(-1px)}
 .booking-btn svg{flex-shrink:0}
 .v39 .booking-btn--gradient-bar{display:none;background:#fff;color:var(--primary)!important;box-shadow:0 2px 10px rgba(0,0,0,.18)}
-.v39 .booking-btn--gradient-bar:hover{background:var(--accent);color:#fff!important}
+.v39 .booking-btn--gradient-bar:hover{background:#CD4A10;color:#fff!important}
 .v39 .htop__actions{display:flex;align-items:center;gap:8px;margin-left:auto}
 .mobile-cta{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#fff;color:var(--primary);border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:.78rem;text-transform:uppercase;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:all .2s}
-.mobile-cta:hover{color:#fff;background:var(--accent);transform:translateY(-1px)}
+.mobile-cta:hover{color:#fff;background:#CD4A10;transform:translateY(-1px)}
 .mobile-menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:10px;font-size:22px;line-height:1;cursor:pointer;color:#fff;flex-shrink:0;transition:background .2s}
 .mobile-menu-btn:hover{background:rgba(255,255,255,.28)}
-.mobile-menu-btn--open{background:var(--accent);border-color:var(--accent)}
+.mobile-menu-btn--open{background:#CD4A10;border-color:#CD4A10}
 @media(min-width:768px){
 .v39 .htop{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding:12px 0}
 .v39 .hlogo{justify-self:start}

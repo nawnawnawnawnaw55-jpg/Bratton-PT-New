@@ -5,7 +5,7 @@
   --primary: #2257A6;
   --primary-dark: #1B3B6F;
   --accent: #E05516;
-  --accent-dark: #e05a15;
+  --accent-dark: #c44a10;
   --danger: #BE1E2D;
   --success: #1B8E3D;
   --white: #FFFFFF;
@@ -85,7 +85,7 @@ h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:var(--radius-pill);font-family:var(--font-heading);font-weight:700;font-size:clamp(.875rem, 2vw, 1rem);text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap}
 .btn--primary{background:var(--primary);color:var(--white)}
 .btn--primary:hover{background:var(--primary-dark);color:var(--white)}
-.btn--accent{background:var(--accent);color:var(--white)}
+.btn--accent{background:#CD4A10;color:var(--white)}
 .btn--accent:hover{background:#c44a10;color:var(--white)}
 .btn--danger{background:var(--danger);color:var(--white)}
 .btn--danger:hover{background:#a01a26;color:var(--white)}

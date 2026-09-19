@@ -20,8 +20,8 @@
 .br-read-more{font-size:11px;color:#2257A6;margin-top:2px;cursor:pointer;display:none}
 .br-review-card.long .br-read-more{display:block}
 .br-review-footer{text-align:center;padding:16px 20px;border-top:1px solid #eee}
-.br-review-btn{display:inline-block;background:#E05516;color:#fff!important;padding:10px 24px;border-radius:25px;text-decoration:none;font-size:14px;font-weight:600;transition:background .3s}
-.br-review-btn:hover{background:#e05a15}
+.br-review-btn{display:inline-block;background:#CD4A10;color:#fff!important;padding:10px 24px;border-radius:25px;text-decoration:none;font-size:14px;font-weight:600;transition:background .3s}
+.br-review-btn:hover{background:#c44a10}
 .br-review-loading{text-align:center;padding:20px;color:#999;font-size:13px}
 `;
   
