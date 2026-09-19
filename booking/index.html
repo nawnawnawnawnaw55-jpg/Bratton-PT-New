@@ -93,6 +93,88 @@
   .booking-phone-fallback__number a:hover {
     text-decoration: underline;
   }
+  /* Prompt EMR scheduling embed */
+  .booking-embed {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+  .booking-embed__header {
+    padding: 24px 24px 8px;
+    text-align: center;
+  }
+  .booking-embed__viewport {
+    position: relative;
+    height: 420px;
+    background: #fff;
+    transition: height 0.25s ease;
+  }
+  .booking-embed__viewport iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .booking-embed__toolbar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px 24px 24px;
+  }
+  .booking-embed__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--primary);
+    background: #fff;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .booking-embed__btn:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+  /* Expanded state: taller viewport only (width stays the same) */
+  .booking-embed.is-expanded .booking-embed__viewport {
+    height: min(90vh, 1000px);
+  }
+  @media (max-width: 600px) {
+    .booking-embed__viewport {
+      height: 460px;
+    }
+    .booking-embed.is-expanded .booking-embed__viewport {
+      height: 85vh;
+    }
+    .booking-embed__header {
+      padding: 20px 16px 8px;
+    }
+    .booking-embed__toolbar {
+      padding: 12px 12px 20px;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .booking-embed__btn {
+      padding: 9px 10px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2px;
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+
   .booking-form-section {
     background: var(--white);
     border-radius: 12px;
@@ -1573,100 +1655,29 @@ html {
         <p style="font-size:1.15rem;line-height:1.7;max-width:600px;margin:0 auto">Schedule your physical therapy visit in just a few clicks. Available for both new and returning patients.</p>
       </div>
 
-      <!-- ============================================ -->
-      <!-- PROMPT EMR ONLINE SCHEDULING WIDGET          -->
-      <!-- ============================================ -->
-      <!-- TO ACTIVATE: Replace this entire             -->
-      <!-- .booking-widget-wrapper section with the     -->
-      <!-- live Prompt EMR embed code provided by       -->
-      <!-- Prompt Health. It will typically be either:  -->
-      <!--                                               -->
-      <!-- Option A — <iframe> embed:                   -->
-      <!-- <iframe src="YOUR_PROMPT_SCHEDULING_URL"     -->
-      <!--   width="100%" height="800" frameborder="0"> -->
-      <!-- </iframe>                                     -->
-      <!--                                               -->
-      <!-- Option B — <script> embed:                   -->
-      <!-- <script src="YOUR_PROMPT_WIDGET_JS_URL"      -->
-      <!--   data-client-key="YOUR_KEY">                -->
-      <!-- </script>                                     -->
-      <!-- <div id="prompt-scheduler"></div>             -->
-      <!--                                               -->
-      <!-- Set .booking-widget-wrapper class to         -->
-      <!-- booking-widget-wrapper--active when live     -->
-      <!-- and remove the placeholder content below.    -->
-      <!-- ============================================ -->
+      <!-- Prompt EMR Online Scheduling (iframe embed) -->
+      <div class="booking-embed" id="booking-embed">
+        <div class="booking-embed__header">
+          <h2 class="booking-form-section__heading">Book Your Appointment</h2>
+          <p class="booking-form-section__subheading">Complete the secure form below to schedule your visit. Your information is submitted directly to our scheduling system through Prompt EMR.</p>
+        </div>
 
-      <div class="booking-form-section" id="booking-form-section">
-        <h2 class="booking-form-section__heading">Book Your Appointment</h2>
-        <p class="booking-form-section__subheading">Fill out the form below to request an appointment and a member of our team will confirm your booking.</p>
-        <form class="booking-form" id="booking-form" novalidate>
-          <div class="booking-form__row">
-            <div class="booking-form__group">
-              <label class="booking-form__label booking-form__label--required" for="booking-name">Full Name</label>
-              <input class="booking-form__input" type="text" id="booking-name" name="name" placeholder="Your full name" required>
-              <span class="booking-form__field-error" id="booking-name-error">Please enter your full name.</span>
-            </div>
-          </div>
-          <div class="booking-form__row">
-            <div class="booking-form__group">
-              <label class="booking-form__label booking-form__label--required" for="booking-phone">Phone</label>
-              <input class="booking-form__input" type="tel" id="booking-phone" name="phone" placeholder="(985) 555-0123" required>
-              <span class="booking-form__field-error" id="booking-phone-error">Please enter a valid phone number.</span>
-            </div>
-            <div class="booking-form__group">
-              <label class="booking-form__label booking-form__label--required" for="booking-email">Email</label>
-              <input class="booking-form__input" type="email" id="booking-email" name="email" placeholder="you@example.com" required>
-              <span class="booking-form__field-error" id="booking-email-error">Please enter a valid email address.</span>
-            </div>
-          </div>
-          <div class="booking-form__row">
-            <div class="booking-form__group">
-              <label class="booking-form__label" for="booking-date">Preferred Date</label>
-              <input class="booking-form__input" type="date" id="booking-date" name="preferredDate">
-            </div>
-            <div class="booking-form__group">
-              <label class="booking-form__label" for="booking-time">Preferred Time</label>
-              <select class="booking-form__select" id="booking-time" name="preferredTime">
-                <option value="" disabled selected>Select a time…</option>
-                <option value="Early Morning (7am–9am)">Early Morning (7am – 9am)</option>
-                <option value="Late Morning (9am–12pm)">Late Morning (9am – 12pm)</option>
-                <option value="Early Afternoon (12pm–3pm)">Early Afternoon (12pm – 3pm)</option>
-                <option value="Late Afternoon (3pm–6pm)">Late Afternoon (3pm – 6pm)</option>
-              </select>
-            </div>
-          </div>
-          <div class="booking-form__group">
-            <label class="booking-form__label booking-form__label--required" for="booking-concern">What Are You Being Seen For?</label>
-            <select class="booking-form__select" id="booking-concern" name="concern" required>
-              <option value="" disabled selected>Select your concern…</option>
-              <option value="Shoulder">Shoulder</option>
-              <option value="Knee">Knee</option>
-              <option value="Back / Sciatica">Back / Sciatica</option>
-              <option value="Neck">Neck</option>
-              <option value="Sports Injury">Sports Injury</option>
-              <option value="Post-Surgical Rehabilitation">Post-Surgical Rehabilitation</option>
-              <option value="Work-Related Injury">Work-Related Injury</option>
-              <option value="Balance / Walking Problems">Balance / Walking Problems</option>
-              <option value="Arthritis / Joint">Arthritis / Joint</option>
-              <option value="Other">Other / Not Sure</option>
-            </select>
-            <span class="booking-form__field-error" id="booking-concern-error">Please select what you need care for.</span>
-          </div>
-          <div class="booking-form__group">
-            <label class="booking-form__label" for="booking-message">Additional Notes</label>
-            <textarea class="booking-form__textarea" id="booking-message" name="message" placeholder="Any details you'd like us to know…"></textarea>
-          </div>
-          <div class="booking-form__submit-row">
-            <button class="booking-form__submit-btn" type="submit" id="booking-submit-btn">Request Appointment</button>
-          </div>
-          <div class="booking-form__success" id="booking-success">
-            <div class="booking-form__success-icon">&#10003;</div>
-            <div class="booking-form__success-title">Appointment Request Received!</div>
-            <p class="booking-form__success-text">A member of our team will contact you shortly to confirm your appointment time.</p>
-          </div>
-          <p class="booking-form__disclaimer">For immediate scheduling, call us at <a href="tel:9856415825" style="color:var(--primary);text-decoration:underline">(985) 641-5825</a>.</p>
-        </form>
+        <div class="booking-embed__viewport" id="booking-embed-viewport">
+          <iframe
+            id="booking-embed-frame"
+            src="https://scheduling.go.promptemr.com/onlineScheduling?w=1040&amp;s=DL"
+            title="Book an appointment at Bratton Physical Therapy"
+            width="100%"
+            height="100%"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="booking-embed__toolbar">
+          <button type="button" class="booking-embed__btn" id="booking-embed-expand" aria-expanded="false" aria-controls="booking-embed-viewport">
+            <span class="booking-embed__btn-label">Expand Form</span>
+          </button>
+          <a class="booking-embed__btn" href="https://scheduling.go.promptemr.com/onlineScheduling?w=1040&amp;s=DL" target="_blank" rel="noopener">Open in New Tab</a>
+        </div>
       </div>
 
       <div class="booking-phone-fallback">
@@ -1688,6 +1699,6 @@ html {
 <div id="site-footer"></div>
 <script src="/js/footer.js"></script>
 <script src="/js/main.js"></script>
-<script src="/js/booking.js"></script>
+<script src="/js/booking-embed.js"></script>
 </body>
 </html>
