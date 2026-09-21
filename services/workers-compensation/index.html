@@ -375,10 +375,10 @@ h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
   z-index: 0;
   pointer-events: none;
 }
-/* When page has .section--bleed-into-footer, swap footer's white triangle layers to blue */
+/* When page has .section--bleed-into-footer, swap footer's white triangle layers to orange */
 body:has(.section--bleed-into-footer) .site-footer::before,
 body:has(.section--bleed-into-footer) .site-footer::after {
-  background: var(--primary);
+  background: var(--accent);
 }
 /* Angular accent shapes in footer */
 .site-footer__accent-shape {
@@ -1389,7 +1389,7 @@ html {
         </ul>
       </div>
       <div style="flex:1 1 200px;text-align:center">
-        <a href="tel:9856415825" class="btn btn--accent btn--lg">Start Your Program Today</a>
+        <a href="/booking/" class="btn btn--accent btn--lg">Start Your Program Today</a>
       </div>
     </div>
   </section>
@@ -1401,7 +1401,7 @@ html {
         <div class="audience-card">
           <h3>Injured Workers</h3>
           <p>Don't get the runaround. We focus on getting you in quickly and helping you recover based on your specific job duties.</p>
-          <a href="tel:9856415825" class="btn btn--accent" style="margin-top:12px">Schedule Evaluation</a>
+          <a href="/booking/" class="btn btn--accent" style="margin-top:12px">Schedule Evaluation</a>
         </div>
         <div class="audience-card">
           <h3>Employers</h3>
@@ -1446,7 +1446,7 @@ html {
   </section>
 
   <!-- Final CTA -->
-  <section class="wc-cta">
+  <section class="wc-cta section--bleed-into-footer">
     <div class="container">
       <h2>Ready to get started?</h2>
       <p style="margin-bottom:24px;font-size:1.1rem">Call us or request an appointment today.</p>
