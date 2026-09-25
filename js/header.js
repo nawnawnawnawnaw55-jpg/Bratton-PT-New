@@ -4,6 +4,14 @@
 // The mobile menu toggle is wired up in js/main.js (which owns the overlay,
 // close button, and scroll lock). Replaces the previously inlined script.
 (function(){
+  // Shared navigation overrides also reach pages with legacy inlined CSS.
+  if (!document.getElementById('navigation-accessibility-css')) {
+    var stylesheet = document.createElement('link');
+    stylesheet.id = 'navigation-accessibility-css';
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = '/css/navigation-accessibility.css';
+    document.head.appendChild(stylesheet);
+  }
   fetch('/templates/header.html')
     .then(function(r){return r.text()})
     .then(function(h){

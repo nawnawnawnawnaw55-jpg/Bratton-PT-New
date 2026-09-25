@@ -66,6 +66,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:800;text-transform:upper
 h1{font-size:clamp(1.75rem, 5vw, 2.75rem)}
 h2{font-size:clamp(1.35rem, 4vw, 2rem)}
 h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
+.heading-size-h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
 h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
 /* Heading overrides for semantic h3 used in place of h4 for accessibility */
 .site-footer__heading,
@@ -586,7 +587,7 @@ html {
 .value-prop__icon:hover{transform:scale(1.1);background:var(--primary)}.value-prop__icon:hover img{filter:brightness(0) invert(1)}
 
 .value-prop__icon svg{width:32px;height:32px}
-.value-prop h3{font-size:1rem;margin:0}
+.value-prop h3,.value-prop h2{font-size:1rem;margin:0}
 .value-prop h3 a{color:var(--primary)}
 .value-prop h3 a:hover{color:var(--accent)}
 .value-prop p{font-size:.85rem;color:var(--gray);margin:0;max-width:220px}
@@ -1313,17 +1314,17 @@ html {
       <div class="value-props__grid" style="margin:24px 0">
         <div class="value-prop" style="border:1px solid var(--light-gray)">
           <div class="value-prop__icon" style="font-size:28px;background:var(--primary);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center">PT</div>
-          <h3>Licensed Physical Therapists</h3>
+          <h2>Licensed Physical Therapists</h2>
           <p>Doctorate-level training with specialized certifications in manual therapy, dry needling, and sports rehabilitation.</p>
         </div>
         <div class="value-prop" style="border:1px solid var(--light-gray)">
           <div class="value-prop__icon" style="font-size:28px;background:var(--success);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center">1:1</div>
-          <h3>One-on-One Model</h3>
+          <h2>One-on-One Model</h2>
           <p>Your therapist is with you for the entire session: no double-booking, no handing off to assistants.</p>
         </div>
         <div class="value-prop" style="border:1px solid var(--light-gray)">
           <div class="value-prop__icon" style="font-size:28px;background:var(--accent);color:#fff;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center">CE</div>
-          <h3>Continuing Education</h3>
+          <h2>Continuing Education</h2>
           <p>Our team stays current with the latest evidence-based techniques through ongoing training and certification.</p>
         </div>
       </div>

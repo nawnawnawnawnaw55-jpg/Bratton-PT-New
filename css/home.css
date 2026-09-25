@@ -38,7 +38,7 @@
 .value-prop__icon:hover{transform:scale(1.1);background:var(--primary)}.value-prop__icon:hover img{filter:brightness(0) invert(1)}
 
 .value-prop__icon svg{width:32px;height:32px}
-.value-prop h3{font-size:1rem;margin:0}
+.value-prop h3,.value-prop h2{font-size:1rem;margin:0}
 .value-prop h3 a{color:var(--primary)}
 .value-prop h3 a:hover{color:var(--accent)}
 .value-prop p{font-size:.85rem;color:var(--gray);margin:0;max-width:220px}

@@ -66,6 +66,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:800;text-transform:upper
 h1{font-size:clamp(1.75rem, 5vw, 2.75rem)}
 h2{font-size:clamp(1.35rem, 4vw, 2rem)}
 h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
+.heading-size-h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
 h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
 /* Heading overrides for semantic h3 used in place of h4 for accessibility */
 .site-footer__heading,
@@ -586,7 +587,7 @@ html {
 .value-prop__icon:hover{transform:scale(1.1);background:var(--primary)}.value-prop__icon:hover img{filter:brightness(0) invert(1)}
 
 .value-prop__icon svg{width:32px;height:32px}
-.value-prop h3{font-size:1rem;margin:0}
+.value-prop h3,.value-prop h2{font-size:1rem;margin:0}
 .value-prop h3 a{color:var(--primary)}
 .value-prop h3 a:hover{color:var(--accent)}
 .value-prop p{font-size:.85rem;color:var(--gray);margin:0;max-width:220px}
@@ -1316,13 +1317,13 @@ html {
       </div>
 
       <div style="background:var(--light-gray);padding:24px;border-radius:8px;margin:24px 0">
-        <h3 style="margin-top:0">Address</h3>
+        <h2 class="heading-size-h3" style="margin-top:0">Address</h2>
         <p>1346 Lindberg Drive Suite 3<br>Slidell, LA 70458</p>
 
-        <h3>Phone</h3>
+        <h2 class="heading-size-h3">Phone</h2>
         <p style="font-size:1.2rem;font-weight:700"><a href="tel:9856415825" style="color:var(--primary);text-decoration:none">(985) 641-5825</a></p>
 
-        <h3>Hours</h3>
+        <h2 class="heading-size-h3">Hours</h2>
         <table class="hours-table">
           <tbody>
             <tr><td>Monday</td><td>7:00 AM – 5:30 PM</td></tr>

@@ -169,21 +169,118 @@
     toggleEl.parentNode.replaceChild(newToggle, toggleEl);
     toggleEl = newToggle;
     toggleEl.id = 'menu-toggle';
+    toggleEl.setAttribute('aria-controls', 'main-nav');
+    toggleEl.setAttribute('aria-expanded', 'false');
+    toggleEl.setAttribute('aria-label', 'Open menu');
+    closeBtn.type = 'button';
+
+    var mobile = window.matchMedia('(max-width: 767px)');
+    var backgroundState = [];
+    var savedOverflow = null;
+    var dropdowns = [];
+    var lastFocusInNav = false;
+
+    function setDropdown(item, expanded) {
+      item.wrapper.classList.toggle('open', expanded);
+      item.button.setAttribute('aria-expanded', String(expanded));
+      item.menu.hidden = !expanded;
+    }
+
+    navEl.querySelectorAll('.nav__dropdown').forEach(function(wrapper, index){
+      var link = wrapper.querySelector(':scope > .nav__link');
+      var menu = wrapper.querySelector(':scope > .nav__dropdown-menu');
+      if (!link || !menu) return;
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'nav__submenu-toggle';
+      button.textContent = '\u2304';
+      button.setAttribute('aria-label', link.textContent.trim() + ' submenu');
+      menu.id = 'nav-submenu-' + index;
+      button.setAttribute('aria-controls', menu.id);
+      link.insertAdjacentElement('afterend', button);
+      var item = { wrapper: wrapper, button: button, menu: menu };
+      dropdowns.push(item);
+      setDropdown(item, false);
+      button.addEventListener('click', function(){
+        var expanded = button.getAttribute('aria-expanded') !== 'true';
+        dropdowns.forEach(function(other){ if (other !== item) setDropdown(other, false); });
+        setDropdown(item, expanded);
+      });
+      wrapper.addEventListener('mouseenter', function(){
+        if (!mobile.matches) setDropdown(item, true);
+      });
+      wrapper.addEventListener('mouseleave', function(){
+        if (!mobile.matches && !wrapper.contains(document.activeElement)) setDropdown(item, false);
+      });
+      wrapper.addEventListener('focusout', function(e){
+        if (!wrapper.contains(e.relatedTarget)) setDropdown(item, false);
+      });
+      wrapper.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+          e.preventDefault();
+          e.stopPropagation();
+          setDropdown(item, false);
+          button.focus();
+        }
+        if (e.key === 'ArrowDown' && e.target === button) {
+          e.preventDefault();
+          setDropdown(item, true);
+          var firstLink = menu.querySelector('a[href]');
+          if (firstLink) firstLink.focus();
+        }
+      });
+    });
+
+    // Inert the siblings at each ancestor level, not an ancestor of the drawer.
+    // This also works if the shared header is initially nested in a wrapper.
+    function isolateDrawer() {
+      var branch = navEl;
+      while (branch && branch !== document.body) {
+        Array.from(branch.parentElement.children).forEach(function(el){
+          if (el === branch || el === overlay || /^(SCRIPT|STYLE|LINK)$/.test(el.tagName)) return;
+          backgroundState.push({ element: el, inert: el.inert });
+          el.inert = true;
+        });
+        branch = branch.parentElement;
+      }
+    }
+
+    function restoreBackground() {
+      backgroundState.forEach(function(state){ state.element.inert = state.inert; });
+      backgroundState = [];
+    }
+
+    function drawerFocusables() {
+      return Array.from(navEl.querySelectorAll('a[href], button, [tabindex]')).filter(function(el){
+        return el.tabIndex >= 0 && !el.disabled && el.getClientRects().length && !el.closest('[inert]');
+      });
+    }
 
     function open() {
+      if (!mobile.matches || navEl.classList.contains('nav--open')) return;
       navEl.classList.add('nav--open');
       overlay.classList.add('menu-overlay--visible');
       toggleEl.classList.add('mobile-menu-btn--open');
       toggleEl.innerHTML = '&times;';
+      toggleEl.setAttribute('aria-expanded', 'true');
+      toggleEl.setAttribute('aria-label', 'Close menu');
       lockScroll();
+      closeBtn.focus();
+      isolateDrawer();
     }
 
-    function close() {
+    function close(restoreFocus) {
+      var wasOpen = navEl.classList.contains('nav--open');
       navEl.classList.remove('nav--open');
       overlay.classList.remove('menu-overlay--visible');
       toggleEl.classList.remove('mobile-menu-btn--open');
       toggleEl.innerHTML = '&#x2630;';
+      toggleEl.setAttribute('aria-expanded', 'false');
+      toggleEl.setAttribute('aria-label', 'Open menu');
+      restoreBackground();
+      dropdowns.forEach(function(item){ setDropdown(item, false); });
       unlockScroll();
+      if (wasOpen && restoreFocus !== false && mobile.matches) toggleEl.focus();
     }
 
     // Lock page scroll while the mobile menu is open. Setting overflow:hidden on
@@ -197,14 +294,18 @@
     }
 
     function lockScroll() {
+      savedOverflow = [document.documentElement.style.overflow, document.body.style.overflow];
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
       document.addEventListener('touchmove', preventBodyScroll, { passive: false });
     }
 
     function unlockScroll() {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
+      if (savedOverflow) {
+        document.documentElement.style.overflow = savedOverflow[0];
+        document.body.style.overflow = savedOverflow[1];
+        savedOverflow = null;
+      }
       document.removeEventListener('touchmove', preventBodyScroll);
     }
 
@@ -222,17 +323,46 @@
 
     // Close on Escape
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && navEl.classList.contains('nav--open')) close();
+      if (!navEl.classList.contains('nav--open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      }
+      if (e.key === 'Tab') {
+        var items = drawerFocusables();
+        var first = items[0];
+        var last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
-    // Dropdown toggles on mobile
-    document.querySelectorAll('.nav__dropdown > .nav__link').forEach(function(link){
-      link.addEventListener('click', function(e){
-        if (window.innerWidth < 768){
-          e.preventDefault();
-          this.parentElement.classList.toggle('open');
-        }
-      });
+    document.addEventListener('focusin', function(e){
+      // A breakpoint can hide the focused control before the media-query
+      // callback runs. Remember its location across that browser blur.
+      if (e.target !== document.body) lastFocusInNav = navEl.contains(e.target);
+      if (navEl.classList.contains('nav--open') && !navEl.contains(e.target)) closeBtn.focus();
+    });
+    document.addEventListener('click', function(e){
+      if (!navEl.contains(e.target)) dropdowns.forEach(function(item){ setDropdown(item, false); });
+    });
+    navEl.addEventListener('click', function(e){
+      if (e.target.closest('a[href]') && mobile.matches) close(false);
+    });
+    mobile.addEventListener('change', function(){
+      var focusWasInNav = navEl.contains(document.activeElement) ||
+        (document.activeElement === document.body && lastFocusInNav) ||
+        navEl.classList.contains('nav--open');
+      close(false);
+      if (focusWasInNav) {
+        if (mobile.matches) toggleEl.focus();
+        else navEl.querySelector('a[href]').focus();
+      }
     });
   }
 
@@ -258,7 +388,7 @@
 
     // Safety timeout: stop observing after 5 seconds
     setTimeout(function() {
-      obs2.disconnect && obs2.disconnect();
+      if (obs2) obs2.disconnect();
       bodyObs.disconnect();
     }, 5000);
   }

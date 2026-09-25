@@ -41,6 +41,7 @@ h1,h2,h3,h4{font-family:var(--font-heading);font-weight:800;text-transform:upper
 h1{font-size:clamp(1.75rem, 5vw, 2.75rem)}
 h2{font-size:clamp(1.35rem, 4vw, 2rem)}
 h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
+.heading-size-h3{font-size:clamp(1.1rem, 3vw, 1.5rem)}
 h4{font-size:clamp(1rem, 2.5vw, 1.25rem);color:var(--accent)}
 /* Heading overrides for semantic h3 used in place of h4 for accessibility */
 .site-footer__heading,
