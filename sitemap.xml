@@ -48,7 +48,6 @@
   <url><loc>https://bratton-pt.vercel.app/insurance/</loc><priority>0.6</priority></url>
   <url><loc>https://bratton-pt.vercel.app/booking/</loc><priority>0.8</priority></url>
   <url><loc>https://bratton-pt.vercel.app/new-appointment/</loc><priority>0.7</priority></url>
-  <url><loc>https://bratton-pt.vercel.app/paperwork/</loc><priority>0.6</priority></url>
   <url><loc>https://bratton-pt.vercel.app/community/</loc><priority>0.5</priority></url>
   <!-- Legal -->
   <url><loc>https://bratton-pt.vercel.app/privacy-policy/</loc><priority>0.3</priority></url>

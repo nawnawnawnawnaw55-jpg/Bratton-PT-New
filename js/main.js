@@ -1,3 +1,27 @@
+// ===== Skip to main content =====
+// Keep the existing visually hidden link, but move keyboard focus as well as
+// scrolling. Medical library pages retain their existing behavior.
+(function(){
+  if (/^\/library(?:\/|$)/.test(window.location.pathname)) return;
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('a.sr-only[href="#main-content"]');
+    if (!link || e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var main = document.getElementById('main-content');
+    if (!main) return;
+    e.preventDefault();
+    main.focus({ preventScroll: true });
+    // Reserve room for the header and navigation even when either is hidden
+    // during scrolling, so the destination is not covered when they reappear.
+    var header = document.getElementById('site-header');
+    var nav = document.getElementById('main-nav');
+    var offset = (header ? header.offsetHeight : 0) + (nav ? nav.offsetHeight : 0) + 16;
+    window.scrollTo({
+      top: Math.max(0, window.scrollY + main.getBoundingClientRect().top - offset),
+      behavior: 'instant'
+    });
+  });
+})();
+
 // ===== Dynamic Header Height — measure actual rendered height and cache =====
 // Prevents layout shift: on first visit measures the real header height,
 // stores it in sessionStorage, and subsequent page loads reserve that exact
