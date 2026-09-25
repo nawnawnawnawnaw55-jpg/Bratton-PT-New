@@ -1,15 +1,20 @@
 /* Shared with pages that contain older inlined header styles. */
 #main-nav .nav__dropdown{display:flex;align-items:center;flex-wrap:wrap}
-#main-nav .nav__dropdown > .nav__link{padding-right:4px}
-#main-nav .nav__submenu-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;min-height:44px;border:0;background:transparent;color:var(--primary);font:inherit;cursor:pointer;border-radius:4px}
-#main-nav .nav__submenu-toggle[aria-expanded="true"]{color:var(--accent)}
+#main-nav .nav__submenu-toggle{display:none}
 #main-nav .nav__dropdown-menu[hidden]{display:none!important}
 #main-nav .nav__dropdown-menu:not([hidden]){display:block}
 #main-nav a:focus-visible,#main-nav button:focus-visible,#menu-toggle:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
 @media(max-width:767px){
-  #main-nav .nav__dropdown > .nav__link{flex:1;min-width:0}
-  #main-nav .nav__submenu-toggle{flex-basis:44px}
+  #main-nav .nav__dropdown > .nav__link{flex:1;min-width:0;padding-right:8px}
+  #main-nav .nav__submenu-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:0;border-radius:0;background:transparent;color:var(--primary);cursor:pointer;transition:color .18s}
+  #main-nav .nav__submenu-toggle svg{display:block;transition:transform .18s}
+  #main-nav .nav__submenu-toggle:hover{color:var(--accent)}
+  #main-nav .nav__submenu-toggle[aria-expanded="true"]{color:var(--accent)}
+  #main-nav .nav__submenu-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
   #main-nav .nav__dropdown-menu{flex:0 0 100%}
+}
+@media(prefers-reduced-motion:reduce){
+  #main-nav .nav__submenu-toggle,#main-nav .nav__submenu-toggle svg{transition:none}
 }
 @media(max-width:360px){
   .v39 .htop{gap:8px}

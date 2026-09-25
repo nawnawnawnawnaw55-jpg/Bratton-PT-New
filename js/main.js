@@ -183,7 +183,20 @@
     function setDropdown(item, expanded) {
       item.wrapper.classList.toggle('open', expanded);
       item.button.setAttribute('aria-expanded', String(expanded));
+      if (!mobile.matches) item.link.setAttribute('aria-expanded', String(expanded));
       item.menu.hidden = !expanded;
+    }
+
+    function syncDropdownControls() {
+      dropdowns.forEach(function(item){
+        if (mobile.matches) {
+          item.link.removeAttribute('aria-expanded');
+          item.link.removeAttribute('aria-controls');
+        } else {
+          item.link.setAttribute('aria-controls', item.menu.id);
+          item.link.setAttribute('aria-expanded', item.button.getAttribute('aria-expanded'));
+        }
+      });
     }
 
     navEl.querySelectorAll('.nav__dropdown').forEach(function(wrapper, index){
@@ -193,12 +206,12 @@
       var button = document.createElement('button');
       button.type = 'button';
       button.className = 'nav__submenu-toggle';
-      button.textContent = '\u2304';
+      button.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       button.setAttribute('aria-label', link.textContent.trim() + ' submenu');
       menu.id = 'nav-submenu-' + index;
       button.setAttribute('aria-controls', menu.id);
       link.insertAdjacentElement('afterend', button);
-      var item = { wrapper: wrapper, button: button, menu: menu };
+      var item = { wrapper: wrapper, link: link, button: button, menu: menu };
       dropdowns.push(item);
       setDropdown(item, false);
       button.addEventListener('click', function(){
@@ -215,14 +228,18 @@
       wrapper.addEventListener('focusout', function(e){
         if (!wrapper.contains(e.relatedTarget)) setDropdown(item, false);
       });
+      link.addEventListener('focus', function(){
+        if (!mobile.matches) setDropdown(item, true);
+      });
       wrapper.addEventListener('keydown', function(e){
         if (e.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
           e.preventDefault();
           e.stopPropagation();
           setDropdown(item, false);
-          button.focus();
+          (mobile.matches ? button : link).focus();
+          setDropdown(item, false);
         }
-        if (e.key === 'ArrowDown' && e.target === button) {
+        if (e.key === 'ArrowDown' && (e.target === button || (!mobile.matches && e.target === link))) {
           e.preventDefault();
           setDropdown(item, true);
           var firstLink = menu.querySelector('a[href]');
@@ -230,6 +247,7 @@
         }
       });
     });
+    syncDropdownControls();
 
     // Inert the siblings at each ancestor level, not an ancestor of the drawer.
     // This also works if the shared header is initially nested in a wrapper.
@@ -359,6 +377,7 @@
         (document.activeElement === document.body && lastFocusInNav) ||
         navEl.classList.contains('nav--open');
       close(false);
+      syncDropdownControls();
       if (focusWasInNav) {
         if (mobile.matches) toggleEl.focus();
         else navEl.querySelector('a[href]').focus();
