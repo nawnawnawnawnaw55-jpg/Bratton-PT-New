@@ -9,6 +9,8 @@
   var reviews = [];
   var currentReview = 0;
   var autoTimer = null;
+  var hasStarted = false;
+  var stopped = false;
 
   function getInitials(name){
     return (name||'?').split(' ').map(function(w){return w.charAt(0).toUpperCase()}).join('').substring(0,2);
@@ -31,8 +33,10 @@
   }
 
   function startAuto(){
+    if (stopped) return;
     if (autoTimer) clearInterval(autoTimer);
     if (!reviews.length) return;
+    hasStarted = true;
     autoTimer = setInterval(function(){
       currentReview = (currentReview + 1) % reviews.length;
       showReview(currentReview);
@@ -42,6 +46,25 @@
   function stopAuto(){
     if (autoTimer) clearInterval(autoTimer);
     autoTimer = null;
+  }
+
+  // Start auto-rotation only once the carousel scrolls into view (and only
+  // if the user hasn't manually picked a review).
+  function startWhenVisible(){
+    if (hasStarted || stopped) return;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            io.disconnect();
+            startAuto();
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(grid);
+    } else {
+      startAuto();
+    }
   }
 
   function toggleReview(idx){
@@ -114,7 +137,7 @@
     }).join('');
 
     currentReview = 0;
-    startAuto();
+    startWhenVisible();
   }
   // Event delegation (CSP-safe, no inline onclick attributes)
   grid.addEventListener('click', function(e){
@@ -128,6 +151,8 @@
     var dot = e.target.closest('.review-dot');
     if (!dot) return;
     e.preventDefault();
+    stopped = true;
+    stopAuto();
     showReview(parseInt(dot.getAttribute('data-idx'), 10));
   });
 
