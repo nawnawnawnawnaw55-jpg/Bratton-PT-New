@@ -5,7 +5,7 @@
   var dots = document.getElementById('home-review-dots');
   if (!grid || !dots) return;
 
-  var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--secondary)'];
+  var avatarColors = ['var(--success)','var(--primary)','var(--accent)','var(--primary-dark)','var(--primary)'];
   var reviews = [];
   var currentReview = 0;
   var autoTimer = null;
@@ -76,13 +76,37 @@
       var readMoreHTML = isLong ? '<span class="review-card__readmore" data-idx="' + i + '" style="display:block;color:var(--primary);font-size:.82rem;cursor:pointer;margin-top:6px;font-weight:600">Read more ▼</span>' : '';
       return '<div class="review-card' + active + '" data-review="' + i + '" data-idx="' + i + '">' +
         '<div class="review-card__header">' +
-        '<div class="review-card__avatar" style="background:' + avatarColors[i % avatarColors.length] + '">' + getInitials(r.name) + '</div>' +
+        '<div class="review-card__avatar" aria-hidden="true" style="position:relative;overflow:hidden;background:' + avatarColors[i % avatarColors.length] + '">' + escapeHTML(getInitials(r.name)) + '</div>' +
         '<div><div class="review-card__stars">' + starStr(r.rating) + '</div><strong>' + escapeHTML(r.name) + '</strong></div>' +
         '</div>' +
         '<p class="review-card__text" data-idx="' + i + '">' + displayText + '</p>' +
         readMoreHTML +
         '</div>';
     }).join('');
+
+    // The nightly cache already supplies photo URLs. Assign through the DOM
+    // rather than interpolating a URL into HTML; keep initials under the photo.
+    var avatars = grid.querySelectorAll('.review-card__avatar');
+    list.forEach(function(review, i){
+      if (typeof review.photo !== 'string' || !review.photo.trim()) return;
+      var url;
+      try {
+        url = new URL(review.photo);
+      } catch (e) {
+        return;
+      }
+      if (url.protocol !== 'https:' && url.protocol !== 'http:') return;
+      var image = document.createElement('img');
+      image.alt = '';
+      image.width = 44;
+      image.height = 44;
+      image.referrerPolicy = 'no-referrer';
+      image.decoding = 'async';
+      image.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover';
+      image.addEventListener('error', function(){ image.remove(); });
+      image.src = url.href;
+      avatars[i].appendChild(image);
+    });
 
     dots.innerHTML = list.map(function(_, i){
       var active = i === 0 ? ' review-dot--active' : '';
@@ -120,7 +144,10 @@
   // Wrapped in requestIdleCallback to defer the non-critical fetch.
   var doReviewsFetch = function(){
     fetch('/api/reviews')
-      .then(function(r){ return r.json(); })
+      .then(function(r){
+        if (!r.ok) throw new Error('Reviews request failed');
+        return r.json();
+      })
       .then(function(data){
         var allReviews = (data.reviews && data.reviews.length) ? data.reviews : [];
         // Homepage: show top 5-star reviews only, up to 5
