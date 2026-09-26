@@ -1,6 +1,22 @@
 {
   "reviews": [
     {
+      "name": "Cynthia Camp",
+      "text": "Jena Bratton is my physical therapist. She is a passionate, considerate, comforting and a knowledgeable therapist. She does not believe pain is good as I was told throughout the years of my therapy. If an exercise hurts my neck/shoulders she has me stop. She is very concerned about my well being and her staff is awesome and kind. I am so glad my friend told me to go to her. I am 71 and have been in therapy for 6-10 years and have seen most in Slidell. Jena is the BEST and I am so grateful for her. For the first time in my life I do not shrug at the thought of going to therapy. Just the opposite, I am NOT looking forward to my last visit for the first time ever. God Bless them all.",
+      "time": 1790364330,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLVx3BXmn39KGD7Dsaoe1yKypuvSpZb4T8Yr2ko0ZGqCN7q4A=s128-c0x00000000-cc-rp-mo"
+    },
+    {
+      "name": "Cherie Trumbach",
+      "text": "Highly recommend this PT. I had a problem in my neck and shoulder. Bratton was thorough in explaining what was happening and how my recovery would progress. Everything happened as she said and my neck and shoulders have recovered well.",
+      "time": 1790349755,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXmci0MWRo5RVw-hw-qMKm_GgAucr93ACe0wu1LXsDLqxZVrlNAoQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "kylamsxpit",
       "text": "Cancer treatment caused me to have weak muscles and lots of pain in my knee. The physical therapy at Bratton has made me able to walk again without limping and to sleep without the pain waking me at night. I would have come a lot sooner had I known I didn’t have to have a physician referral for Medicare to cover it. I’m so glad I looked into it. The PT at Bratton has helped me immensely.",
       "time": 1790177336,
@@ -142,24 +158,10 @@
       "time": null,
       "rating": 5,
       "relative_time": "8 months ago"
-    },
-    {
-      "name": "John C.",
-      "text": "The experience has been outstanding! When I first came to Bratton Physical Therapy I had sore ankles, couldn't walk more than 50 feet, getting up from sitting was painful. Now I can easily walk 100's of yards (likely more), I have no pain...",
-      "time": null,
-      "rating": 5,
-      "relative_time": "1 year ago"
-    },
-    {
-      "name": "Barbara K.",
-      "text": "My journey at Bratton PT began after I spent 3 days, about 6 hours a day working on a ladder moving shelving over my head remodeling my master closet. I developed pain in my neck and upper back. I chose Bratton PT because I used them in the past...",
-      "time": null,
-      "rating": 5,
-      "relative_time": "1 year ago"
     }
   ],
   "overall_rating": 5,
-  "total_reviews": 218,
-  "archive_size": 17,
-  "cached_at": "2026-09-25T10:59:08.347Z"
+  "total_reviews": 220,
+  "archive_size": 19,
+  "cached_at": "2026-09-26T10:40:56.114Z"
 }
