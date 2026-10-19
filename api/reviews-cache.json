@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Nicole Edson",
+      "text": "Jena is so kind, smart, and knowledgeable. She evaluated every muscle to isolate problems and develop a plan before starting. She’s thorough. I highly recommend her practice to anyone needing physical therapy.",
+      "time": 1792365409,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLxB1u0NQYdlOLeZ5tN18qVtuULhmt_pHZe8tzm_68wKh6NhQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Deanna Loftus",
       "text": "Great experience, friendly and professional staff. I was getting treatment elsewhere (chiro) and was worried that treatment was causing more issues. I had a very stiff neck, trouble sleeping and intense pain down my left arm with intense tingling extending to the thumb and forefinger). I came to Gina for a second opinion and her treatment plan really helped. The treatment and excercises have almost completely removed all symptoms. I can now sleep at night without constantly waking up and I can turn my head. I also have more strength in my arm and only experience tingling when I revert to behaviors or positions as someone that sits at a conputer a good amount of time, that aggravates it. Gina helped assessed not only my work setup but several specialty neck pillows that had actually been making the issues worse. I highly recommend.",
       "time": 1792097929,
@@ -151,18 +159,10 @@
       "relative_time": "3 months ago",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXL5AW7J-2qcejJEK5KytG3rjO3RAxkSblPeGWDqND85TTOe5kz=s128-c0x00000000-cc-rp-mo"
-    },
-    {
-      "name": "Lori Milford",
-      "text": "Bratton Physical Therapy has helped me so much. I was in so much pain in my back and my hip that I could not function in my daily home and work life. Jena was able to pinpoint the root causes of my pain and develop a care plan to improve my condition. I cannot believe how much better I feel. After a few sessions, I am able to return to work and participate more fully in my social and daily life. I am certain I will continue to improve and look forward to being mostly pain-free. If you need help, don’t hesitate, go to Bratton Physical Therapy for a professional, life-changing experience.",
-      "time": 1773694354,
-      "relative_time": "4 months ago",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKnCi_0wlzw3VG44zNk8ardScYSI39aK8Zgg2uqV_uJbRl5WA=s128-c0x00000000-cc-rp-mo"
     }
   ],
   "overall_rating": 5,
-  "total_reviews": 221,
-  "archive_size": 21,
-  "cached_at": "2026-10-18T10:15:06.907Z"
+  "total_reviews": 222,
+  "archive_size": 22,
+  "cached_at": "2026-10-19T11:53:45.029Z"
 }
