@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Dorothy Siverd",
+      "text": "I have been to other therapy places but this one didn’t make me feel like a number. She was personal and observant and very thorough. I highly recommend Bratton therapy.",
+      "time": 1792422269,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKhONHOUm5hy3k5xUQPwQo5i7ZR3syKIKnbqgkzZgOz8ZZPSw=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Nicole Edson",
       "text": "Jena is so kind, smart, and knowledgeable. She evaluated every muscle to isolate problems and develop a plan before starting. She’s thorough. I highly recommend her practice to anyone needing physical therapy.",
       "time": 1792365409,
@@ -151,18 +159,10 @@
       "relative_time": "2 months ago",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocKv-rTLcPwHdOJYSHHUxcu52DMrmTihy4UvchyA2DK_Kq4gBg=s128-c0x00000000-cc-rp-mo"
-    },
-    {
-      "name": "H. \"Chip\" Brockhaus",
-      "text": "Very knowledgeable owner and staff. Jena correctly determined the issue with my shoulder and prepared a treatment plan. Pain is now nearly 0 and my range of motion has improved significantly. Highly recommended.",
-      "time": 1776380355,
-      "relative_time": "3 months ago",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXL5AW7J-2qcejJEK5KytG3rjO3RAxkSblPeGWDqND85TTOe5kz=s128-c0x00000000-cc-rp-mo"
     }
   ],
   "overall_rating": 5,
   "total_reviews": 222,
-  "archive_size": 22,
-  "cached_at": "2026-10-19T11:53:45.029Z"
+  "archive_size": 23,
+  "cached_at": "2026-10-20T10:49:54.981Z"
 }
