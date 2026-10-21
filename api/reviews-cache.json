@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Nicole Edson",
+      "text": "Jena is so kind, smart, and knowledgeable. She evaluated every muscle to isolate problems and develop a plan before starting. She’s thorough. I highly recommend her practice to anyone needing physical therapy.",
+      "time": 1792498583,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLxB1u0NQYdlOLeZ5tN18qVtuULhmt_pHZe8tzm_68wKh6NhQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Dorothy Siverd",
       "text": "I have been to other therapy places but this one didn’t make me feel like a number. She was personal and observant and very thorough. I highly recommend Bratton therapy.",
       "time": 1792422269,
@@ -23,14 +31,6 @@
       "relative_time": "in the last week",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a-/ALV-UjU4iLfMoNYTbJqIA0sIq_Ceon6RiQVtlO7Lxq9nt06C1erlOmNH=s128-c0x00000000-cc-rp-mo"
-    },
-    {
-      "name": "Dorothy Siverd",
-      "text": "I have been to other therapy places but this one didn’t make me feel like a number. She was personal and observant and very thorough. I highly recommend Bratton therapy.",
-      "time": 1790597825,
-      "relative_time": "in the last week",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKhONHOUm5hy3k5xUQPwQo5i7ZR3syKIKnbqgkzZgOz8ZZPSw=s128-c0x00000000-cc-rp-mo"
     },
     {
       "name": "Cynthia Camp",
@@ -164,5 +164,5 @@
   "overall_rating": 5,
   "total_reviews": 222,
   "archive_size": 23,
-  "cached_at": "2026-10-20T10:49:54.981Z"
+  "cached_at": "2026-10-21T11:01:26.916Z"
 }
