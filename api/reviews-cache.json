@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Kathryn Fortier",
+      "text": "I started PT after total hip replacement and have had measurable improvements in my mobility in just three sessions. Dr Bratton is extremely knowledgeable and caring!!Additionally Jena and her staff are very kind and extremely encouraging. Their attitude towards my recovery inspires me to do my best which has significantly increased my mobility and emotional health.",
+      "time": 1793971799,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocIHT7VLSGPiwHWnxtlyhGAc3b9klsXIlmQtSfk0Z8_KKBnlKw=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Artie-Denise Liuzza",
       "text": "I recently received physical therapy at Bratton PT and had an excellent experience. Jena and her staff are professional, thorough, and knowledgeable, taking the time to address all of my physical therapy needs. Appointments always started on time, and I truly enjoyed working with such a patient, kind, and caring team. I highly recommend Bratton PT and will continue to choose them for my future physical therapy needs!",
       "time": 1792847437,
@@ -151,18 +159,10 @@
       "relative_time": "4 months ago",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocLbLK_kUMoOXWxQEaJWlmOIJwFtMnbDomkMD39gf0QIk_oGpA=s128-c0x00000000-cc-rp-mo-ba2"
-    },
-    {
-      "name": "Susan Behrens",
-      "text": "I had trouble with my right knee. It felt stiff, sore and achy. My brother supposed trying Bratton Therapy Centre. So I did and it was the best decision ever.They came up with a special exercise program, just for me which would strengthen knee. It worked and my knee feels so much better.The staff are kind and can’t do enough for you. I totally recommend them to anyone who has a physical problem.",
-      "time": 1781934438,
-      "relative_time": "3 weeks ago",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKBi9tfwd5NA-KCWw_G1uSkCfv1ohSy49Elis9z8kIMnFAEUg=s128-c0x00000000-cc-rp-mo"
     }
   ],
   "overall_rating": 5,
   "total_reviews": 222,
-  "archive_size": 26,
-  "cached_at": "2026-11-05T13:52:34.080Z"
+  "archive_size": 27,
+  "cached_at": "2026-11-06T13:38:23.503Z"
 }
