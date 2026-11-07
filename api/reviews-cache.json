@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Artie-Denise Liuzza",
+      "text": "I recently received physical therapy at Bratton PT and had an excellent experience. Jena and her staff are professional, thorough, and knowledgeable, taking the time to address all of my physical therapy needs. Appointments always started on time, and I truly enjoyed working with such a patient, kind, and caring team. I highly recommend Bratton PT and will continue to choose them for my future physical therapy needs!",
+      "time": 1793975974,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjVfvq49AXLjcgpW4OlWMU93AEo_yP8tm0ysxeKUFWnVPEm5kd9-=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Kathryn Fortier",
       "text": "I started PT after total hip replacement and have had measurable improvements in my mobility in just three sessions. Dr Bratton is extremely knowledgeable and caring!!Additionally Jena and her staff are very kind and extremely encouraging. Their attitude towards my recovery inspires me to do my best which has significantly increased my mobility and emotional health.",
       "time": 1793971799,
@@ -151,18 +159,10 @@
       "relative_time": "a week ago",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocI7_PD2esn33aAajDgh8Vlg-XLvLWyt_El4mUQhe0rrb1M30g=s128-c0x00000000-cc-rp-mo-ba3"
-    },
-    {
-      "name": "Paul Rieder",
-      "text": "Undergoing PT for total hip replacement. The treatment is awesome. I get a custom PT plan focused on my needs and progress. I am so happy that I came to Bratton.Update: I completed my hip implant rehab. The custom treatments developed for me my Jena greatly facilitated and expedited my recovery. Jena and Madyson ensured that I did the various exercised correctly. The zero gravity treadmill allowed me to walk without putting the full body weight on my hip implant. Increased body weight imposed on the hip was then slowly added as my healing progressed. This avoided needless pain from overloading the joint. The attached camera permitted viewing to ensure that my gait was correct. Unlike the gym and hospital PT clinics, you get customized treatment plans and more personal attention. I highly recommend Bratton PT clinic.",
-      "time": 1782332692,
-      "relative_time": "4 months ago",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLbLK_kUMoOXWxQEaJWlmOIJwFtMnbDomkMD39gf0QIk_oGpA=s128-c0x00000000-cc-rp-mo-ba2"
     }
   ],
   "overall_rating": 5,
   "total_reviews": 222,
-  "archive_size": 27,
-  "cached_at": "2026-11-06T13:38:23.503Z"
+  "archive_size": 28,
+  "cached_at": "2026-11-07T12:18:18.902Z"
 }
