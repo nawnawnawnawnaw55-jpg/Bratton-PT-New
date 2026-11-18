@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Roberta McCrea",
+      "text": "Referred to Bratton PT by my chiropractor due to terrible hip pain for MONTHS and not sleeping because of it. I’m only 4-5 weeks into it and the pain is 99.999% gone and sleeping through the night every night! Bratton PT has helped me immensely and not to mention, they are knowledgeable, kind and fun! Wouldn’t go anywhere else!!",
+      "time": 1794929563,
+      "relative_time": "in the last week",
+      "rating": 5,
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJirQ4WLSoBsMuKMHPW5f7G-Nkt2wry94qTNr3fCyN_MKCmyQ=s128-c0x00000000-cc-rp-mo"
+    },
+    {
       "name": "Jill W",
       "text": "I have been going to Bratton physical therapy for a while and have been so pleased with them. I came for a bulging disc in my back. The pain was unbearable, with her help I now able to do more and less pain. Thank you",
       "time": 1794847853,
@@ -151,18 +159,10 @@
       "relative_time": "a week ago",
       "rating": 5,
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocKPCupooyoJfyWoPevDg54O0KVWXeXGNhcWkxIidheFFw8IMA=s128-c0x00000000-cc-rp-mo"
-    },
-    {
-      "name": "Alfred Johnson",
-      "text": "The staff is very professional. All guide your routine with caution and care.. I began recovery after my first visit. I know my recovery is in good hands. All are kind, caring, and efficient. Give them a call and visit. You will NOT be disappointed. It is a great place!!",
-      "time": 1783044775,
-      "relative_time": "a week ago",
-      "rating": 5,
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocI7_PD2esn33aAajDgh8Vlg-XLvLWyt_El4mUQhe0rrb1M30g=s128-c0x00000000-cc-rp-mo-ba3"
     }
   ],
   "overall_rating": 5,
-  "total_reviews": 224,
-  "archive_size": 28,
-  "cached_at": "2026-11-17T15:23:59.853Z"
+  "total_reviews": 225,
+  "archive_size": 29,
+  "cached_at": "2026-11-18T14:58:12.561Z"
 }
